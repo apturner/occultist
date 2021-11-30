@@ -1,0 +1,12 @@
+{
+    "name": "occultist",
+    "version": "0.1.0",
+    "description": "Bot to get BotC stats from game history of Social Deduction HQ",
+    "main": "bot.js",
+    "author": "Cyberholmes",
+    "dependencies": {
+        "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+        "lodash": "^4.17.21",
+        "winston": "^3.3.3"
+    }
+}

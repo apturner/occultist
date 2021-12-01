@@ -5,7 +5,9 @@
     "main": "bot.js",
     "author": "Cyberholmes",
     "dependencies": {
+        "@discordjs/builders": "^0.8.2",
         "@discordjs/rest": "^0.1.0-canary.0",
+        "commander": "^8.3.0",
         "discord-api-types": "^0.25.2",
         "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
         "discord.js": "^13.3.1",

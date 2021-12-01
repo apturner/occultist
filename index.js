@@ -1,5 +1,5 @@
 // Require the necessary discord.js classes
-const { Client, Intents } = require("discord.js");
+const { Client, Collection, Intents } = require("discord.js");
 const { token } = require("./config.json");
 
 // Require some extra classes
@@ -7,23 +7,48 @@ const fs = require("fs");
 const _ = require("lodash");
 
 // Read in games file
-const games = JSON.parse(fs.readFileSync("games.json", "utf8"));
+const games = JSON.parse(fs.readFileSync("./games.json", "utf8"));
 
 /*
 ==================================================
-============== Initializing the bot ==============
+================ Running the bot =================
 ==================================================
 */
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-// When the client is ready, run this code (only once)
-client.once("ready", () => {
-    console.log("Ready!");
-});
+// Get slash commands
+const commandFiles = fs
+    .readdirSync("./commands")
+    .filter((file) => file.endsWith(".js"));
 
-// Login to Discord with your client's token
+client.commands = new Collection();
+
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+
+    // Set a new item in the Collection with the key as the command name and
+    // the value as the exported module
+    client.commands.set(command.data.name, command);
+}
+
+// Get and respond to events
+const eventFiles = fs
+    .readdirSync("./events")
+    .filter((file) => file.endsWith(".js"));
+
+for (const file of eventFiles) {
+    const event = require(`./events/${file}`);
+
+    if (event.once) {
+        client.once(event.name, (...args) => event.execute(...args));
+    } else {
+        client.on(event.name, (...args) => event.execute(...args));
+    }
+}
+
+// Login to Discord with client's token
 client.login(token);
 
 /*

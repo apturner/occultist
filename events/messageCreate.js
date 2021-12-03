@@ -30,7 +30,11 @@ module.exports = {
         defWinRate(occultist, message);
 
         // Cut off the prefix, trim, and split on whitespace
-        const args = message.content.slice(prefix.length).trim().split(/ +/g);
+        const args = message.content
+            .slice(prefix.length)
+            .trim()
+            .match(/(?:[^\s'"]+|['"][^'"]*['"])+/g)
+            .map((str) => str.replace(/['"]/g, ""));
 
         // Parse the arguments, controlling error handling ourselves
         try {

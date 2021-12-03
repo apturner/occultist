@@ -5,8 +5,8 @@ const sendCodeBlock = require("../functions/sendCodeBlock");
 const characterMap = require("../data/characters");
 const nameMap = require("../data/names");
 
-function defWinRate(comm, message) {
-    comm.command("winrate")
+function defCount(comm, message) {
+    comm.command("count")
         .description(
             "Get the win rate for the specified player, with optional filters"
         )
@@ -55,14 +55,7 @@ async function winRate(message, player, options, command) {
         player = message.author.username;
     }
 
-    const {
-        result,
-        wins,
-        plays,
-        nameFound,
-        initialCharacterFound,
-        finalCharacterFound,
-    } = getWinRate(
+    const { result, wins, plays, nameFound } = getWinRate(
         message.client.games,
         player,
         options.character,
@@ -74,13 +67,7 @@ async function winRate(message, player, options, command) {
     );
 
     let response;
-    if (nameFound !== true) {
-        response = `No player found with name "${player}".`;
-    } else if (initialCharacterFound !== true) {
-        response = `No character found with name "${options.character}".`;
-    } else if (finalCharacterFound !== true) {
-        response = `No character found with name "${options.finalCharacter}".`;
-    } else {
+    if (nameFound === true) {
         response = `${nameMap[player.toLowerCase()]}'s win rate${
             options.character || options.type || options.alignment
                 ? " starting as"
@@ -111,6 +98,8 @@ async function winRate(message, player, options, command) {
                 ? " " + characterMap[options.finalCharacter.toLowerCase()]
                 : ""
         }: ${options.fraction ? `${wins}/${plays}` : result}`;
+    } else {
+        response = `No player found with name "${player}".`;
     }
 
     // Send result
@@ -122,4 +111,4 @@ async function winRate(message, player, options, command) {
     });
 }
 
-module.exports = { defWinRate: defWinRate, winRate: winRate };
+module.exports = { defWinRate: defCount, winRate: winRate };

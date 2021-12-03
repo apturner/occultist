@@ -1,6 +1,9 @@
 const _ = require("lodash");
 const getFinalRole = require("../functions/getFinalRole");
+const characterMap = require("../data/characters");
 const characterType = require("../data/characterType");
+const nameMap = require("../data/names");
+const scriptMap = require("../data/scripts");
 const scriptType = require("../data/scriptType");
 
 function filterGames(
@@ -13,6 +16,8 @@ function filterGames(
         win,
         storytellers,
         players,
+        winningPlayers,
+        losingPlayers,
         characters,
         playerInitialCharacters,
         playerFinalCharacters,
@@ -20,8 +25,6 @@ function filterGames(
         playerFinalCharacterTypes,
         playerInitialAlignments,
         playerFinalAlignments,
-        winningPlayers,
-        losingPlayers,
         count = false,
     }
 ) {
@@ -34,7 +37,7 @@ function filterGames(
     }
 
     if (dateRange !== undefined) {
-        // Game date in given date range (in 1000 * Unix time )
+        // Game date in given date range (in Unix time )
         conditions.push((game) =>
             ((date) => dateRange[0] <= date && date <= dateRange[1])(
                 Date.parse(game.Date)
@@ -78,7 +81,7 @@ function filterGames(
         // Game contains all of the given players
         conditions.push((game) =>
             players.every((player) =>
-                _.has(game, ["Players", player.toLowerCase()])
+                _.has(game, ["Players", nameMap[player.toLowerCase()]])
             )
         );
     }
@@ -88,7 +91,9 @@ function filterGames(
         conditions.push((game) =>
             characters.every((character) =>
                 game.Players.values().some(
-                    (player) => player.Character === character
+                    (player) =>
+                        player.Character ===
+                        characterMap[character.toLowerCase()]
                 )
             )
         );
@@ -99,8 +104,9 @@ function filterGames(
         conditions.push((game) =>
             playerInitialCharacters.every(
                 (playerCharacter) =>
-                    game.Players[playerCharacter[0]]?.Character ===
-                    playerCharacter[1]
+                    game.Players[nameMap[playerCharacter[0].toLowerCase()]]
+                        ?.Character ===
+                    characterMap[playerCharacter[1].toLowerCase()]
             )
         );
     }
@@ -110,8 +116,10 @@ function filterGames(
         conditions.push((game) =>
             playerFinalCharacters.every(
                 (playerCharacter) =>
-                    getFinalRole(game.Players[playerCharacter[0]])
-                        ?.Character === playerCharacter[1]
+                    getFinalRole(
+                        game.Players[nameMap[playerCharacter[0].toLowerCase()]]
+                    )?.Character ===
+                    characterMap[playerCharacter[1].toLowerCase()]
             )
         );
     }
@@ -122,7 +130,9 @@ function filterGames(
             playerInitialCharacterTypes.every(
                 (playerCharacterType) =>
                     characterType[
-                        game.Players[playerCharacterType[0]]?.Character
+                        game.Players[
+                            nameMap[playerCharacterType[0].toLowerCase()]
+                        ]?.Character
                     ] === playerCharacterType[1]
             )
         );
@@ -134,8 +144,11 @@ function filterGames(
             playerFinalCharacterTypes.every(
                 (playerCharacterType) =>
                     characterType[
-                        getFinalRole(game.Players[playerCharacterType[0]])
-                            ?.Character
+                        getFinalRole(
+                            game.Players[
+                                nameMap[playerCharacterType[0].toLowerCase()]
+                            ]
+                        )?.Character
                     ] === playerCharacterType[1]
             )
         );
@@ -146,8 +159,8 @@ function filterGames(
         conditions.push((game) =>
             playerInitialAlignments.every(
                 (playerAlignment) =>
-                    game.Players[playerAlignment[0]]?.Alignment ===
-                    playerAlignment[1]
+                    game.Players[nameMap[playerAlignment[0].toLowerCase()]]
+                        ?.Alignment === playerAlignment[1]
             )
         );
     }
@@ -157,30 +170,33 @@ function filterGames(
         conditions.push((game) =>
             playerFinalAlignments.every(
                 (playerAlignment) =>
-                    getFinalRole(game.Players[playerAlignment[0]])
-                        ?.Alignment === playerAlignment[1]
+                    getFinalRole(
+                        game.Players[nameMap[playerAlignment[0].toLowerCase()]]
+                    )?.Alignment === playerAlignment[1]
             )
         );
     }
 
     if (winningPlayers !== undefined) {
-        // Game contains all of the given players ending as their given alignments
+        // Game contains all of the given players on the winning team
         conditions.push((game) =>
             winningPlayers.every(
                 (winningPlayer) =>
-                    getFinalRole(game.Players[winningPlayer]).Alignment ===
-                    game.Win
+                    getFinalRole(
+                        game.Players[nameMap[winningPlayer.toLowerCase()]]
+                    )?.Alignment === game.Win
             )
         );
     }
 
     if (losingPlayers !== undefined) {
-        // Game contains all of the given players ending as their given alignments
+        // Game contains all of the given players on the losing team
         conditions.push((game) =>
             losingPlayers.every(
                 (losingPlayer) =>
-                    getFinalRole(game.Players[losingPlayer]).Alignment !==
-                    game.Win
+                    getFinalRole(
+                        game.Players[nameMap[losingPlayer.toLowerCase()]]
+                    )?.Alignment !== game.Win
             )
         );
     }

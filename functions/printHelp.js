@@ -1,12 +1,8 @@
 const { codeBlock } = require("@discordjs/builders");
+const sendMessage = require("./sendMessage");
 
 async function printHelp(message, command) {
-    await message.reply({
-        content: codeBlock(command.helpInformation()),
-        allowedMentions: {
-            repliedUser: false,
-        },
-    });
+    await sendMessage(message, codeBlock(command.helpInformation()));
 }
 
 module.exports = printHelp;

@@ -8,6 +8,9 @@ const sendCodeBlock = require("../functions/sendCodeBlock");
 
 // Read in files for message commands
 const { defCount } = require("../commands/count");
+const { defFind } = require("../commands/find");
+const { defGame } = require("../commands/game");
+const { defGrim } = require("../commands/grim");
 const { defStToggle } = require("../commands/stToggle");
 const { defWinRate } = require("../commands/winRate");
 
@@ -24,11 +27,14 @@ module.exports = {
             .configureOutput({ writeOut: (str) => sendCodeBlock(message, str) })
             .addHelpCommand("help [command]", "Display help for command")
             .helpOption("-h, --help", "Display help for command")
-            .configureHelp({ sortSubcommands: true, helpWidth: 1000 })
+            .configureHelp({ helpWidth: 1000 })
             .exitOverride();
 
         // Build subcommands
         defCount(occultist, message);
+        defFind(occultist, message);
+        defGame(occultist, message);
+        defGrim(occultist, message);
         defStToggle(occultist, message);
         defWinRate(occultist, message);
 
@@ -48,9 +54,11 @@ module.exports = {
                 console.log(err);
                 sendCodeBlock(
                     message,
-                    occultist.commands
-                        .find((comm) => comm._name === args[0])
-                        .helpInformation()
+                    err.code !== "commander.unknownCommand"
+                        ? occultist.commands
+                              .find((comm) => comm._name === args[0])
+                              .helpInformation()
+                        : occultist.helpInformation()
                 );
             }
         }

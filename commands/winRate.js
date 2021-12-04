@@ -1,63 +1,15 @@
-const { Command, Option } = require("commander");
-const _ = require("lodash");
+const { Option } = require("commander");
 const getWinRate = require("../functions/getWinRate");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendMessage = require("../functions/sendMessage");
 const stringFormat = require("../functions/stringFormat");
 const characterFormat = require("../data/characterFormat");
 const nameFormat = require("../data/nameFormat");
-
-function defWinRate(comm, message) {
-    comm.command("winrate")
-        .description(
-            "Get the win rate for the specified player, with optional filters"
-        )
-        .argument("[player]", "Player to find win rate of")
-        .option("-c, --character <character>", "Initial character")
-        .option("-C, --final-character <character>", "Final character")
-        .addOption(
-            new Option("-t, --type <type>", "Initial character type").choices([
-                "Townsfolk",
-                "Outsider",
-                "Minion",
-                "Demon",
-                "Traveller",
-            ])
-        )
-        .addOption(
-            new Option(
-                "-T, --final-type <type>",
-                "Final character type"
-            ).choices(["Townsfolk", "Outsider", "Minion", "Demon", "Traveller"])
-        )
-        .addOption(
-            new Option(
-                "-a, --alignment <alignment>",
-                "Initial alignment"
-            ).choices(["Good", "Evil"])
-        )
-        .addOption(
-            new Option(
-                "-A, --final-alignment <alignment>",
-                "Final alignment"
-            ).choices(["Good", "Evil"])
-        )
-        .option("-f, --fraction", "Show result as unreduced fraction")
-        .action(async (player, options, command) =>
-            winRate(message, player, options, command)
-        )
-        .configureOutput({
-            writeOut: (str) => sendCodeBlock(message, str),
-            writeErr: (str) => sendCodeBlock(message, str),
-        })
-        .helpOption("-h, --help", "Display help for command")
-        .allowUnknownOption()
-        .exitOverride();
-}
+const usernameName = require("../data/usernameName");
 
 async function winRate(message, player, options, command) {
     if (player === undefined) {
-        player = message.author.username;
+        player = usernameName(message.author.username);
     }
 
     const {
@@ -119,7 +71,55 @@ async function winRate(message, player, options, command) {
     }
 
     // Send result
-    sendMessage(message, response);
+    await sendMessage(message, response);
 }
 
-module.exports = { defWinRate: defWinRate, winRate: winRate };
+function defWinRate(comm, message) {
+    comm.command("winrate")
+        .description(
+            "Get the win rate for the specified player, with optional filters"
+        )
+        .argument("[player]", "Player to find win rate of")
+        .option("-k, --character <character>", "Initial character")
+        .option("-K, --final-character <character>", "Final character")
+        .addOption(
+            new Option("-t, --type <type>", "Initial character type").choices([
+                "Townsfolk",
+                "Outsider",
+                "Minion",
+                "Demon",
+                "Traveller",
+            ])
+        )
+        .addOption(
+            new Option(
+                "-T, --final-type <type>",
+                "Final character type"
+            ).choices(["Townsfolk", "Outsider", "Minion", "Demon", "Traveller"])
+        )
+        .addOption(
+            new Option(
+                "-a, --alignment <alignment>",
+                "Initial alignment"
+            ).choices(["Good", "Evil"])
+        )
+        .addOption(
+            new Option(
+                "-A, --final-alignment <alignment>",
+                "Final alignment"
+            ).choices(["Good", "Evil"])
+        )
+        .option("-f, --fraction", "Show result as unreduced fraction")
+        .action(async (player, options, command) =>
+            winRate(message, player, options, command)
+        )
+        .configureOutput({
+            writeOut: (str) => sendCodeBlock(message, str),
+            writeErr: (str) => sendCodeBlock(message, str),
+        })
+        .helpOption("-h, --help", "Display help for command")
+        .allowUnknownOption()
+        .exitOverride();
+}
+
+module.exports = { winRate: winRate, defWinRate: defWinRate };

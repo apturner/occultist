@@ -1,19 +1,5 @@
-const { Command } = require("commander");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendMessage = require("../functions/sendMessage");
-
-function defStToggle(comm, message) {
-    comm.command("st")
-        .description("Toggle whether the guild member has the ST role")
-        .action(async (options, command) => stToggle(message, options, command))
-        .configureOutput({
-            writeOut: (str) => sendCodeBlock(message, str),
-            writeErr: (str) => sendCodeBlock(message, str),
-        })
-        .helpOption("-h, --help", "Display help for command")
-        .allowUnknownOption()
-        .exitOverride();
-}
 
 async function stToggle(message, options, command) {
     // Get author of message as a guild member
@@ -28,15 +14,28 @@ async function stToggle(message, options, command) {
     if (member.roles.cache.some((role) => role === st)) {
         // Take it away and tell them about it
         member.roles.remove(st);
-        sendMessage(
+        await sendMessage(
             message,
             `${member.displayName} is no longer storytelling.`
         );
     } else {
         // Give it to them and tell them about it
         member.roles.add(st);
-        sendMessage(message, `${member.displayName} is storytelling!`);
+        await sendMessage(message, `${member.displayName} is storytelling!`);
     }
 }
 
-module.exports = { defStToggle: defStToggle, stToggle: stToggle };
+function defStToggle(comm, message) {
+    comm.command("st")
+        .description("Toggle whether the guild member has the ST role")
+        .action(async (options, command) => stToggle(message, options, command))
+        .configureOutput({
+            writeOut: (str) => sendCodeBlock(message, str),
+            writeErr: (str) => sendCodeBlock(message, str),
+        })
+        .helpOption("-h, --help", "Display help for command")
+        .allowUnknownOption()
+        .exitOverride();
+}
+
+module.exports = { stToggle: stToggle, defStToggle: defStToggle };

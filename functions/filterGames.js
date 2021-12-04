@@ -1,4 +1,5 @@
 const _ = require("lodash");
+const getAllRoles = require("../functions/getAllRoles");
 const getFinalRole = require("../functions/getFinalRole");
 const stringFormat = require("../functions/stringFormat");
 const characterTypeMap = require("../data/characterType");
@@ -19,6 +20,8 @@ function filterGames(
         winningPlayers,
         losingPlayers,
         characters,
+        initialCharacters,
+        finalCharacters,
         playerInitialCharacters,
         playerFinalCharacters,
         playerInitialCharacterTypes,
@@ -28,6 +31,26 @@ function filterGames(
         count = false,
     }
 ) {
+    // console.log("numbers: ", numbers);
+    // console.log("startDate: ", startDate);
+    // console.log("endDate: ", endDate);
+    // console.log("scripts: ", scripts);
+    // console.log("scriptTypes: ", scriptTypes);
+    // console.log("win: ", win);
+    // console.log("storytellers: ", storytellers);
+    // console.log("players: ", players);
+    // console.log("winningPlayers: ", winningPlayers);
+    // console.log("losingPlayers: ", losingPlayers);
+    // console.log("characters: ", characters);
+    // console.log("initialCharacters: ", initialCharacters);
+    // console.log("finalCharacters: ", finalCharacters);
+    // console.log("playerInitialCharacters: ", playerInitialCharacters);
+    // console.log("playerFinalCharacters: ", playerFinalCharacters);
+    // console.log("playerInitialCharacterTypes: ", playerInitialCharacterTypes);
+    // console.log("playerFinalCharacterTypes: ", playerFinalCharacterTypes);
+    // console.log("playerInitialAlignments: ", playerInitialAlignments);
+    // console.log("playerFinalAlignments: ", playerFinalAlignments);
+
     // Create list of conditions and push all possible conditions into it
     var conditions = [];
 
@@ -40,13 +63,11 @@ function filterGames(
 
     if (startDate !== undefined) {
         // Game date after given date (in Unix time)
-        console.log(parseInt(startDate, 10));
         conditions.push((game) => parseInt(startDate, 10) <= game.Date);
     }
 
     if (endDate !== undefined) {
         // Game date before given date (in Unix time)
-        console.log(parseInt(endDate, 10));
         conditions.push((game) => game.Date <= parseInt(endDate, 10));
     }
 
@@ -99,9 +120,35 @@ function filterGames(
         // Game contains all of the given characters
         conditions.push((game) =>
             characters.every((character) =>
-                game.Players.values().some(
+                _.values(game.Players).some((player) =>
+                    _.map(getAllRoles(player), (role) =>
+                        stringFormat(role.Character)
+                    ).includes(stringFormat(character))
+                )
+            )
+        );
+    }
+
+    if (initialCharacters !== undefined) {
+        // Game contains all of the given characters
+        conditions.push((game) =>
+            characters.every((character) =>
+                _.values(game.Players).some(
                     (player) =>
                         stringFormat(player.Character) ===
+                        stringFormat(character)
+                )
+            )
+        );
+    }
+
+    if (finalCharacters !== undefined) {
+        // Game contains all of the given characters
+        conditions.push((game) =>
+            characters.every((character) =>
+                _.values(game.Players).some(
+                    (player) =>
+                        stringFormat(getFinalRole(player).Character) ===
                         stringFormat(character)
                 )
             )
@@ -143,13 +190,13 @@ function filterGames(
         conditions.push((game) =>
             playerInitialCharacterTypes.every(
                 (playerCharacterType) =>
-                    characterTypeFormat[
-                        stringFormat(
+                    stringFormat(
+                        characterTypeMap[
                             game.Players[
                                 nameFormat[stringFormat(playerCharacterType[0])]
                             ]?.Character
-                        )
-                    ] === stringFormat(playerCharacterType[1])
+                        ]
+                    ) === stringFormat(playerCharacterType[1])
             )
         );
     }
@@ -159,8 +206,8 @@ function filterGames(
         conditions.push((game) =>
             playerFinalCharacterTypes.every(
                 (playerCharacterType) =>
-                    characterTypeFormat[
-                        stringFormat(
+                    stringFormat(
+                        characterTypeMap[
                             getFinalRole(
                                 game.Players[
                                     nameFormat[
@@ -168,8 +215,8 @@ function filterGames(
                                     ]
                                 ]
                             )?.Character
-                        )
-                    ] === stringFormat(playerCharacterType[1])
+                        ]
+                    ) === stringFormat(playerCharacterType[1])
             )
         );
     }

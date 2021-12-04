@@ -2,8 +2,10 @@ const { Command, Option } = require("commander");
 const _ = require("lodash");
 const getWinRate = require("../functions/getWinRate");
 const sendCodeBlock = require("../functions/sendCodeBlock");
-const characterMap = require("../data/characters");
-const nameMap = require("../data/names");
+const sendMessage = require("../functions/sendMessage");
+const stringFormat = require("../functions/stringFormat");
+const characterFormat = require("../data/characterFormat");
+const nameFormat = require("../data/nameFormat");
 
 function defWinRate(comm, message) {
     comm.command("winrate")
@@ -44,8 +46,11 @@ function defWinRate(comm, message) {
         .action(async (player, options, command) =>
             winRate(message, player, options, command)
         )
-        .configureOutput({ writeOut: (str) => sendCodeBlock(message, str) })
-        .helpOption("-h, --help", "Dislpay help for command")
+        .configureOutput({
+            writeOut: (str) => sendCodeBlock(message, str),
+            writeErr: (str) => sendCodeBlock(message, str),
+        })
+        .helpOption("-h, --help", "Display help for command")
         .allowUnknownOption()
         .exitOverride();
 }
@@ -59,7 +64,7 @@ async function winRate(message, player, options, command) {
         result,
         wins,
         plays,
-        nameFound,
+        playerFound,
         initialCharacterFound,
         finalCharacterFound,
     } = getWinRate(
@@ -74,14 +79,14 @@ async function winRate(message, player, options, command) {
     );
 
     let response;
-    if (nameFound !== true) {
+    if (playerFound !== true) {
         response = `No player found with name "${player}".`;
     } else if (initialCharacterFound !== true) {
         response = `No character found with name "${options.character}".`;
     } else if (finalCharacterFound !== true) {
         response = `No character found with name "${options.finalCharacter}".`;
     } else {
-        response = `${nameMap[player.toLowerCase()]}'s win rate${
+        response = `${nameFormat[stringFormat(player)]}'s win rate${
             options.character || options.type || options.alignment
                 ? " starting as"
                 : ""
@@ -89,7 +94,7 @@ async function winRate(message, player, options, command) {
             options.type ? " " + options.type : ""
         }${
             options.character
-                ? " " + characterMap[options.character.toLowerCase()]
+                ? " " + characterFormat[stringFormat(options.character)]
                 : ""
         }${
             (options.character || options.type || options.alignment) &&
@@ -108,18 +113,13 @@ async function winRate(message, player, options, command) {
             options.finalType ? " " + options.finalType : ""
         }${
             options.finalCharacter
-                ? " " + characterMap[options.finalCharacter.toLowerCase()]
+                ? " " + characterFormat[stringFormat(options.finalCharacter)]
                 : ""
         }: ${options.fraction ? `${wins}/${plays}` : result}`;
     }
 
     // Send result
-    await message.reply({
-        content: response,
-        allowedMentions: {
-            repliedUser: false,
-        },
-    });
+    sendMessage(message, response);
 }
 
 module.exports = { defWinRate: defWinRate, winRate: winRate };

@@ -1,7 +1,7 @@
 const _ = require("lodash");
 const filterGames = require("../functions/filterGames");
-const characterMap = require("../data/characters");
-const nameMap = require("../data/names");
+const characterFormat = require("../data/characterFormat");
+const nameFormat = require("../data/nameFormat");
 
 function getWinRate(
     games,
@@ -63,13 +63,13 @@ function getWinRate(
         result: `${((100 * playerWinsCount) / playerGamesCount).toFixed(2)}%`,
         wins: playerWinsCount,
         plays: playerGamesCount,
-        nameFound: _.has(nameMap, player.toLowerCase()),
+        playerFound: _.has(nameFormat, player.toLowerCase()),
         initialCharacterFound:
             initialCharacter === undefined ||
-            _.has(characterMap, initialCharacter.toLowerCase()),
+            _.has(characterFormat, initialCharacter.toLowerCase()),
         finalCharacterFound:
             finalCharacter === undefined ||
-            _.has(characterMap, finalCharacter.toLowerCase()),
+            _.has(characterFormat, finalCharacter.toLowerCase()),
     };
 }
 

@@ -1,18 +1,18 @@
 const _ = require("lodash");
 const getFinalRole = require("../functions/getFinalRole");
-const characterMap = require("../data/characters");
-const characterType = require("../data/characterType");
-const nameMap = require("../data/names");
-const scriptMap = require("../data/scripts");
-const scriptType = require("../data/scriptType");
+const stringFormat = require("../functions/stringFormat");
+const characterTypeMap = require("../data/characterType");
+const nameFormat = require("../data/nameFormat");
+const scriptTypeMap = require("../data/scriptType");
 
 function filterGames(
     games,
     {
         numbers,
-        dateRange,
-        script,
-        scriptType,
+        startDate,
+        endDate,
+        scripts,
+        scriptTypes,
         win,
         storytellers,
         players,
@@ -33,45 +33,54 @@ function filterGames(
 
     if (numbers !== undefined) {
         // Game number in given list of numbers
-        conditions.push((game) => numbers.some((num) => num === game.Number));
+        conditions.push((game) =>
+            numbers.some((num) => num === game.Number.toString())
+        );
     }
 
-    if (dateRange !== undefined) {
-        // Game date in given date range (in Unix time )
+    if (startDate !== undefined) {
+        // Game date after given date (in Unix time)
+        console.log(parseInt(startDate, 10));
+        conditions.push((game) => parseInt(startDate, 10) <= game.Date);
+    }
+
+    if (endDate !== undefined) {
+        // Game date before given date (in Unix time)
+        console.log(parseInt(endDate, 10));
+        conditions.push((game) => game.Date <= parseInt(endDate, 10));
+    }
+
+    if (scripts !== undefined) {
+        // Game script equal to given script
         conditions.push((game) =>
-            ((date) => dateRange[0] <= date && date <= dateRange[1])(
-                Date.parse(game.Date)
+            scripts.some(
+                (script) => stringFormat(game.Script) === stringFormat(script)
             )
         );
     }
 
-    if (script !== undefined) {
-        // Game script equal to given script
-        conditions.push(
-            (game) => game.Script.toLowerCase() === script.toLowerCase()
-        );
-    }
-
-    if (scriptType !== undefined) {
+    if (scriptTypes !== undefined) {
         // Game script type equal to given script type
-        conditions.push(
-            (game) =>
-                scriptType[game.Script].toLowerCase() ===
-                scriptType.toLowerCase()
+        conditions.push((game) =>
+            scriptTypes.some(
+                (scriptType) =>
+                    stringFormat(scriptTypeMap[game.Script]) ===
+                    stringFormat(scriptType)
+            )
         );
     }
 
     if (win !== undefined) {
         // Winning team equal to given team
-        conditions.push((game) => game.Win.toLowerCase() === win.toLowerCase());
+        conditions.push((game) => stringFormat(game.Win) === stringFormat(win));
     }
 
     if (storytellers !== undefined) {
         // Game contains any of the given storytellers
         conditions.push((game) =>
             storytellers.some((storyteller) =>
-                _.map(game.Storytellers, (st) => st.toLowerCase()).includes(
-                    storyteller.toLowerCase()
+                _.map(game.Storytellers, (st) => stringFormat(st)).includes(
+                    stringFormat(storyteller)
                 )
             )
         );
@@ -81,7 +90,7 @@ function filterGames(
         // Game contains all of the given players
         conditions.push((game) =>
             players.every((player) =>
-                _.has(game, ["Players", nameMap[player.toLowerCase()]])
+                _.has(game, ["Players", nameFormat[stringFormat(player)]])
             )
         );
     }
@@ -92,8 +101,8 @@ function filterGames(
             characters.every((character) =>
                 game.Players.values().some(
                     (player) =>
-                        player.Character ===
-                        characterMap[character.toLowerCase()]
+                        stringFormat(player.Character) ===
+                        stringFormat(character)
                 )
             )
         );
@@ -104,9 +113,11 @@ function filterGames(
         conditions.push((game) =>
             playerInitialCharacters.every(
                 (playerCharacter) =>
-                    game.Players[nameMap[playerCharacter[0].toLowerCase()]]
-                        ?.Character ===
-                    characterMap[playerCharacter[1].toLowerCase()]
+                    stringFormat(
+                        game.Players[
+                            nameFormat[stringFormat(playerCharacter[0])]
+                        ]?.Character
+                    ) === stringFormat(playerCharacter[1])
             )
         );
     }
@@ -116,10 +127,13 @@ function filterGames(
         conditions.push((game) =>
             playerFinalCharacters.every(
                 (playerCharacter) =>
-                    getFinalRole(
-                        game.Players[nameMap[playerCharacter[0].toLowerCase()]]
-                    )?.Character ===
-                    characterMap[playerCharacter[1].toLowerCase()]
+                    stringFormat(
+                        getFinalRole(
+                            game.Players[
+                                nameFormat[stringFormat(playerCharacter[0])]
+                            ]
+                        )?.Character
+                    ) === stringFormat(playerCharacter[1])
             )
         );
     }
@@ -129,11 +143,13 @@ function filterGames(
         conditions.push((game) =>
             playerInitialCharacterTypes.every(
                 (playerCharacterType) =>
-                    characterType[
-                        game.Players[
-                            nameMap[playerCharacterType[0].toLowerCase()]
-                        ]?.Character
-                    ] === playerCharacterType[1]
+                    characterTypeFormat[
+                        stringFormat(
+                            game.Players[
+                                nameFormat[stringFormat(playerCharacterType[0])]
+                            ]?.Character
+                        )
+                    ] === stringFormat(playerCharacterType[1])
             )
         );
     }
@@ -143,13 +159,17 @@ function filterGames(
         conditions.push((game) =>
             playerFinalCharacterTypes.every(
                 (playerCharacterType) =>
-                    characterType[
-                        getFinalRole(
-                            game.Players[
-                                nameMap[playerCharacterType[0].toLowerCase()]
-                            ]
-                        )?.Character
-                    ] === playerCharacterType[1]
+                    characterTypeFormat[
+                        stringFormat(
+                            getFinalRole(
+                                game.Players[
+                                    nameFormat[
+                                        stringFormat(playerCharacterType[0])
+                                    ]
+                                ]
+                            )?.Character
+                        )
+                    ] === stringFormat(playerCharacterType[1])
             )
         );
     }
@@ -159,8 +179,11 @@ function filterGames(
         conditions.push((game) =>
             playerInitialAlignments.every(
                 (playerAlignment) =>
-                    game.Players[nameMap[playerAlignment[0].toLowerCase()]]
-                        ?.Alignment === playerAlignment[1]
+                    stringFormat(
+                        game.Players[
+                            nameFormat[stringFormat(playerAlignment[0])]
+                        ]?.Alignment
+                    ) === stringFormat(playerAlignment[1])
             )
         );
     }
@@ -170,9 +193,13 @@ function filterGames(
         conditions.push((game) =>
             playerFinalAlignments.every(
                 (playerAlignment) =>
-                    getFinalRole(
-                        game.Players[nameMap[playerAlignment[0].toLowerCase()]]
-                    )?.Alignment === playerAlignment[1]
+                    stringFormat(
+                        getFinalRole(
+                            game.Players[
+                                nameFormat[stringFormat(playerAlignment[0])]
+                            ]
+                        )?.Alignment
+                    ) === stringFormat(playerAlignment[1])
             )
         );
     }
@@ -182,9 +209,13 @@ function filterGames(
         conditions.push((game) =>
             winningPlayers.every(
                 (winningPlayer) =>
-                    getFinalRole(
-                        game.Players[nameMap[winningPlayer.toLowerCase()]]
-                    )?.Alignment === game.Win
+                    stringFormat(
+                        getFinalRole(
+                            game.Players[
+                                nameFormat[stringFormat(winningPlayer)]
+                            ]
+                        )?.Alignment
+                    ) === stringFormat(game.Win)
             )
         );
     }
@@ -194,9 +225,11 @@ function filterGames(
         conditions.push((game) =>
             losingPlayers.every(
                 (losingPlayer) =>
-                    getFinalRole(
-                        game.Players[nameMap[losingPlayer.toLowerCase()]]
-                    )?.Alignment !== game.Win
+                    stringFormat(
+                        getFinalRole(
+                            game.Players[nameFormat[stringFormat(losingPlayer)]]
+                        )?.Alignment
+                    ) !== stringFormat(game.Win)
             )
         );
     }

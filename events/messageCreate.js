@@ -1,13 +1,15 @@
 const { codeBlock } = require("@discordjs/builders");
 const { Command, Option } = require("commander");
+const shlex = require("shlex");
 const { prefix } = require("../config.json");
 
 // Read in useful functions
 const sendCodeBlock = require("../functions/sendCodeBlock");
 
 // Read in files for message commands
-const { defStToggle, stToggle } = require("../commands/stToggle");
-const { defWinRate, winRate } = require("../commands/winRate");
+const { defCount } = require("../commands/count");
+const { defStToggle } = require("../commands/stToggle");
+const { defWinRate } = require("../commands/winRate");
 
 // Define response to messages
 module.exports = {
@@ -21,20 +23,19 @@ module.exports = {
             .name("!o")
             .configureOutput({ writeOut: (str) => sendCodeBlock(message, str) })
             .addHelpCommand("help [command]", "Display help for command")
-            .helpOption("-h, --help", "Dislpay help for command")
-            .configureHelp({ helpWidth: 1000 })
+            .helpOption("-h, --help", "Display help for command")
+            .configureHelp({ sortSubcommands: true, helpWidth: 1000 })
             .exitOverride();
 
         // Build subcommands
+        defCount(occultist, message);
         defStToggle(occultist, message);
         defWinRate(occultist, message);
 
-        // Cut off the prefix, trim, and split on whitespace
-        const args = message.content
-            .slice(prefix.length)
-            .trim()
-            .match(/(?:[^\s'"]+|['"][^'"]*['"])+/g)
-            .map((str) => str.replace(/['"]/g, ""));
+        // Cut off the prefix, trim, and split on whitespace not in quotes
+        const args = shlex.split(message.content.slice(prefix.length).trim());
+        // .match(/(?:[^\s'"]+|['"][^'"]*['"])+/g)
+        // .map((str) => str.replace(/['"]/g, ""));
 
         // Parse the arguments, controlling error handling ourselves
         try {
@@ -45,7 +46,12 @@ module.exports = {
                 err.code !== "commander.helpDisplayed"
             ) {
                 console.log(err);
-                sendCodeBlock(message, occultist.helpInformation());
+                sendCodeBlock(
+                    message,
+                    occultist.commands
+                        .find((comm) => comm._name === args[0])
+                        .helpInformation()
+                );
             }
         }
     },

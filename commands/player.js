@@ -60,7 +60,6 @@ async function game(message, number, command) {
     if (grimOk === true) embed.setImage(grim);
 
     // Add demon avatar to embed
-    const nameUsername = _.invert(usernameName);
     const firstDemonUsername = _.map(
         _.keys(
             _.pickBy(
@@ -68,7 +67,7 @@ async function game(message, number, command) {
                 (player) => characterTypeMap[player.Character] === "Demon"
             )
         ),
-        (name) => nameUsername[name]
+        (name) => _.invert(usernameName)[name]
     )[0];
     const firstDemonAvatar = message.guild.members.cache
         .find((member) => member.user.username === firstDemonUsername)

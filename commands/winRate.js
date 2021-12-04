@@ -9,7 +9,7 @@ const usernameName = require("../data/usernameName");
 
 async function winRate(message, player, options, command) {
     if (player === undefined) {
-        player = usernameName(message.author.username);
+        player = usernameName[message.author.username];
     }
 
     const {
@@ -79,7 +79,7 @@ function defWinRate(comm, message) {
         .description(
             "Get the win rate for the specified player, with optional filters"
         )
-        .argument("[player]", "Player to find win rate of")
+        .argument("[player]", "Player to find win rate of (default: ")
         .option("-k, --character <character>", "Initial character")
         .option("-K, --final-character <character>", "Final character")
         .addOption(

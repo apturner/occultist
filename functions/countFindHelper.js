@@ -20,8 +20,14 @@ function pairsParse(value, previous) {
 
 function actionHelper(message, options, command, count) {
     return filterGames(message.client.games, {
-        startDate: options.startDate,
-        endDate: options.endDate,
+        startDate:
+            options.startDate !== undefined
+                ? Date.parse(options.startDate) / 1000
+                : undefined,
+        endDate:
+            options.endDate !== undefined
+                ? Date.parse(options.endDate) / 1000
+                : undefined,
         scripts: options.scripts,
         scriptTypes: options.scriptTypes,
         win: options.win,
@@ -45,8 +51,8 @@ function actionHelper(message, options, command, count) {
 function defHelper(comm, message, name, desc, act) {
     comm.command(name)
         .description(desc)
-        .option("-d, --start-date <seconds>", "Start date, in Unix time")
-        .option("-D, --end-date <seconds>", "End date, in Unix time")
+        .option("-d, --start-date <seconds>", "Start date")
+        .option("-D, --end-date <seconds>", "End date")
         .option("-s, --scripts <script...>", "Scripts [OR]")
         .addOption(
             new Option(

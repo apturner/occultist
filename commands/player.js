@@ -14,8 +14,8 @@ function playerGameString(player, win, number) {
     const roles = getAllRoles(player);
     const finalAlignment = roles[roles.length - 1].Alignment;
 
-    return `#${number}: ${finalAlignment} ${
-        finalAlignment === win ? "win" : "loss"
+    return `#${number}: ${
+        finalAlignment === win ? "Win" : "Loss"
     } as ${_.reduce(
         roles,
         (str, role) =>

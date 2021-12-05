@@ -1,6 +1,6 @@
 {
     "name": "occultist",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Bot to get BotC stats from game history of Social Deduction HQ",
     "main": "bot.js",
     "author": "Cyberholmes",

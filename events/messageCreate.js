@@ -11,6 +11,7 @@ const { defCount } = require("../commands/count");
 const { defFind } = require("../commands/find");
 const { defGame } = require("../commands/game");
 const { defGrim } = require("../commands/grim");
+const { defPlayer } = require("../commands/player");
 const { defStToggle } = require("../commands/stToggle");
 const { defWinRate } = require("../commands/winRate");
 
@@ -35,6 +36,7 @@ module.exports = {
         defFind(occultist, message);
         defGame(occultist, message);
         defGrim(occultist, message);
+        defPlayer(occultist, message);
         defStToggle(occultist, message);
         defWinRate(occultist, message);
 

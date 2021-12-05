@@ -3,7 +3,7 @@ const fetch = (...args) =>
     import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const _ = require("lodash");
 const getAllRoles = require("../functions/getAllRoles");
-const sendMessage = require("../functions/sendMessage");
+const sendEmbed = require("../functions/sendEmbed");
 const stringFormat = require("../functions/stringFormat");
 const characterTypeMap = require("../data/characterType");
 const usernameName = require("../data/usernameName");
@@ -84,12 +84,7 @@ async function game(message, number, command) {
     }
 
     // Send result
-    await message.reply({
-        embeds: [embed],
-        allowedMentions: {
-            repliedUser: false,
-        },
-    });
+    await sendEmbed(message, embed);
 }
 
 function defGame(comm, message) {

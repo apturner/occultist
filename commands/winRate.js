@@ -8,6 +8,7 @@ const nameFormat = require("../data/nameFormat");
 const usernameName = require("../data/usernameName");
 
 async function winRate(message, player, options, command) {
+    // If no player given, set player to caller
     if (player === undefined) {
         player = usernameName[message.author.username];
     }
@@ -19,16 +20,14 @@ async function winRate(message, player, options, command) {
         playerFound,
         initialCharacterFound,
         finalCharacterFound,
-    } = getWinRate(
-        message.client.games,
-        player,
-        options.character,
-        options.finalCharacter,
-        options.type,
-        options.finalType,
-        options.alignment,
-        options.finalAlignment
-    );
+    } = getWinRate(message.client.games, player, {
+        initialCharacter: options.character,
+        finalCharacter: options.finalCharacter,
+        initialType: options.type,
+        finalType: options.finalType,
+        initialAlignment: options.alignment,
+        finalAlignment: options.finalAlignment,
+    });
 
     let response;
     if (playerFound !== true) {
@@ -79,7 +78,7 @@ function defWinRate(comm, message) {
         .description(
             "Get the win rate for the specified player, with optional filters"
         )
-        .argument("[player]", "Player to find win rate of (default: ")
+        .argument("[player]", "Player to find win rate of (default: caller)")
         .option("-k, --character <character>", "Initial character")
         .option("-K, --final-character <character>", "Final character")
         .addOption(

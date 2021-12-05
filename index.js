@@ -6,7 +6,11 @@ const { token } = require("./config.json");
 
 // Create a new client instance
 const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_MEMBERS,
+    ],
 });
 
 // Read in games file and associate it with the client

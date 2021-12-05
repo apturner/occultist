@@ -8,7 +8,9 @@ async function stToggle(message, options, command) {
     );
 
     // Get ST role
-    const st = message.guild.roles.cache.find((role) => role.name === "test");
+    const st = message.guild.roles.cache.find(
+        (role) => role.name === "Storyteller"
+    );
 
     // If they already have the ST role...
     if (member.roles.cache.some((role) => role === st)) {

@@ -132,7 +132,7 @@ function filterGames(
     if (initialCharacters !== undefined) {
         // Game contains all of the given characters
         conditions.push((game) =>
-            characters.every((character) =>
+            initialCharacters.every((character) =>
                 _.values(game.Players).some(
                     (player) =>
                         stringFormat(player.Character) ===
@@ -145,7 +145,7 @@ function filterGames(
     if (finalCharacters !== undefined) {
         // Game contains all of the given characters
         conditions.push((game) =>
-            characters.every((character) =>
+            finalCharacters.every((character) =>
                 _.values(game.Players).some(
                     (player) =>
                         stringFormat(getFinalRole(player).Character) ===

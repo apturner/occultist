@@ -6,12 +6,14 @@ const nameFormat = require("../data/nameFormat");
 function getWinRate(
     games,
     player,
-    initialCharacter,
-    finalCharacter,
-    initialType,
-    finalType,
-    initialAlignment,
-    finalAlignment
+    {
+        initialCharacter,
+        finalCharacter,
+        initialType,
+        finalType,
+        initialAlignment,
+        finalAlignment,
+    }
 ) {
     const playerGamesCount = filterGames(games, {
         players: [player],
@@ -60,7 +62,10 @@ function getWinRate(
     });
 
     return {
-        result: `${((100 * playerWinsCount) / playerGamesCount).toFixed(2)}%`,
+        result:
+            playerGamesCount > 0
+                ? `${((100 * playerWinsCount) / playerGamesCount).toFixed(2)}%`
+                : "No games",
         wins: playerWinsCount,
         plays: playerGamesCount,
         playerFound: _.has(nameFormat, player.toLowerCase()),

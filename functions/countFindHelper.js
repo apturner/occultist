@@ -30,7 +30,7 @@ function actionHelper(message, options, command, count) {
                 : undefined,
         scripts: options.scripts,
         scriptTypes: options.scriptTypes,
-        win: options.win,
+        win: options.winningTeam,
         storytellers: options.storytellers,
         players: options.players,
         winningPlayers: options.winners,

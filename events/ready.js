@@ -8,6 +8,11 @@ module.exports = {
     name: "ready",
     once: true,
     async execute(client) {
+        // Delete all old slash commands
+        const guildCommands = client.guilds.cache.get(guildId)?.commands;
+        await guildCommands.fetch();
+        guildCommands.cache.forEach((value, key) => guildCommands.delete(key));
+
         // Get slash commands
         const commandFiles = fs
             .readdirSync(__dirname + "/../slash")
@@ -19,9 +24,9 @@ module.exports = {
             const commandInfo = require(`../slash/${file}`);
 
             // Register the command
-            const command = await client.guilds.cache
-                .get(guildId)
-                ?.commands.create(commandInfo.data.toJSON());
+            const command = await guildCommands.create(
+                commandInfo.data.toJSON()
+            );
 
             // Special treatment for functions that are private by default
             if (commandInfo.giveMePermission) {

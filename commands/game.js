@@ -60,6 +60,7 @@ async function game(message, number, command) {
     if (grimOk === true) embed.setImage(grim);
 
     // Add demon avatar to embed
+    await message.guild.members.fetch();
     const nameUsername = _.invert(usernameName);
     const firstDemonUsername = _.map(
         _.keys(

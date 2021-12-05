@@ -35,8 +35,8 @@ async function player(message, player, command) {
     }
 
     // Get player avatar
-    const nameUsername = _.invert(usernameName);
     await message.guild.members.fetch();
+    const nameUsername = _.invert(usernameName);
     const playerAvatar = message.guild.members.cache
         .find((member) => member.user.username === nameUsername[player])
         ?.displayAvatarURL();

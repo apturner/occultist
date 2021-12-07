@@ -54,18 +54,8 @@ function defHelper(comm, message, name, desc, act) {
         .option("-d, --start-date <seconds>", "Start date")
         .option("-D, --end-date <seconds>", "End date")
         .option("-s, --scripts <script...>", "Scripts [OR]")
-        .addOption(
-            new Option(
-                "-S, --script-types <script type...>",
-                "Script types [OR]"
-            ).choices(["Full", "Teensyville", "Weensyville"])
-        )
-        .addOption(
-            new Option(
-                "-W, --winning-team <alignment>",
-                "Winning alignment"
-            ).choices(["Good", "Evil"])
-        )
+        .option("-S, --script-types <script type...>", "Script types [OR]")
+        .option("-W, --winning-team <alignment>", "Winning alignment")
         .option("-g, --storytellers <storyteller...>", "Storytellers [OR]")
         .option("-p, --players <player...>", "Players [AND]")
         .option("-w, --winners <player...>", "Winning players [AND]")

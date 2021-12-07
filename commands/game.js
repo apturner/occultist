@@ -3,19 +3,20 @@ const fetch = (...args) =>
     import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const _ = require("lodash");
 const getAllRoles = require("../functions/getAllRoles");
+const getCauseOfDeathString = require("../functions/getCauseOfDeathString");
+const getPlayerChangeString = require("../functions/getPlayerChangeString");
 const sendEmbed = require("../functions/sendEmbed");
 const stringFormat = require("../functions/stringFormat");
 const characterTypeMap = require("../data/characterType");
 const usernameName = require("../data/usernameName");
 
-function playerChangeString(playerName, playerRole) {
-    return `• ${playerName} as ${_.reduce(
-        playerRole,
-        (str, role) =>
-            `${str}${str !== "" ? " turned " : ""}${role.Alignment} ${
-                role.Character
-            }`,
-        ""
+function playerRolesString(playerName, playerObj) {
+    return `• ${playerName} as ${getPlayerChangeString(
+        getAllRoles(playerObj)
+    )}; ${getCauseOfDeathString(
+        playerObj.Fate,
+        playerObj["Cause of Death"],
+        playerObj["Killed By"]
     )}`;
 }
 
@@ -40,16 +41,19 @@ async function game(message, number, command) {
     const win = game.Win;
     const storytellers = game.Storytellers;
     const players = game.Players;
-    const playerRoles = _.mapValues(players, (player) => getAllRoles(player));
     const playerChangesString = _.reduce(
-        playerRoles,
-        (str, role, player) => `${str}\n${playerChangeString(player, role)}`,
+        players,
+        (str, playerObj, playerName) =>
+            `${str}\n${playerRolesString(playerName, playerObj)}`,
         ""
     );
 
     const embed = new MessageEmbed()
         .setColor("#9d221a")
-        .setAuthor(`Game #${number}`, message.client.user.avatarURL())
+        .setAuthor(
+            `Game #${number}, storytold by ${storytellers.join(", ")}`,
+            message.client.user.avatarURL()
+        )
         // .setURL(grimOk ? grim : "https://github.com/apturner/botc-game-grims")
         .setTitle(`${script}`)
         .setDescription(`**${win.toUpperCase()} WIN**`)
@@ -79,7 +83,7 @@ async function game(message, number, command) {
     } else {
         embed.setThumbnail(
             `https://raw.githubusercontent.com/bra1n/townsquare/develop/src/assets/icons/${stringFormat(
-                players[usernameName[firstDemonUsername]].Character
+                players[usernameName[firstDemonUsername]]?.Character
             )}.png`
         );
     }

@@ -4,25 +4,24 @@ const fetch = (...args) =>
 const _ = require("lodash");
 const filterGames = require("../functions/filterGames");
 const getAllRoles = require("../functions/getAllRoles");
+const getCauseOfDeathString = require("../functions/getCauseOfDeathString");
+const getPlayerChangeString = require("../functions/getPlayerChangeString");
 const getWinRate = require("../functions/getWinRate");
 const sendEmbed = require("../functions/sendEmbed");
 const stringFormat = require("../functions/stringFormat");
 const nameFormat = require("../data/nameFormat");
 const usernameName = require("../data/usernameName");
 
-function playerGameString(player, win, number) {
-    const roles = getAllRoles(player);
+function playerGameString(playerObj, win, number) {
+    const roles = getAllRoles(playerObj);
     const finalAlignment = roles[roles.length - 1].Alignment;
 
     return `#${number}: ${
         finalAlignment === win ? "Win" : "Loss"
-    } as ${_.reduce(
-        roles,
-        (str, role) =>
-            `${str}${str !== "" ? " turned " : ""}${role.Alignment} ${
-                role.Character
-            }`,
-        ""
+    } as ${getPlayerChangeString(roles)}; ${getCauseOfDeathString(
+        playerObj.Fate,
+        playerObj["Cause of Death"],
+        playerObj["Killed By"]
     )}`;
 }
 
@@ -47,72 +46,104 @@ async function player(message, player, command) {
     });
 
     // Get player win rates
-    const winRate = getWinRate(playerGames, player, {}).result;
-    const goodWinRate = getWinRate(playerGames, player, {
+    const { result: winRate, wins: winCount, plays: playCount } = getWinRate(
+        playerGames,
+        player,
+        {}
+    );
+    const {
+        result: goodWinRate,
+        wins: goodWinCount,
+        plays: goodPlayCount,
+    } = getWinRate(playerGames, player, {
         initialAlignment: "Good",
-    }).result;
-    const evilWinRate = getWinRate(playerGames, player, {
+    });
+    const {
+        result: evilWinRate,
+        wins: evilWinCount,
+        plays: evilPlayCount,
+    } = getWinRate(playerGames, player, {
         initialAlignment: "Evil",
-    }).result;
-    const townsfolkWinRate = getWinRate(playerGames, player, {
+    });
+    const {
+        result: townsfolkWinRate,
+        wins: townsfolkWinCount,
+        plays: townsfolkPlayCount,
+    } = getWinRate(playerGames, player, {
         initialType: "Townsfolk",
-    }).result;
-    const outsiderWinRate = getWinRate(playerGames, player, {
+    });
+    const {
+        result: outsiderWinRate,
+        wins: outsiderWinCount,
+        plays: outsiderPlayCount,
+    } = getWinRate(playerGames, player, {
         initialType: "Outsider",
-    }).result;
-    const minionWinRate = getWinRate(playerGames, player, {
+    });
+    const {
+        result: minionWinRate,
+        wins: minionWinCount,
+        plays: minionPlayCount,
+    } = getWinRate(playerGames, player, {
         initialType: "Minion",
-    }).result;
-    const demonWinRate = getWinRate(playerGames, player, {
+    });
+    const {
+        result: demonWinRate,
+        wins: demonWinCount,
+        plays: demonPlayCount,
+    } = getWinRate(playerGames, player, {
         initialType: "Demon",
-    }).result;
-    const travellerWinRate = getWinRate(playerGames, player, {
+    });
+    const {
+        result: travellerWinRate,
+        wins: travellerWinCount,
+        plays: travellerPlayCount,
+    } = getWinRate(playerGames, player, {
         initialType: "Traveller",
-    }).result;
+    });
 
     const embed = new MessageEmbed()
         .setColor("#9d221a")
         // .setURL()
         .setTitle(`${player}`)
         .setDescription(
-            `**OVERALL WIN RATE:** ${winRate} across ${playerGames.length} games`
+            `**OVERALL WIN RATE:** ${winRate} (${winCount}/${playCount})`
         )
         .addFields(
             {
                 name: "Good Win Rate",
-                value: `${goodWinRate}`,
+                value: `${goodWinRate} (${goodWinCount}/${goodPlayCount})`,
                 inline: true,
             },
             {
                 name: "Evil Win Rate",
-                value: `${evilWinRate}`,
+                value: `${evilWinRate} (${evilWinCount}/${evilPlayCount})`,
                 inline: true,
             },
             { name: "\u200b", value: "\u200b", inline: true },
             { name: "\u200b", value: "\u200b" },
             {
                 name: "Townsfolk Win Rate",
-                value: `${townsfolkWinRate}`,
+                value: `${townsfolkWinRate} (${townsfolkWinCount}/${townsfolkPlayCount})`,
                 inline: true,
             },
             {
                 name: "Outsider Win Rate",
-                value: `${outsiderWinRate}`,
+                value: `${outsiderWinRate} (${outsiderWinCount}/${outsiderPlayCount})`,
                 inline: true,
             },
             {
                 name: "Traveller Win Rate",
-                value: `${travellerWinRate}`,
+                value: `${travellerWinRate} (${travellerWinCount}/${travellerPlayCount})`,
                 inline: true,
             },
             {
                 name: "Minion Win Rate",
-                value: `${minionWinRate}`,
+                value: `${minionWinRate} (${minionWinCount}/${minionPlayCount})`,
                 inline: true,
             },
             {
                 name: "Demon Win Rate",
-                value: `${demonWinRate}`,
+                value: `${demonWinRate} (${demonWinCount}/${demonPlayCount})`,
                 inline: true,
             },
             { name: "\u200b", value: "\u200b", inline: true },
@@ -136,27 +167,29 @@ async function player(message, player, command) {
             _.map(playerGames, (game) =>
                 playerGameString(game.Players[player], game.Win, game.Number)
             ),
-            25
+            20
         ),
         (arr, index) => {
             return {
                 name: index === 0 ? "Game Summaries" : "\u200b",
                 value: arr.join("\n"),
-                inline: true,
+                inline: false,
             };
         }
     );
-    const loopLength = gameSummaries.length / 3 - 1;
-    for (let i = 0; i <= loopLength; i++) {
-        gameSummaries.splice(3 * i + 2, 0, {
-            name: "\u200b",
-            value: "\u200b",
-            inline: false,
-        });
-    }
-    gameSummaries.forEach((summary) =>
-        embed.addField(summary.name, summary.value, summary.inline)
-    );
+    // This creates 2 columns, if above inline set to true
+    // const loopLength = gameSummaries.length / 3 - 1;
+    // for (let i = 0; i <= loopLength; i++) {
+    //     gameSummaries.splice(3 * i + 2, 0, {
+    //         name: "\u200b",
+    //         value: "\u200b",
+    //         inline: false,
+    //     });
+    // }
+    // gameSummaries.forEach((summary) =>
+    //     embed.addField(summary.name, summary.value, summary.inline)
+    // );
+    embed.addFields(gameSummaries);
 
     // Send result
     await sendEmbed(message, embed);

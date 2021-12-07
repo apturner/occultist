@@ -81,33 +81,10 @@ function defWinRate(comm, message) {
         .argument("[player]", "Player to find win rate of (default: caller)")
         .option("-k, --character <character>", "Initial character")
         .option("-K, --final-character <character>", "Final character")
-        .addOption(
-            new Option("-t, --type <type>", "Initial character type").choices([
-                "Townsfolk",
-                "Outsider",
-                "Minion",
-                "Demon",
-                "Traveller",
-            ])
-        )
-        .addOption(
-            new Option(
-                "-T, --final-type <type>",
-                "Final character type"
-            ).choices(["Townsfolk", "Outsider", "Minion", "Demon", "Traveller"])
-        )
-        .addOption(
-            new Option(
-                "-a, --alignment <alignment>",
-                "Initial alignment"
-            ).choices(["Good", "Evil"])
-        )
-        .addOption(
-            new Option(
-                "-A, --final-alignment <alignment>",
-                "Final alignment"
-            ).choices(["Good", "Evil"])
-        )
+        .option("-t, --type <type>", "Initial character type")
+        .option("-T, --final-type <type>", "Final character type")
+        .option("-a, --alignment <alignment>", "Initial alignment")
+        .option("-A, --final-alignment <alignment>", "Final alignment")
         .option("-f, --fraction", "Show result as unreduced fraction")
         .action(async (player, options, command) =>
             winRate(message, player, options, command)

@@ -8486,5 +8486,113 @@
 				"Fate":"Alive"
 			}
 		}
+	},
+	{
+		"Number":124,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/124.png",
+		"Date":1638680400,
+		"Script":"Bad Moon Rising",
+		"Win":"Evil",
+		"Win Condition":"Two Living Players",
+		"Storytellers":[
+			"Megan"
+		],
+		"Bluffs":[
+			"Exorcist",
+			"Innkeeper",
+			"Courtier"
+		],
+		"Notes":"Zombuul 'died' N2, following choice of Lunatic.\nPacifist executed D1 and lived.\nGossips: D1: Either Cyberholes or Matt is Demon. D2: Either OngakuSensei or Jakes is Demon.\nNo Gossip kill on N2 because Gossip was chosen by Sailor that night.",
+		"Players":{
+			"Alek2ander":{
+				"Character":"Gossip",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Matt":{
+				"Character":"Zombuul",
+				"Alignment":"Evil",
+				"Fate":"Alive",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Zombuul"
+			},
+			"nothership":{
+				"Character":"Godfather",
+				"Alignment":"Evil",
+				"Fate":"Dead",
+				"Cause of Death":"Execution"
+			},
+			"Jakes":{
+				"Character":"Lunatic",
+				"Alignment":"Good",
+				"Believed They Were":"Zombuul",
+				"Fate":"Dead",
+				"Cause of Death":"Execution"
+			},
+			"OngakuSensei":{
+				"Character":"Sailor",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Cyberholmes":{
+				"Character":"Pacifist",
+				"Alignment":"Good",
+				"Fate":"Dead",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Zombuul"
+			},
+			"sabrina":{
+				"Character":"Chambermaid",
+				"Alignment":"Good",
+				"Fate":"Dead",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Godfather"
+			}
+		}
+	},
+	{
+		"Number":125,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/125.png",
+		"Date":1638680400,
+		"Script":"Target Practice",
+		"Fabled":[
+			"Sentinel",
+			"Deus ex Fiasco"
+		],
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"nothership"
+		],
+		"Notes":"Deus ex Fiasco was on the D1 Savant info. Savant info was: D1: Cerenovus select a townsfolk player last night or chef would get a 1, D2: Both of my neighbors are evil or a good player selected me last night. However, the Cerenovus chose themselves both nights, so the D1 info was fully false.",
+		"Players":{
+			"Alek2ander":{
+				"Character":"Po",
+				"Alignment":"Evil",
+				"Fate":"Dead",
+				"Cause of Death":"Execution"
+			},
+			"Matt":{
+				"Character":"Soldier",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Jakes":{
+				"Character":"Flowergirl",
+				"Alignment":"Good",
+				"Fate":"Dead",
+				"Cause of Death":"Execution"
+			},
+			"OngakuSensei":{
+				"Character":"Cerenovus",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Cyberholmes":{
+				"Character":"Savant",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			}
+		}
 	}
 ]

@@ -1,6 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const fetch = (...args) =>
-    import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const _ = require("lodash");
 const filterGames = require("../functions/filterGames");
 const getAllRoles = require("../functions/getAllRoles");
@@ -18,7 +16,7 @@ function playerGameString(playerObj, win, number) {
 
     return `#${number}: ${
         finalAlignment === win ? "Win" : "Loss"
-    } as ${getPlayerChangeString(roles)}; ${getCauseOfDeathString(
+    } as ${getPlayerChangeString(roles)}, who ${getCauseOfDeathString(
         playerObj.Fate,
         playerObj["Cause of Death"],
         playerObj["Killed By"]

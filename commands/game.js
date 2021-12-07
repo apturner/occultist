@@ -13,7 +13,7 @@ const usernameName = require("../data/usernameName");
 function playerRolesString(playerName, playerObj) {
     return `• ${playerName} as ${getPlayerChangeString(
         getAllRoles(playerObj)
-    )}; ${getCauseOfDeathString(
+    )}, who ${getCauseOfDeathString(
         playerObj.Fate,
         playerObj["Cause of Death"],
         playerObj["Killed By"]
@@ -39,6 +39,7 @@ async function game(message, number, command) {
     );
     const script = game.Script;
     const win = game.Win;
+    const winCondition = game["Win Condition"];
     const storytellers = game.Storytellers;
     const players = game.Players;
     const playerChangesString = _.reduce(
@@ -56,7 +57,7 @@ async function game(message, number, command) {
         )
         // .setURL(grimOk ? grim : "https://github.com/apturner/botc-game-grims")
         .setTitle(`${script}`)
-        .setDescription(`**${win.toUpperCase()} WIN**`)
+        .setDescription(`**${win.toUpperCase()} WIN: ${winCondition}**`)
         .addFields({ name: "Featuring", value: playerChangesString })
         .setTimestamp(date);
 

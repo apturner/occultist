@@ -10,7 +10,7 @@ function getCauseOfDeathString(fate, causeOfDeath, killedBy) {
             case "Execution":
                 return "died by Execution";
             case "Demon Attack":
-                return `killed by ${killedBy} attack`;
+                return `was killed by ${killedBy} Attack`;
             case "Other Power (Day)":
                 return `died by ${dayDeath[killedBy]}`;
             case "Other Power (Night)":

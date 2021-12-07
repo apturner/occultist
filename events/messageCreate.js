@@ -7,6 +7,7 @@ const { prefix } = require("../config.json");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 
 // Read in files for message commands
+const { defChoose } = require("../commands/choose");
 const { defCount } = require("../commands/count");
 const { defFind } = require("../commands/find");
 const { defGame } = require("../commands/game");
@@ -32,6 +33,7 @@ module.exports = {
             .exitOverride();
 
         // Build subcommands
+        defChoose(occultist, message);
         defCount(occultist, message);
         defFind(occultist, message);
         defGame(occultist, message);

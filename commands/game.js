@@ -49,22 +49,22 @@ async function game(message, number, command) {
         ""
     );
 
+    // Make embed
     const embed = new MessageEmbed()
         .setColor("#9d221a")
         .setAuthor(
             `Game #${number}, storytold by ${storytellers.join(", ")}`,
             message.client.user.avatarURL()
         )
-        // .setURL(grimOk ? grim : "https://github.com/apturner/botc-game-grims")
         .setTitle(`${script}`)
         .setDescription(`**${win.toUpperCase()} WIN: ${winCondition}**`)
         .addFields({ name: "Featuring", value: playerChangesString })
         .setTimestamp(date);
 
-    // Add Grimoire to embed
+    // Add Grimoire if found
     if (grimOk === true) embed.setImage(grim);
 
-    // Add demon avatar to embed
+    // Add demon avatar if found
     await message.guild.members.fetch();
     const nameUsername = _.invert(usernameName);
     const firstDemonUsername = _.map(

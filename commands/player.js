@@ -99,9 +99,9 @@ async function player(message, player, command) {
         initialType: "Traveller",
     });
 
+    // Make embed
     const embed = new MessageEmbed()
         .setColor("#9d221a")
-        // .setURL()
         .setTitle(`${player}`)
         .setDescription(
             `**OVERALL WIN RATE:** ${winRate} (${winCount}/${playCount})`
@@ -147,7 +147,6 @@ async function player(message, player, command) {
             { name: "\u200b", value: "\u200b", inline: true },
             { name: "\u200b", value: "\u200b" }
         )
-        // .setImage()
         .setTimestamp();
 
     // Add player avatar if found

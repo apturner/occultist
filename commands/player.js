@@ -23,7 +23,7 @@ function playerGameString(playerObj, win, number) {
     )}`;
 }
 
-async function player(message, player, command) {
+async function playerSummary(message, player, command) {
     // If no player given, set player to caller
     if (player === undefined) {
         player = usernameName[message.author.username];
@@ -102,6 +102,7 @@ async function player(message, player, command) {
     // Make embed
     const embed = new MessageEmbed()
         .setColor("#9d221a")
+        .setAuthor("Player Summary", message.client.user.avatarURL())
         .setTitle(`${player}`)
         .setDescription(
             `**OVERALL WIN RATE:** ${winRate} (${winCount}/${playCount})`
@@ -150,13 +151,7 @@ async function player(message, player, command) {
         .setTimestamp();
 
     // Add player avatar if found
-    if (playerAvatar !== undefined) {
-        embed
-            .setAuthor("Player Summary", playerAvatar)
-            .setThumbnail(playerAvatar);
-    } else {
-        embed.setAuthor("Player Summary");
-    }
+    if (playerAvatar !== undefined) embed.setThumbnail(playerAvatar);
 
     // Get and add game summary strings
     const gameSummaries = _.map(
@@ -196,7 +191,10 @@ function defPlayer(comm, message) {
     comm.command("player")
         .description("View a summary of the given player")
         .argument("[player]", "Player to find info of (default: caller)")
-        .action(async (number, command) => player(message, number, command))
+        .action(
+            async (player, command) =>
+                await playerSummary(message, player, command)
+        )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),
             writeErr: (str) => sendCodeBlock(message, str),
@@ -206,4 +204,4 @@ function defPlayer(comm, message) {
         .exitOverride();
 }
 
-module.exports = { player: player, defPlayer: defPlayer };
+module.exports = { player: playerSummary, defPlayer: defPlayer };

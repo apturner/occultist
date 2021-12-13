@@ -1,3 +1,5 @@
+const { codeBlock } = require("@discordjs/builders");
+
 module.exports = {
     name: "interactionCreate",
     async execute(interaction) {
@@ -15,7 +17,9 @@ module.exports = {
         } catch (error) {
             console.error(error);
             await interaction.reply({
-                content: "There was an error while executing this command!",
+                content: codeBlock(
+                    "There was an error while executing this command!"
+                ),
                 ephemeral: true,
             });
         }

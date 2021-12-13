@@ -23,7 +23,7 @@ function playerGameString(playerObj, win, number) {
     )}`;
 }
 
-async function storyteller(message, st, command) {
+async function storytellerSummary(message, st, command) {
     // If no player given, set player to caller
     if (st === undefined) {
         st = usernameName[message.author.username];
@@ -119,6 +119,7 @@ async function storyteller(message, st, command) {
     // Make embed
     const embed = new MessageEmbed()
         .setColor("#9d221a")
+        .setAuthor("Storyteller Summary", message.client.user.avatarURL())
         .setTitle(`${st}`)
         .setDescription(`${goodWins} Good Wins, ${evilWins} Evil Wins`)
         .addFields(
@@ -184,11 +185,7 @@ async function storyteller(message, st, command) {
         .setTimestamp();
 
     // Add player avatar if found
-    if (stAvatar !== undefined) {
-        embed.setAuthor("Storyteller Summary", stAvatar).setThumbnail(stAvatar);
-    } else {
-        embed.setAuthor("Storyteller Summary");
-    }
+    if (stAvatar !== undefined) embed.setThumbnail(stAvatar);
 
     // Send result
     await sendEmbed(message, embed);
@@ -201,8 +198,9 @@ function defStoryteller(comm, message) {
             "[storyteller]",
             "Storyteller to find info of (default: caller)"
         )
-        .action(async (number, command) =>
-            storyteller(message, number, command)
+        .action(
+            async (number, command) =>
+                await storytellerSummary(message, number, command)
         )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),
@@ -213,4 +211,7 @@ function defStoryteller(comm, message) {
         .exitOverride();
 }
 
-module.exports = { storyteller: storyteller, defStoryteller: defStoryteller };
+module.exports = {
+    storyteller: storytellerSummary,
+    defStoryteller: defStoryteller,
+};

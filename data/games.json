@@ -7632,7 +7632,7 @@
 				"Character":"Philosopher",
 				"Alignment":"Good",
 				"Setup Tokens":[
-					"StyleBox[\"Investigator\",FontWeight->\"Plain\"]StyleBox[\" \",FontWeight->\"Plain\"]StyleBox[\"Wrong\",FontWeight->\"Plain\"]"
+					"Investigator Wr"
 				],
 				"Fate":"Dead",
 				"Cause of Death":"Demon Attack",
@@ -8057,7 +8057,8 @@
 		"Win":"Good",
 		"Win Condition":"No Living Demon",
 		"Storytellers":[
-			"Alek2ander,nothership"
+			"Alek2ander",
+			"nothership"
 		],
 		"Bluffs":[
 			"Saint",

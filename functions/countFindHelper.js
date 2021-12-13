@@ -99,7 +99,9 @@ function defHelper(comm, message, name, desc, act) {
             "Player/final alignment pairs, joined by ':' [AND]",
             pairsParse
         )
-        .action(async (options, command) => act(message, options, command))
+        .action(
+            async (options, command) => await act(message, options, command)
+        )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),
             writeErr: (str) => sendCodeBlock(message, str),

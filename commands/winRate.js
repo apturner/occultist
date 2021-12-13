@@ -116,8 +116,9 @@ function defWinRate(comm, message) {
         .option("-a, --initial-alignment <alignment>", "Initial alignment")
         .option("-A, --final-alignment <alignment>", "Final alignment")
         .option("-f, --fraction", "Show result as unreduced fraction")
-        .action(async (player, options, command) =>
-            winRate(message, player, options, command)
+        .action(
+            async (player, options, command) =>
+                await winRate(message, player, options, command)
         )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),

@@ -20,7 +20,7 @@ function playerRolesString(playerName, playerObj) {
     )}`;
 }
 
-async function game(message, number, command) {
+async function gameSummary(message, number, command) {
     // Get game
     const game = message.client.games[parseInt(number, 10) - 1];
 
@@ -41,6 +41,7 @@ async function game(message, number, command) {
     const win = game.Win;
     const winCondition = game["Win Condition"];
     const storytellers = game.Storytellers;
+    const bluffs = game.Bluffs;
     const players = game.Players;
     const playerChangesString = _.reduce(
         players,
@@ -53,11 +54,15 @@ async function game(message, number, command) {
     const embed = new MessageEmbed()
         .setColor("#9d221a")
         .setAuthor(
-            `Game #${number}, storytold by ${storytellers.join(", ")}`,
+            `Game #${number}, Storytold by ${storytellers.join(", ")}`,
             message.client.user.avatarURL()
         )
         .setTitle(`${script}`)
-        .setDescription(`**${win.toUpperCase()} WIN: ${winCondition}**`)
+        .setDescription(
+            `**${win.toUpperCase()} WIN: ${winCondition}**${
+                bluffs !== undefined ? "\nBluffs: " + bluffs.join(", ") : ""
+            }`
+        )
         .addFields({ name: "Featuring", value: playerChangesString })
         .setTimestamp(date);
 
@@ -97,7 +102,10 @@ function defGame(comm, message) {
     comm.command("game")
         .description("View a summary of the given game")
         .argument("<number>", "Game number")
-        .action(async (number, command) => game(message, number, command))
+        .action(
+            async (number, command) =>
+                await gameSummary(message, number, command)
+        )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),
             writeErr: (str) => sendCodeBlock(message, str),
@@ -107,4 +115,4 @@ function defGame(comm, message) {
         .exitOverride();
 }
 
-module.exports = { game: game, defGame: defGame };
+module.exports = { game: gameSummary, defGame: defGame };

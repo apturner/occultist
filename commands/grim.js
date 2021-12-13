@@ -23,7 +23,7 @@ function defGrim(comm, message) {
     comm.command("grim")
         .description("View the grimoire of the given game")
         .argument("<number>", "Game number")
-        .action(async (number, command) => grim(message, number, command))
+        .action(async (number, command) => await grim(message, number, command))
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),
             writeErr: (str) => sendCodeBlock(message, str),

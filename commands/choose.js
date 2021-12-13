@@ -12,7 +12,9 @@ function defChoose(comm, message) {
     comm.command("choose")
         .description("Randomly choose from among given options")
         .argument("<choice...>", "Items to choose from")
-        .action(async (choices, command) => choose(message, choices, command))
+        .action(
+            async (choices, command) => await choose(message, choices, command)
+        )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),
             writeErr: (str) => sendCodeBlock(message, str),

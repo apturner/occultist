@@ -5,11 +5,15 @@ const alignmentFormat = require("../data/alignmentFormat");
 const characterFormat = require("../data/characterFormat");
 const characterTypeFormat = require("../data/characterTypeFormat");
 const nameFormat = require("../data/nameFormat");
+const scriptFormat = require("../data/scriptFormat");
+const scriptTypeFormat = require("../data/scriptTypeFormat");
 
 function getWinRate(
     games,
     player,
     {
+        script,
+        scriptType,
         initialCharacter,
         finalCharacter,
         initialType,
@@ -20,6 +24,8 @@ function getWinRate(
 ) {
     const playerGamesCount = filterGames(games, {
         players: [player],
+        scripts: script ? [script] : undefined,
+        scriptTypes: scriptType ? [scriptType] : undefined,
         playerInitialCharacters: initialCharacter
             ? [[player, initialCharacter]]
             : undefined,
@@ -43,6 +49,8 @@ function getWinRate(
 
     const playerWinsCount = filterGames(games, {
         winningPlayers: [player],
+        scripts: script ? [script] : undefined,
+        scriptTypes: scriptType ? [scriptType] : undefined,
         playerInitialCharacters: initialCharacter
             ? [[player, initialCharacter]]
             : undefined,
@@ -72,6 +80,11 @@ function getWinRate(
         wins: playerWinsCount,
         plays: playerGamesCount,
         playerFound: _.has(nameFormat, stringFormat(player)),
+        scriptFound:
+            script === undefined || _.has(scriptFormat, stringFormat(script)),
+        scriptTypeFound:
+            scriptType === undefined ||
+            _.has(scriptTypeFormat, stringFormat(scriptType)),
         initialCharacterFound:
             initialCharacter === undefined ||
             _.has(characterFormat, stringFormat(initialCharacter)),

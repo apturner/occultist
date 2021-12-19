@@ -159,7 +159,7 @@ async function playerSummary(message, player, command) {
             _.map(playerGames, (game) =>
                 playerGameString(game.Players[player], game.Win, game.Number)
             ),
-            20
+            10
         ),
         (arr, index) => {
             return {

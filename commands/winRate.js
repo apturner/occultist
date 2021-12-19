@@ -7,6 +7,9 @@ const alignmentFormat = require("../data/alignmentFormat");
 const characterFormat = require("../data/characterFormat");
 const characterTypeFormat = require("../data/characterTypeFormat");
 const nameFormat = require("../data/nameFormat");
+const scriptFormat = require("../data/scriptFormat");
+const scriptTypeMap = require("../data/scriptType");
+const scriptTypeFormat = require("../data/scriptTypeFormat");
 const usernameName = require("../data/usernameName");
 
 async function winRate(message, player, options, command) {
@@ -20,6 +23,8 @@ async function winRate(message, player, options, command) {
         wins,
         plays,
         playerFound,
+        scriptFound,
+        scriptTypeFound,
         initialCharacterFound,
         finalCharacterFound,
         initialTypeFound,
@@ -27,6 +32,8 @@ async function winRate(message, player, options, command) {
         initialAlignmentFound,
         finalAlignmentFound,
     } = getWinRate(message.client.games, player, {
+        script: options.script,
+        scriptType: options.scriptType,
         initialCharacter: options.initialCharacter,
         finalCharacter: options.finalCharacter,
         initialType: options.initialType,
@@ -38,6 +45,17 @@ async function winRate(message, player, options, command) {
     let response;
     if (playerFound !== true) {
         response = `No player found with name "${player}".`;
+    } else if (scriptFound !== true) {
+        response = `No script found with name "${options.script}".`;
+    } else if (scriptTypeFound !== true) {
+        response = `No script type found with name "${options.scriptType}".`;
+    } else if (
+        options.script !== undefined &&
+        options.scriptType !== undefined &&
+        scriptTypeMap[scriptFormat[stringFormat(options.script)]] !==
+            scriptTypeFormat[stringFormat(options.scriptType)]
+    ) {
+        response = `"${options.script}" is not a script of type "${options.scriptType}".`;
     } else if (initialCharacterFound !== true) {
         response = `No character found with name "${options.initialCharacter}".`;
     } else if (finalCharacterFound !== true) {
@@ -52,6 +70,14 @@ async function winRate(message, player, options, command) {
         response = `No alignment found with name "${options.finalAlignment}".`;
     } else {
         response = `${nameFormat[stringFormat(player)]}'s win rate${
+            options.script
+                ? " in " + scriptFormat[stringFormat(options.script)]
+                : options.scriptType
+                ? " in " +
+                  scriptTypeFormat[stringFormat(options.scriptType)] +
+                  " scripts"
+                : ""
+        }${
             options.initialCharacter ||
             options.initialType ||
             options.initialAlignment
@@ -109,6 +135,8 @@ function defWinRate(comm, message) {
             "Get the win rate for the specified player, with optional filters"
         )
         .argument("[player]", "Player to find win rate of (default: caller)")
+        .option("-s, --script <script>", "Script")
+        .option("-S, --script-type <script type>", "Script type")
         .option("-k, --initial-character <character>", "Initial character")
         .option("-K, --final-character <character>", "Final character")
         .option("-t, --initial-type <type>", "Initial character type")

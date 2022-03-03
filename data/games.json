@@ -6709,7 +6709,7 @@
 				"Character":"Spy",
 				"Alignment":"Evil",
 				"Setup Tokens":[
-					"Investigator Outsider"
+					"Librarian Outsider"
 				],
 				"Fate":"Alive"
 			},
@@ -7115,7 +7115,7 @@
 					"Investigator Wrong"
 				],
 				"Fate":"Dead",
-				"Cause of Death":"Demon Atttack",
+				"Cause of Death":"Demon Attack",
 				"Killed By":"Imp"
 			}
 		}
@@ -7310,7 +7310,7 @@
 			"Snake Charmer",
 			"Savant"
 		],
-		"Notes":"Bone Collecter travelled away at the end of D3. Witch never killed anyone, despite many nominations. Sage was alive in final 3.",
+		"Notes":"Bone Collecter travelled away at the end of D3. Witch never killed anyone, despite many nominations. Sage was alive in final 3.\nCerenovus targets: Cyberholmes Clockmaker, Cyberholmes Clockmaker, Cyberholmes Clockmaker, eNamorD Clockmaker, Matt Seamstress",
 		"Players":{
 			"sabrina":{
 				"Character":"Witch",
@@ -7632,7 +7632,7 @@
 				"Character":"Philosopher",
 				"Alignment":"Good",
 				"Setup Tokens":[
-					"Investigator Wr"
+					"Investigator Wrong"
 				],
 				"Fate":"Dead",
 				"Cause of Death":"Demon Attack",
@@ -7771,7 +7771,7 @@
 		"Storytellers":[
 			"OngakuSensei"
 		],
-		"Notes":"Clockmaker seen as evil to Noble due to registering as evil.\nDay 1, Jen executed\nNight 2, Dano died\nDay 2, Jakes executed\nNight 3, Memes died\nDay 3, no execution due to tie",
+		"Notes":"Clockmaker seen as evil to Noble due to registering as evil.\nDay 1, Jen executed\nNight 2, Dano died\nDay 2, Jakes executed\nNight 3, memes died\nDay 3, no execution due to tie",
 		"Players":{
 			"Jen":{
 				"Character":"Town Crier",

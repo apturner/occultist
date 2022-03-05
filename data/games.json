@@ -9465,5 +9465,480 @@
 				"Fate":"Alive"
 			}
 		}
+	},
+	{
+		"Number":138,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/138.png",
+		"Date":1642914000,
+		"Script":"Bad Moon Rising",
+		"Fabled":[
+			"Deus Ex Fiasco"
+		],
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"Jakes"
+		],
+		"Bluffs":[
+			"Chambermaid",
+			"Pacifist",
+			"Exorcist"
+		],
+		"Notes":"day 1: no executions\nnight 2: leilinea chomped\nday 2: no executions\nnight 3: sabrina chomped\nday 3: onyxien executed\nnight 4: po charge, gambler matt gambles mulli the demon as pacifist, gambler dies",
+		"Players":{
+			"sabrina":{
+				"Character":"Gossip",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Po",
+				"Fate":"Dead"
+			},
+			"Mullibok":{
+				"Character":"Po",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Leilinea":{
+				"Character":"Professor",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Po",
+				"Fate":"Dead"
+			},
+			"CobaltWolf":{
+				"Character":"Godfather",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Essaria":{
+				"Character":"Lunatic",
+				"Alignment":"Good",
+				"Believed They Were":"Zombuul",
+				"Fate":"Alive"
+			},
+			"Matt":{
+				"Character":"Gambler",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Gambler",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Courtier",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":139,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/139.png",
+		"Date":1643518800,
+		"Script":"Bad Moon Rising",
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"Margaret"
+		],
+		"Bluffs":[
+			"Innkeeper",
+			"Chambermaid",
+			"Minstrel"
+		],
+		"Players":{
+			"Mullibok":{
+				"Character":"Po",
+				"Alignment":"Evil",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Po",
+				"Fate":"Dead"
+			},
+			"Cyberholmes":{
+				"Character":"Goon",
+				"Alignment":"Good",
+				"Change":{
+					"Character":"Goon",
+					"Alignment":"Evil",
+					"Cause":"Goon",
+					"Change":{
+						"Character":"Goon",
+						"Alignment":"Good",
+						"Cause":"Goon"
+					}
+				},
+				"Fate":"Alive"
+			},
+			"sabrina":{
+				"Character":"Exorcist",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Gossip",
+				"Fate":"Dead"
+			},
+			"Jakes":{
+				"Character":"Assassin",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"CobaltWolf":{
+				"Character":"Moonchild",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Po",
+				"Fate":"Dead"
+			},
+			"OngakuSensei":{
+				"Character":"Tea Lady",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Po",
+				"Fate":"Dead"
+			},
+			"eNamorD":{
+				"Character":"Sailor",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Matt":{
+				"Character":"Gossip",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Po",
+				"Fate":"Dead"
+			},
+			"Essaria":{
+				"Character":"Tinker",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Tinker",
+				"Fate":"Dead"
+			},
+			"Qaysed":{
+				"Character":"Gambler",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Assassin",
+				"Fate":"Dead"
+			},
+			"Megan":{
+				"Character":"Professor",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Po",
+				"Fate":"Dead"
+			},
+			"Eric":{
+				"Character":"Godfather",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":140,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/140.png",
+		"Date":1645333200,
+		"Script":"Trouble Brewing w\/ Immigrant",
+		"Win":"Evil",
+		"Win Condition":"Storyteller Execution",
+		"Storytellers":[
+			"Jakes"
+		],
+		"Bluffs":[
+			"Fortune Teller",
+			"Saint",
+			"Slayer"
+		],
+		"Notes":"Immigrant(Townsfolk): You are a townsfolk from another script. If an evil player guesses your role (privately or publically) you die at night.\n\n-the immigrant receives the immigrant token and learns the character they are on N1\n-they register as the immigrant\n-evil only has to guess the role, not the player\n-evil has one attempt at guessing the role per game",
+		"Players":{
+			"sabrina":{
+				"Character":"Librarian",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Grafin":{
+				"Character":"Empath",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Librarian Wrong"
+				],
+				"Fate":"Alive"
+			},
+			"Leilinea":{
+				"Character":"Imp",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Qaysed":{
+				"Character":"Scarlet Woman",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Matt":{
+				"Character":"Drunk",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Librarian Outsider"
+				],
+				"Believed They Were":"Immigrant",
+				"Power Gain":{
+					"Power":"Atheist",
+					"Cause":"Immigrant"
+				},
+				"Fate":"Alive"
+			},
+			"eNamorD":{
+				"Character":"Undertaker",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Mullibok":{
+				"Character":"Chef",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Onyxien":{
+				"Character":"Ravenkeeper",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			}
+		}
+	},
+	{
+		"Number":141,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/141.png",
+		"Date":1645333200,
+		"Script":"The Cult of Janus",
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"Mullibok"
+		],
+		"Bluffs":[
+			"General",
+			"Oracle",
+			"Fisherman"
+		],
+		"Notes":"D1: Qaysed executed\nN2: Onyxien, sabrina, Grafin chosen; sabrina, Grafin died\nD2: Cobalt executed\nN3: Matt, Onyxien, eNamorD chosen; all died",
+		"Players":{
+			"Onyxien":{
+				"Character":"Fortune Teller",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Noble Seen"
+				],
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Al-Hadikhia",
+				"Fate":"Dead"
+			},
+			"sabrina":{
+				"Character":"Baron",
+				"Alignment":"Evil",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Al-Hadikhia",
+				"Fate":"Dead"
+			},
+			"eNamorD":{
+				"Character":"Empath",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Al-Hadikhia",
+				"Fate":"Dead"
+			},
+			"Qaysed":{
+				"Character":"Drunk",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Noble Seen"
+				],
+				"Believed They Were":"Poppy Grower",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Leilinea":{
+				"Character":"Boomdandy",
+				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Noble Seen"
+				],
+				"Fate":"Alive"
+			},
+			"CobaltWolf":{
+				"Character":"Amnesiac",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Red Herring"
+				],
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Grafin":{
+				"Character":"Seamstress",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Al-Hadikhia",
+				"Fate":"Dead"
+			},
+			"Matt":{
+				"Character":"Al-Hadikhia",
+				"Alignment":"Evil",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Al-Hadikhia",
+				"Fate":"Dead"
+			},
+			"Eric":{
+				"Character":"Noble",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Jakes":{
+				"Character":"Klutz",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Megan":{
+				"Character":"Sweetheart",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			}
+		}
+	},
+	{
+		"Number":142,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/142.png",
+		"Date":1645938000,
+		"Script":"One in a Minion v2",
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"OngakuSensei"
+		],
+		"Notes":"Amne -> 'Each night, choose a player. If they die tonight or tomorrow, and are good, gain their ability in addition to this ability, and keep all other abilities gained this way.'\n\nNight 0 \nAlchemist (Onyxien) -> Learns Goblin, is evil\nAmnesiac (sabrina) -> Matt\nPoisoner (Jakes) -> Matt \nFearmonger (eNamorD) -> Qaysed\neNamorD has the baby\nEmpath (Qaysed) -> Learns 1 (Cyber, eNamorD)\nBounty Hunter (Cyberholmes) -> Learns Onyxien\n\nDay 1 - 7 alive\nThe fearmonger has made a choice\nGambler (Matt) is executed and dies\nAmnesiac (sabrina) gains Gambler ability\n\nNight 1\nAmnesiac (sabrina) -> cyber\nPoisoner (Jakes) -> Onyxien\nA-Gambler (sabrina) -> Cyber\/Bounty Hunter\nFearmonger (eNamorD) -> Qaysed\nJakes has the baby\nLil' Monsta kills Qaysed\nBounty Hunter (Cyberholmes) -> does not wake\n\nDay 2 - 5 alive\nEmpath (Qaysed) has died in the night\nFearmonger (eNamorD) is executed and dies\n\nNight 2\nAmnesiac (sabrina) -> Onyxien\nPoisoner (Jakes) -> Cyber\nA-Gambler (sabrina) -> Sabrina\/Amnesiac\nJakes has the baby\nLil' Monsta kills Onyxian\nBounty Hunter (Cyberholmes) -> learns Sabrina (poisoned)\n\nDay 3 - 3 alive\nAlchemist (Onyxien) has died\nPoisoner (Jakes) is executed and dies\n\nGood team wins",
+		"Players":{
+			"Cyberholmes":{
+				"Character":"Bounty Hunter",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Jakes":{
+				"Character":"Poisoner",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Alchemist",
+				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Bounty Hunter Known"
+				],
+				"Believed They Were":"Goblin",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Lil' Monsta",
+				"Fate":"Dead"
+			},
+			"sabrina":{
+				"Character":"Amnesiac",
+				"Alignment":"Good",
+				"Power Gain":{
+					"Power":"Gambler",
+					"Cause":"Amnesiac"
+				},
+				"Fate":"Alive"
+			},
+			"Matt":{
+				"Character":"Gambler",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"eNamorD":{
+				"Character":"Fearmonger",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Qaysed":{
+				"Character":"Empath",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Lil' Monsta",
+				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":143,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/143.png",
+		"Date":1645938000,
+		"Script":"Bad Moon Rising",
+		"Win":"Evil",
+		"Win Condition":"Two Living Players",
+		"Storytellers":[
+			"eNamorD"
+		],
+		"Bluffs":[
+			"Exorcist",
+			"Gossip",
+			"Tinker"
+		],
+		"Notes":"Day 1: Onyxien executed\nNight 2: Matt picks Qaysed, Qaysed charges, Luelle resurrects Onyxien\nDay 2: Matt executed\nNight 3: Jakes, Luelle killed, Mullibok targeted but doesn't die\nDay 3: Cyberholmes executed\nNight 4: Qaysed charges\nDay 4: sabrina executed",
+		"Players":{
+			"Luelle":{
+				"Character":"Professor",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Po",
+				"Fate":"Dead"
+			},
+			"Cyberholmes":{
+				"Character":"Chambermaid",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Qaysed":{
+				"Character":"Po",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Matt":{
+				"Character":"Lunatic",
+				"Alignment":"Good",
+				"Believed They Were":"Po",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Grandmother",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Jakes":{
+				"Character":"Innkeeper",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Po",
+				"Fate":"Dead"
+			},
+			"sabrina":{
+				"Character":"Assassin",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Mullibok":{
+				"Character":"Fool",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Grandmother Grandchild"
+				],
+				"Fate":"Alive"
+			}
+		}
 	}
 ]

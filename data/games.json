@@ -8810,7 +8810,7 @@
 		"Number":129,
 		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/129.png",
 		"Date":1640494800,
-		"Script":"Trouble Brewing",
+		"Script":"Teensy Trouble Brewing",
 		"Fabled":[
 			"Double Role"
 		],
@@ -9180,7 +9180,7 @@
 		"Number":134,
 		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/134.png",
 		"Date":1642309200,
-		"Script":"Sects and Violets",
+		"Script":"Sects & Violets",
 		"Win":"Good",
 		"Win Condition":"No Living Demon",
 		"Storytellers":[
@@ -9209,7 +9209,7 @@
 				"Fate":"Alive"
 			},
 			"Jakes":{
-				"Character":"Pit Hag",
+				"Character":"Pit-Hag",
 				"Alignment":"Evil",
 				"Cause of Death":"Execution",
 				"Fate":"Dead"
@@ -9642,7 +9642,7 @@
 		"Number":140,
 		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/140.png",
 		"Date":1645333200,
-		"Script":"Trouble Brewing w\/ Immigrant",
+		"Script":"Trouble Brewing with Immigrant",
 		"Win":"Evil",
 		"Win Condition":"Storyteller Execution",
 		"Storytellers":[

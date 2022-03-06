@@ -5,30 +5,18 @@ const getAllRoles = require("../functions/getAllRoles");
 const getCauseOfDeathString = require("../functions/getCauseOfDeathString");
 const getPlayerChangeString = require("../functions/getPlayerChangeString");
 const getWinRate = require("../functions/getWinRate");
+const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendEmbed = require("../functions/sendEmbed");
 const stringFormat = require("../functions/stringFormat");
 const nameFormat = require("../data/nameFormat");
 const usernameName = require("../data/usernameName");
-
-function playerGameString(playerObj, win, number) {
-    const roles = getAllRoles(playerObj);
-    const finalAlignment = roles[roles.length - 1].Alignment;
-
-    return `#${number}: ${
-        finalAlignment === win ? "Win" : "Loss"
-    } as ${getPlayerChangeString(roles)}, who ${getCauseOfDeathString(
-        playerObj.Fate,
-        playerObj["Cause of Death"],
-        playerObj["Killed By"]
-    )}`;
-}
 
 async function storytellerSummary(message, st, command) {
     // If no player given, set player to caller
     if (st === undefined) {
         st = usernameName[message.author.username];
     } else {
-        st = nameFormat[stringFormat(st)];
+        st = nameFormat[stringFormat(st)] ?? st;
     }
 
     // Get player avatar
@@ -40,7 +28,11 @@ async function storytellerSummary(message, st, command) {
 
     // Get storyteller's info
     const stGames = filterGames(message.client.games, { storytellers: [st] });
-    const { Good: goodWins, Evil: evilWins } = _.countBy(
+    if (stGames.length == 0) {
+        await sendCodeBlock(message, `${st} has not storytold any games.`);
+        return;
+    }
+    const { Good: goodWins = 0, Evil: evilWins = 0 } = _.countBy(
         stGames,
         (game) => game.Win
     );
@@ -121,8 +113,25 @@ async function storytellerSummary(message, st, command) {
         .setColor("#9d221a")
         .setAuthor("Storyteller Summary", message.client.user.avatarURL())
         .setTitle(`${st}`)
-        .setDescription(`${goodWins} Good Wins, ${evilWins} Evil Wins`)
+        .setDescription(
+            `${goodWins} Good Win${
+                goodWins == 1 ? "" : "s"
+            }, ${evilWins} Evil Win${evilWins == 1 ? "" : "s"}`
+        )
         .addFields(
+            {
+                name: "Games",
+                value: `${_.map(
+                    stGames,
+                    ({ Number, Script }) => `#${Number}: ${Script}`
+                ).join("\n")}`,
+                inline: false,
+            },
+            {
+                name: "\u200b",
+                value: "\u200b",
+                inline: false,
+            },
             {
                 name: "Win Conditions",
                 value: `${_.map(
@@ -167,18 +176,22 @@ async function storytellerSummary(message, st, command) {
             },
             {
                 name: "Bluffs",
-                value: `${_.map(
-                    bluffs,
-                    ({ bluff, count }) => `${bluff}: ${count}`
-                ).join("\n")}`,
+                value: `${
+                    _.map(
+                        bluffs,
+                        ({ bluff, count }) => `${bluff}: ${count}`
+                    ).join("\n") || "None"
+                }`,
                 inline: true,
             },
             {
                 name: "Drunks",
-                value: `${_.map(
-                    drunks,
-                    ({ drunk, count }) => `${drunk}: ${count}`
-                ).join("\n")}`,
+                value: `${
+                    _.map(
+                        drunks,
+                        ({ drunk, count }) => `${drunk}: ${count}`
+                    ).join("\n") || "None"
+                }`,
                 inline: true,
             }
         )

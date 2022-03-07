@@ -5,7 +5,7 @@ const fabledDeath = require("../data/causeOfDeathFabled");
 function getCauseOfDeathString(fate, causeOfDeath, killedBy) {
     if (fate === "Alive") {
         return "survived!";
-    } else {
+    } else if (fate === "Dead") {
         switch (causeOfDeath) {
             case "Execution":
                 return "died by Execution";
@@ -36,6 +36,8 @@ function getCauseOfDeathString(fate, causeOfDeath, killedBy) {
             default:
                 return `died to ${causeOfDeath}`;
         }
+    } else {
+        return "met an unknown fate";
     }
 }
 

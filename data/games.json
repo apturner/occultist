@@ -8714,7 +8714,7 @@
 			"Jakes":{
 				"Character":"Investigator",
 				"Alignment":"Good",
-				"Cause of Death":"Execution",
+				"Cause of Death":"Other Power (Day)",
 				"Killed By":"Virgin",
 				"Fate":"Dead"
 			},
@@ -9937,6 +9937,190 @@
 				"Setup Tokens":[
 					"Grandmother Grandchild"
 				],
+				"Fate":"Alive"
+			}
+		}
+	},
+	{
+		"Number":144,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/144.png",
+		"Date":1646542800,
+		"Script":"Sects & Drugs",
+		"Fabled":[
+			"Deus Ex Fiasco"
+		],
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"Megan"
+		],
+		"Notes":"D1: OngakuSensei psychopath killed, Essaria executed but did not lose roshambo\nN2: Jakes killed\nD2: Onyxien psychopath killed, Essaria executed and died\nN3: Grafin entered as Butcher, Cyberholmes killed\nD3: nothership executed, eNamorD butchered\nN4: stbando killed\nD4: Eric executed\nN5: Qaysed killed\nD5: Mullibok executed",
+		"Players":{
+			"Mullibok":{
+				"Character":"Poisoner",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Cyberholmes":{
+				"Character":"Poppy Grower",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Lil' Monsta",
+				"Fate":"Dead"
+			},
+			"OngakuSensei":{
+				"Character":"Town Crier",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Day)",
+				"Killed By":"Psychopath",
+				"Fate":"Dead"
+			},
+			"eNamorD":{
+				"Character":"Drunk",
+				"Alignment":"Good",
+				"Believed They Were":"Alchemist",
+				"Cause of Death":"Other Power (Day)",
+				"Killed By":"Butcher",
+				"Fate":"Dead"
+			},
+			"sabrina":{
+				"Character":"Fisherman",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Essaria":{
+				"Character":"Psychopath",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"stbando":{
+				"Character":"General",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Lil' Monsta",
+				"Fate":"Dead"
+			},
+			"nothership":{
+				"Character":"Fearmonger",
+				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Bounty Hunter Known"
+				],
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Eric":{
+				"Character":"Nightwatchman",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Matt":{
+				"Character":"Goblin",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Onyxien":{
+				"Character":"Balloonist",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Day)",
+				"Killed By":"Psychopath",
+				"Fate":"Dead"
+			},
+			"Jakes":{
+				"Character":"Bounty Hunter",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Lil' Monsta",
+				"Fate":"Dead"
+			},
+			"Qaysed":{
+				"Character":"Fortune Teller",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Lil' Monsta",
+				"Fate":"Dead"
+			},
+			"Grafin":{
+				"Character":"Butcher",
+				"Alignment":"Good",
+				"Cause of Death":"Exile",
+				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":145,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/145.png",
+		"Date":1646542800,
+		"Script":"Bad Moon Rising",
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"nothership"
+		],
+		"Bluffs":[
+			"Gossip",
+			"Courtier",
+			"Exorcist"
+		],
+		"Notes":"n1: Megan picks Matt and Eric, learns a goon-drunk 1\nd1: Matt executed and survives\nn2: Mulli picks Sabrina and Megan, Jakes gambles sabrina fool, Onyxien picks Eric and Sabrina, Megan picks sabrina\/Essaria and gets a innkeeper-drunk 1 (to support Essaria's assassin bluff)\nd2: Essaria executed and dies\nn3: Mulli picks Jakes\/Sabrina, Jakes gambles Matt Goon, Onyxien picks Sabrina\/Megan, Dano dies to Tinker ability, Megan picks sabrina\/Jakes and learns a sober 1\nd3: Essaria doubletapped\nn4: Mulli picks Sabrina\/Matt and is goondrunk, Jakes gambles Matt Goon, Onyxien picks Sabrina\/Matt, Megan (after several attempts) picks Jakes\/Mulli and learns a 2\nd4: Onyxien executed and dies, good wins",
+		"Players":{
+			"Essaria":{
+				"Character":"Mastermind",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Megan":{
+				"Character":"Chambermaid",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Dano":{
+				"Character":"Tinker",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Tinker",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Shabaloth",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Jakes":{
+				"Character":"Gambler",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Eric":{
+				"Character":"Tea Lady",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Shabaloth",
+				"Fate":"Dead"
+			},
+			"Matt":{
+				"Character":"Goon",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Shabaloth",
+				"Fate":"Dead"
+			},
+			"sabrina":{
+				"Character":"Fool",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Shabaloth",
+				"Fate":"Dead"
+			},
+			"Mullibok":{
+				"Character":"Innkeeper",
+				"Alignment":"Good",
 				"Fate":"Alive"
 			}
 		}

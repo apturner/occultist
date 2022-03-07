@@ -116,6 +116,36 @@ function filterGames(
         );
     }
 
+    if (winningPlayers !== undefined) {
+        // Game contains all of the given players on the winning team
+        conditions.push((game) =>
+            winningPlayers.every(
+                (winningPlayer) =>
+                    stringFormat(
+                        getFinalRole(
+                            game.Players[
+                                nameFormat[stringFormat(winningPlayer)]
+                            ]
+                        )?.Alignment
+                    ) === stringFormat(game.Win)
+            )
+        );
+    }
+
+    if (losingPlayers !== undefined) {
+        // Game contains all of the given players on the losing team
+        conditions.push((game) =>
+            losingPlayers.every(
+                (losingPlayer) =>
+                    stringFormat(
+                        getFinalRole(
+                            game.Players[nameFormat[stringFormat(losingPlayer)]]
+                        )?.Alignment
+                    ) === (stringFormat(game.Win) === "good" ? "evil" : "good")
+            )
+        );
+    }
+
     if (characters !== undefined) {
         // Game contains all of the given characters
         conditions.push((game) =>
@@ -247,36 +277,6 @@ function filterGames(
                             ]
                         )?.Alignment
                     ) === stringFormat(playerAlignment[1])
-            )
-        );
-    }
-
-    if (winningPlayers !== undefined) {
-        // Game contains all of the given players on the winning team
-        conditions.push((game) =>
-            winningPlayers.every(
-                (winningPlayer) =>
-                    stringFormat(
-                        getFinalRole(
-                            game.Players[
-                                nameFormat[stringFormat(winningPlayer)]
-                            ]
-                        )?.Alignment
-                    ) === stringFormat(game.Win)
-            )
-        );
-    }
-
-    if (losingPlayers !== undefined) {
-        // Game contains all of the given players on the losing team
-        conditions.push((game) =>
-            losingPlayers.every(
-                (losingPlayer) =>
-                    stringFormat(
-                        getFinalRole(
-                            game.Players[nameFormat[stringFormat(losingPlayer)]]
-                        )?.Alignment
-                    ) !== stringFormat(game.Win)
             )
         );
     }

@@ -5,6 +5,7 @@ const getAllRoles = require("../functions/getAllRoles");
 const getCauseOfDeathString = require("../functions/getCauseOfDeathString");
 const getPlayerChangeString = require("../functions/getPlayerChangeString");
 const getWinRate = require("../functions/getWinRate");
+const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendEmbed = require("../functions/sendEmbed");
 const stringFormat = require("../functions/stringFormat");
 const nameFormat = require("../data/nameFormat");
@@ -28,7 +29,7 @@ async function playerSummary(message, player, command) {
     if (player === undefined) {
         player = usernameName[message.author.username];
     } else {
-        player = nameFormat[stringFormat(player)];
+        player = nameFormat[stringFormat(player)] ?? player;
     }
 
     // Get player avatar
@@ -42,6 +43,10 @@ async function playerSummary(message, player, command) {
     const playerGames = filterGames(message.client.games, {
         players: [player],
     });
+    if (playerGames.length == 0) {
+        await sendCodeBlock(message, `${player} has not played any games.`);
+        return;
+    }
 
     // Get player win rates
     const { result: winRate, wins: winCount, plays: playCount } = getWinRate(

@@ -12,19 +12,27 @@ function getCauseOfDeathString(fate, causeOfDeath, killedBy) {
             case "Demon Attack":
                 return `was killed by ${killedBy} Attack`;
             case "Other Power (Day)":
-                return `died by ${dayDeath[killedBy]}`;
+                return dayDeath[killedBy]
+                    ? `was killed by ${dayDeath[killedBy]}`
+                    : `was killed by ${killedBy}`;
             case "Other Power (Night)":
-                return `died by ${nightDeath[killedBy]}`;
+                return nightDeath[killedBy]
+                    ? `was killed by ${nightDeath[killedBy]}`
+                    : `was killed by ${killedBy}`;
             case "Fabled":
-                return `died by ${nightDeath[killedBy]}`;
+                return fabledDeath[killedBy]
+                    ? `was killed by ${fabledDeath[killedBy]}`
+                    : `was killed by ${killedBy}`;
             case "Star Pass":
-                return `Star Passed`;
+                return "Star Passed";
             case "Exile":
-                return `was Exiled`;
+                return "was Exiled";
             case "Travelled Away":
-                return `Travelled Away`;
+                return "Travelled Away";
             case "Storyteller Discretion":
-                return `died at Storyteller's Discretion`;
+                return "died at Storyteller's Discretion";
+            case undefined:
+                return "died in an indeterminate fashion";
             default:
                 return `died to ${causeOfDeath}`;
         }

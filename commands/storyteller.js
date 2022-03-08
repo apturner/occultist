@@ -7,8 +7,7 @@ const getPlayerChangeString = require("../functions/getPlayerChangeString");
 const getWinRate = require("../functions/getWinRate");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendEmbed = require("../functions/sendEmbed");
-const stringFormat = require("../functions/stringFormat");
-const nameFormat = require("../data/nameFormat");
+const { nameFormat } = require("../functions/stringFormat");
 const usernameName = require("../data/usernameName");
 
 async function storytellerSummary(message, st, command) {
@@ -16,7 +15,7 @@ async function storytellerSummary(message, st, command) {
     if (st === undefined) {
         st = usernameName[message.author.username];
     } else {
-        st = nameFormat[stringFormat(st)] ?? st;
+        st = nameFormat(st) ?? st;
     }
 
     // Get player avatar

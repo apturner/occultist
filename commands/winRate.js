@@ -2,14 +2,16 @@ const { Option } = require("commander");
 const getWinRate = require("../functions/getWinRate");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendMessage = require("../functions/sendMessage");
-const stringFormat = require("../functions/stringFormat");
-const alignmentFormat = require("../data/alignmentFormat");
-const characterFormat = require("../data/characterFormat");
-const characterTypeFormat = require("../data/characterTypeFormat");
-const nameFormat = require("../data/nameFormat");
-const scriptFormat = require("../data/scriptFormat");
+const {
+    stringFormat,
+    alignmentFormat,
+    characterFormat,
+    characterTypeFormat,
+    nameFormat,
+    scriptFormat,
+    scriptTypeFormat,
+} = require("../functions/stringFormat");
 const scriptTypeMap = require("../data/scriptType");
-const scriptTypeFormat = require("../data/scriptTypeFormat");
 const usernameName = require("../data/usernameName");
 
 async function winRate(message, player, options, command) {
@@ -17,6 +19,8 @@ async function winRate(message, player, options, command) {
     if (player === undefined) {
         player = usernameName[message.author.username];
     }
+
+    console.log(player);
 
     const {
         result,
@@ -52,8 +56,8 @@ async function winRate(message, player, options, command) {
     } else if (
         options.script !== undefined &&
         options.scriptType !== undefined &&
-        scriptTypeMap[scriptFormat[stringFormat(options.script)]] !==
-            scriptTypeFormat[stringFormat(options.scriptType)]
+        scriptTypeMap[scriptFormat(options.script)] !==
+            scriptTypeFormat(options.scriptType)
     ) {
         response = `"${options.script}" is not a script of type "${options.scriptType}".`;
     } else if (initialCharacterFound !== true) {
@@ -69,13 +73,11 @@ async function winRate(message, player, options, command) {
     } else if (finalCharacterFound !== true) {
         response = `No alignment found with name "${options.finalAlignment}".`;
     } else {
-        response = `${nameFormat[stringFormat(player)]}'s win rate${
+        response = `${nameFormat(player)}'s win rate${
             options.script
-                ? " in " + scriptFormat[stringFormat(options.script)]
+                ? " in " + scriptFormat(options.script)
                 : options.scriptType
-                ? " in " +
-                  scriptTypeFormat[stringFormat(options.scriptType)] +
-                  " scripts"
+                ? " in " + scriptTypeFormat(options.scriptType) + " scripts"
                 : ""
         }${
             options.initialCharacter ||
@@ -85,15 +87,15 @@ async function winRate(message, player, options, command) {
                 : ""
         }${
             options.initialAlignment
-                ? " " + alignmentFormat[stringFormat(options.initialAlignment)]
+                ? " " + alignmentFormat(options.initialAlignment)
                 : ""
         }${
             options.initialType
-                ? " " + characterTypeFormat[stringFormat(options.initialType)]
+                ? " " + characterTypeFormat(options.initialType)
                 : ""
         }${
             options.initialCharacter
-                ? " " + characterFormat[stringFormat(options.initialCharacter)]
+                ? " " + characterFormat(options.initialCharacter)
                 : ""
         }${
             (options.initialCharacter ||
@@ -112,15 +114,15 @@ async function winRate(message, player, options, command) {
                 : ""
         }${
             options.finalAlignment
-                ? " " + alignmentFormat[stringFormat(options.finalAlignment)]
+                ? " " + alignmentFormat(options.finalAlignment)
                 : ""
         }${
             options.finalType
-                ? " " + characterTypeFormat[stringFormat(options.finalType)]
+                ? " " + characterTypeFormat(options.finalType)
                 : ""
         }${
             options.finalCharacter
-                ? " " + characterFormat[stringFormat(options.finalCharacter)]
+                ? " " + characterFormat(options.finalCharacter)
                 : ""
         }: ${options.fraction ? `${wins}/${plays}` : result}`;
     }

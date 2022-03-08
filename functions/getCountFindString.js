@@ -1,11 +1,13 @@
 const _ = require("lodash");
-const stringFormat = require("../functions/stringFormat");
-const alignmentFormat = require("../data/alignmentFormat");
-const characterFormat = require("../data/characterFormat");
-const characterTypeFormat = require("../data/characterTypeFormat");
-const nameFormat = require("../data/nameFormat");
-const scriptFormat = require("../data/scriptFormat");
-const scriptTypeFormat = require("../data/scriptTypeFormat");
+const {
+    stringFormat,
+    alignmentFormat,
+    characterFormat,
+    characterTypeFormat,
+    nameFormat,
+    scriptFormat,
+    scriptTypeFormat,
+} = require("../functions/stringFormat");
 
 function pluralize(list, ending = "s") {
     return list.length > 1 ? ending : "";
@@ -20,173 +22,158 @@ function optionString(option, func) {
 }
 
 function getCountFindString(options, count) {
-    const startString = count ? "Number of games" : "Game numbers of all games";
+    let countFindString = count
+        ? "Number of games"
+        : "Game numbers of all games";
 
-    let restString = "";
-    restString += optionString(
+    countFindString += optionString(
         options.startDate,
         (opt) => ` after date ${opt};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.endDate,
         (opt) => ` before date ${opt};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.scripts,
         (opt) =>
             ` with script${pluralize(opt, " one of")} ${_.map(
                 opt,
-                (script) => scriptFormat[stringFormat(script)]
+                scriptFormat
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.scriptTypes,
         (opt) =>
             ` with script type${pluralize(opt, " one of")} ${_.map(
                 opt,
-                (scriptType) => scriptTypeFormat[stringFormat(scriptType)]
+                scriptTypeFormat
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.winningTeam,
         (opt) => ` with winning team ${opt};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.storytellers,
         (opt) =>
-            ` with storyteller${pluralize(opt, " among")} ${_.map(
-                opt,
-                (st) => nameFormat[stringFormat(st)]
+            ` with storyteller${pluralize(opt, " among")} ${_.map(opt, (st) =>
+                nameFormat(st)
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.players,
         (opt) =>
-            ` with player${pluralize(opt)} ${_.map(
-                opt,
-                (player) => nameFormat[stringFormat(player)]
-            ).join(", ")};`
+            ` with player${pluralize(opt)} ${_.map(opt, nameFormat).join(
+                ", "
+            )};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.winners,
         (opt) =>
-            ` with player${pluralize(opt)} ${_.map(
-                opt,
-                (player) => nameFormat[stringFormat(player)]
-            ).join(", ")} on the winning team;`
+            ` with player${pluralize(opt)} ${_.map(opt, nameFormat).join(
+                ", "
+            )} on the winning team;`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.losers,
         (opt) =>
-            ` with player${pluralize(opt)} ${_.map(
-                opt,
-                (player) => nameFormat[stringFormat(player)]
-            ).join(", ")} on the losing team;`
+            ` with player${pluralize(opt)} ${_.map(opt, nameFormat).join(
+                ", "
+            )} on the losing team;`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.characters,
         (opt) =>
             ` with character${pluralize(opt)} ${_.map(
                 opt,
-                (character) => characterFormat[stringFormat(character)]
+                characterFormat
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.startingCharacters,
         (opt) =>
             ` with starting character${pluralize(opt)} ${_.map(
                 opt,
-                (character) => characterFormat[stringFormat(character)]
+                characterFormat
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.endingCharacters,
         (opt) =>
             ` with ending character${pluralize(opt)} ${_.map(
                 opt,
-                (character) => characterFormat[stringFormat(character)]
+                characterFormat
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.initialCharacters,
         (opt) =>
             ` with player/initial character pair${pluralize(opt)} ${_.map(
                 opt,
                 ([player, char]) =>
-                    `${nameFormat[stringFormat(player)]}/${
-                        characterFormat[stringFormat(char)]
-                    }`
+                    `${nameFormat(player)}/${characterFormat(char)}`
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.finalCharacters,
         (opt) =>
             ` with player/final character pair${pluralize(opt)} ${_.map(
                 opt,
                 ([player, char]) =>
-                    `${nameFormat[stringFormat(player)]}/${
-                        characterFormat[stringFormat(char)]
-                    }`
+                    `${nameFormat(player)}/${characterFormat(char)}`
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.initialTypes,
         (opt) =>
             ` with player/initial character type pair${pluralize(opt)} ${_.map(
                 opt,
-                ([player, type]) =>
-                    `${nameFormat[stringFormat(player)]}/${
-                        characterTypeFormat[stringFormat(type)]
-                    }`
+                ([player, charType]) =>
+                    `${nameFormat(player)}/${characterTypeFormat(charType)}`
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.finalTypes,
         (opt) =>
             ` with player/final character type pair${pluralize(opt)} ${_.map(
                 opt,
-                ([player, type]) =>
-                    `${nameFormat[stringFormat(player)]}/${
-                        characterTypeFormat[stringFormat(type)]
-                    }`
+                ([player, charType]) =>
+                    `${nameFormat(player)}/${characterTypeFormat(charType)}`
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.initialAlignments,
         (opt) =>
             ` with player/initial alignment pair${pluralize(opt)} ${_.map(
                 opt,
                 ([player, alignment]) =>
-                    `${nameFormat[stringFormat(player)]}/${
-                        alignmentFormat[stringFormat(alignment)]
-                    }`
+                    `${nameFormat(player)}/${alignmentFormat(alignment)}`
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.finalAlignments,
         (opt) =>
             ` with player/final alignment pair${pluralize(opt)} ${_.map(
                 opt,
                 ([player, alignment]) =>
-                    `${nameFormat[stringFormat(player)]}/${
-                        alignmentFormat[stringFormat(alignment)]
-                    }`
+                    `${nameFormat(player)}/${alignmentFormat(alignment)}`
             ).join(", ")};`
     );
-    restString += optionString(
+    countFindString += optionString(
         options.versus,
-        (opt) =>
-            ` in which ${nameFormat[stringFormat(opt[0])]} and ${
-                nameFormat[stringFormat(opt[1])]
-            } won together, lost together, won/lost, and lost/won, respectively`
+        ([p1, p2]) =>
+            ` in which ${nameFormat(p1)} and ${nameFormat(
+                p2
+            )} won together, lost together, won/lost, and lost/won, respectively`
     );
 
-    if (restString.slice(-1) === ";") {
-        restString = restString.slice(0, -1);
+    if (countFindString.slice(-1) === ";") {
+        countFindString = countFindString.slice(0, -1);
     }
-    restString += ": ";
+    countFindString += ": ";
 
-    return startString + restString;
+    return countFindString;
 }
 
 module.exports = getCountFindString;

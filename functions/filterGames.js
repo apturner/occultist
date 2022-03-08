@@ -1,9 +1,8 @@
 const _ = require("lodash");
 const getAllRoles = require("../functions/getAllRoles");
 const getFinalRole = require("../functions/getFinalRole");
-const stringFormat = require("../functions/stringFormat");
+const { stringFormat, nameFormat } = require("../functions/stringFormat");
 const characterTypeMap = require("../data/characterType");
-const nameFormat = require("../data/nameFormat");
 const scriptTypeMap = require("../data/scriptType");
 
 function filterGames(
@@ -111,7 +110,7 @@ function filterGames(
         // Game contains all of the given players
         conditions.push((game) =>
             players.every((player) =>
-                _.has(game, ["Players", nameFormat[stringFormat(player)]])
+                _.has(game, ["Players", nameFormat(player)])
             )
         );
     }
@@ -122,11 +121,8 @@ function filterGames(
             winningPlayers.every(
                 (winningPlayer) =>
                     stringFormat(
-                        getFinalRole(
-                            game.Players[
-                                nameFormat[stringFormat(winningPlayer)]
-                            ]
-                        )?.Alignment
+                        getFinalRole(game.Players[nameFormat(winningPlayer)])
+                            ?.Alignment
                     ) === stringFormat(game.Win)
             )
         );
@@ -138,9 +134,8 @@ function filterGames(
             losingPlayers.every(
                 (losingPlayer) =>
                     stringFormat(
-                        getFinalRole(
-                            game.Players[nameFormat[stringFormat(losingPlayer)]]
-                        )?.Alignment
+                        getFinalRole(game.Players[nameFormat(losingPlayer)])
+                            ?.Alignment
                     ) === (stringFormat(game.Win) === "good" ? "evil" : "good")
             )
         );
@@ -189,12 +184,10 @@ function filterGames(
         // Game contains all of the given players starting as their given characters
         conditions.push((game) =>
             playerInitialCharacters.every(
-                (playerCharacter) =>
+                ([player, char]) =>
                     stringFormat(
-                        game.Players[
-                            nameFormat[stringFormat(playerCharacter[0])]
-                        ]?.Character
-                    ) === stringFormat(playerCharacter[1])
+                        game.Players[nameFormat(player)]?.Character
+                    ) === stringFormat(char)
             )
         );
     }
@@ -203,14 +196,11 @@ function filterGames(
         // Game contains all of the given players ending as their given characters
         conditions.push((game) =>
             playerFinalCharacters.every(
-                (playerCharacter) =>
+                ([player, char]) =>
                     stringFormat(
-                        getFinalRole(
-                            game.Players[
-                                nameFormat[stringFormat(playerCharacter[0])]
-                            ]
-                        )?.Character
-                    ) === stringFormat(playerCharacter[1])
+                        getFinalRole(game.Players[nameFormat(player)])
+                            ?.Character
+                    ) === stringFormat(char)
             )
         );
     }
@@ -219,14 +209,12 @@ function filterGames(
         // Game contains all of the given players starting as their given character types
         conditions.push((game) =>
             playerInitialCharacterTypes.every(
-                (playerCharacterType) =>
+                ([player, charType]) =>
                     stringFormat(
                         characterTypeMap[
-                            game.Players[
-                                nameFormat[stringFormat(playerCharacterType[0])]
-                            ]?.Character
+                            game.Players[nameFormat(player)]?.Character
                         ]
-                    ) === stringFormat(playerCharacterType[1])
+                    ) === stringFormat(charType)
             )
         );
     }
@@ -235,18 +223,13 @@ function filterGames(
         // Game contains all of the given players ending as their given character types
         conditions.push((game) =>
             playerFinalCharacterTypes.every(
-                (playerCharacterType) =>
+                ([player, charType]) =>
                     stringFormat(
                         characterTypeMap[
-                            getFinalRole(
-                                game.Players[
-                                    nameFormat[
-                                        stringFormat(playerCharacterType[0])
-                                    ]
-                                ]
-                            )?.Character
+                            getFinalRole(game.Players[nameFormat(player)])
+                                ?.Character
                         ]
-                    ) === stringFormat(playerCharacterType[1])
+                    ) === stringFormat(charType)
             )
         );
     }
@@ -255,12 +238,10 @@ function filterGames(
         // Game contains all of the given players starting as their given alignments
         conditions.push((game) =>
             playerInitialAlignments.every(
-                (playerAlignment) =>
+                ([player, alignment]) =>
                     stringFormat(
-                        game.Players[
-                            nameFormat[stringFormat(playerAlignment[0])]
-                        ]?.Alignment
-                    ) === stringFormat(playerAlignment[1])
+                        game.Players[nameFormat(player)]?.Alignment
+                    ) === stringFormat(alignment)
             )
         );
     }
@@ -269,14 +250,11 @@ function filterGames(
         // Game contains all of the given players ending as their given alignments
         conditions.push((game) =>
             playerFinalAlignments.every(
-                (playerAlignment) =>
+                ([player, alignment]) =>
                     stringFormat(
-                        getFinalRole(
-                            game.Players[
-                                nameFormat[stringFormat(playerAlignment[0])]
-                            ]
-                        )?.Alignment
-                    ) === stringFormat(playerAlignment[1])
+                        getFinalRole(game.Players[nameFormat(player)])
+                            ?.Alignment
+                    ) === stringFormat(alignment)
             )
         );
     }

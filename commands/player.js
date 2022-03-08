@@ -7,8 +7,7 @@ const getPlayerChangeString = require("../functions/getPlayerChangeString");
 const getWinRate = require("../functions/getWinRate");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendEmbed = require("../functions/sendEmbed");
-const stringFormat = require("../functions/stringFormat");
-const nameFormat = require("../data/nameFormat");
+const { nameFormat } = require("../functions/stringFormat");
 const usernameName = require("../data/usernameName");
 
 function playerGameString(playerObj, win, number, script) {
@@ -29,7 +28,7 @@ async function playerSummary(message, player, command) {
     if (player === undefined) {
         player = usernameName[message.author.username];
     } else {
-        player = nameFormat[stringFormat(player)] ?? player;
+        player = nameFormat(player) ?? player;
     }
 
     // Get player avatar

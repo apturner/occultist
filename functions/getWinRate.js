@@ -1,12 +1,12 @@
 const _ = require("lodash");
 const filterGames = require("../functions/filterGames");
-const stringFormat = require("../functions/stringFormat");
-const alignmentFormat = require("../data/alignmentFormat");
-const characterFormat = require("../data/characterFormat");
-const characterTypeFormat = require("../data/characterTypeFormat");
-const nameFormat = require("../data/nameFormat");
-const scriptFormat = require("../data/scriptFormat");
-const scriptTypeFormat = require("../data/scriptTypeFormat");
+const { stringFormat } = require("../functions/stringFormat");
+const alignmentFormatMap = require("../data/alignmentFormat");
+const characterFormatMap = require("../data/characterFormat");
+const characterTypeFormatMap = require("../data/characterTypeFormat");
+const nameFormatMap = require("../data/nameFormat");
+const scriptFormatMap = require("../data/scriptFormat");
+const scriptTypeFormatMap = require("../data/scriptTypeFormat");
 
 function getWinRate(
     games,
@@ -79,30 +79,31 @@ function getWinRate(
                 : "No games",
         wins: playerWinsCount,
         plays: playerGamesCount,
-        playerFound: _.has(nameFormat, stringFormat(player)),
+        playerFound: _.has(nameFormatMap, stringFormat(player)),
         scriptFound:
-            script === undefined || _.has(scriptFormat, stringFormat(script)),
+            script === undefined ||
+            _.has(scriptFormatMap, stringFormat(script)),
         scriptTypeFound:
             scriptType === undefined ||
-            _.has(scriptTypeFormat, stringFormat(scriptType)),
+            _.has(scriptTypeFormatMap, stringFormat(scriptType)),
         initialCharacterFound:
             initialCharacter === undefined ||
-            _.has(characterFormat, stringFormat(initialCharacter)),
+            _.has(characterFormatMap, stringFormat(initialCharacter)),
         finalCharacterFound:
             finalCharacter === undefined ||
-            _.has(characterFormat, stringFormat(finalCharacter)),
+            _.has(characterFormatMap, stringFormat(finalCharacter)),
         initialTypeFound:
             initialType === undefined ||
-            _.has(characterTypeFormat, stringFormat(initialType)),
+            _.has(characterTypeFormatMap, stringFormat(initialType)),
         finalTypeFound:
             finalType === undefined ||
-            _.has(characterTypeFormat, stringFormat(finalType)),
+            _.has(characterTypeFormatMap, stringFormat(finalType)),
         initialAlignmentFound:
             initialAlignment === undefined ||
-            _.has(alignmentFormat, stringFormat(initialAlignment)),
+            _.has(alignmentFormatMap, stringFormat(initialAlignment)),
         finalAlignmentFound:
             finalAlignment === undefined ||
-            _.has(alignmentFormat, stringFormat(finalAlignment)),
+            _.has(alignmentFormatMap, stringFormat(finalAlignment)),
     };
 }
 

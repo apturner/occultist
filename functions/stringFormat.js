@@ -1,9 +1,9 @@
-const alignmentFormatObj = require("../data/alignmentFormat");
-const characterFormatObj = require("../data/characterFormat");
-const characterTypeFormatObj = require("../data/characterTypeFormat");
-const nameFormatObj = require("../data/nameFormat");
-const scriptFormatObj = require("../data/scriptFormat");
-const scriptTypeFormatObj = require("../data/scriptTypeFormat");
+const alignmentFormatMap = require("../data/alignmentFormat");
+const characterFormatMap = require("../data/characterFormat");
+const characterTypeFormatMap = require("../data/characterTypeFormat");
+const nameFormatMap = require("../data/nameFormat");
+const scriptFormatMap = require("../data/scriptFormat");
+const scriptTypeFormatMap = require("../data/scriptTypeFormat");
 
 function stringFormat(str) {
     if (str === undefined) return undefined;
@@ -12,27 +12,27 @@ function stringFormat(str) {
 }
 
 function alignmentFormat(str) {
-    alignmentFormatObj[stringFormat(str)];
+    return alignmentFormatMap[stringFormat(str)];
 }
 
 function characterFormat(str) {
-    characterFormatObj[stringFormat(str)];
+    return characterFormatMap[stringFormat(str)];
 }
 
 function characterTypeFormat(str) {
-    characterTypeFormatObj[stringFormat(str)];
+    return characterTypeFormatMap[stringFormat(str)];
 }
 
 function nameFormat(str) {
-    nameFormatObj[stringFormat(str)];
+    return nameFormatMap[stringFormat(str)];
 }
 
 function scriptFormat(str) {
-    scriptFormatObj[stringFormat(str)];
+    return scriptFormatMap[stringFormat(str)];
 }
 
 function scriptTypeFormat(str) {
-    scriptTypeFormatObj[stringFormat(str)];
+    return scriptTypeFormatMap[stringFormat(str)];
 }
 
 module.exports = {

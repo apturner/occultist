@@ -15,13 +15,12 @@ async function find(message, options, command) {
         getCountFindString(options, false, result) +
         `${
             options.versus === undefined
-                ? "[" + result.join(", ") + "]"
-                : "\n[\n" +
+                ? "**[" + result.join(", ") + "]**"
+                : "\n" +
                   _.map(
                       result,
-                      (gameList) => "[" + gameList.join(", ") + "]"
-                  ).join("\n") +
-                  "\n]"
+                      (gameList) => "**[" + gameList.join(", ") + "]**"
+                  ).join("\n")
         }`;
 
     // Send result

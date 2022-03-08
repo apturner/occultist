@@ -7,182 +7,179 @@ const nameFormat = require("../data/nameFormat");
 const scriptFormat = require("../data/scriptFormat");
 const scriptTypeFormat = require("../data/scriptTypeFormat");
 
-function getCountFindString(options, count) {
-    let startString = "";
-    if (count) {
-        startString = "Number of games";
-    } else {
-        startString = "Game numbers of all games";
-    }
+function pluralize(list, ending = "s") {
+    return list.length > 1 ? ending : "";
+}
 
-    let restString = `${
-        options.startDate !== undefined
-            ? ` after date ${options.startDate};`
-            : ""
-    }${
-        options.endDate !== undefined ? ` before date ${options.endDate};` : ""
-    }${
-        options.scripts !== undefined
-            ? ` with script${
-                  options.scripts.length > 1 ? " one of" : ""
-              } ${_.map(
-                  options.scripts,
-                  (script) => scriptFormat[stringFormat(script)]
-              ).join(", ")};`
-            : ""
-    }${
-        options.scriptTypes !== undefined
-            ? ` with script type${
-                  options.scriptTypes.length > 1 ? " one of" : ""
-              } ${_.map(
-                  options.scriptTypes,
-                  (scriptType) => scriptTypeFormat[stringFormat(scriptType)]
-              ).join(", ")};`
-            : ""
-    }${
-        options.winningTeam !== undefined
-            ? ` with winning team ${options.winningTeam};`
-            : ""
-    }${
-        options.storytellers !== undefined
-            ? ` with storyteller${
-                  options.storytellers.length > 1 ? " among" : ""
-              } ${_.map(
-                  options.storytellers,
-                  (st) => nameFormat[stringFormat(st)]
-              ).join(", ")};`
-            : ""
-    }${
-        options.players !== undefined
-            ? ` with player${options.players.length > 1 ? "s" : ""} ${_.map(
-                  options.players,
-                  (player) => nameFormat[stringFormat(player)]
-              ).join(", ")};`
-            : ""
-    }${
-        options.winners !== undefined
-            ? ` with player${options.winners.length > 1 ? "s" : ""} ${_.map(
-                  options.winners,
-                  (player) => nameFormat[stringFormat(player)]
-              ).join(", ")} on the winning team;`
-            : ""
-    }${
-        options.losers !== undefined
-            ? ` with player${options.losers.length > 1 ? "s" : ""} ${_.map(
-                  options.losers,
-                  (player) => nameFormat[stringFormat(player)]
-              ).join(", ")} on the losing team;`
-            : ""
-    }${
-        options.characters !== undefined
-            ? ` with character${
-                  options.characters.length > 1 ? "s" : ""
-              } ${_.map(
-                  options.characters,
-                  (character) => characterFormat[stringFormat(character)]
-              ).join(", ")};`
-            : ""
-    }${
-        options.startingCharacters !== undefined
-            ? ` with starting character${
-                  options.startingCharacters.length > 1 ? "s" : ""
-              } ${_.map(
-                  options.startingCharacters,
-                  (character) => characterFormat[stringFormat(character)]
-              ).join(", ")};`
-            : ""
-    }${
-        options.endingCharacters !== undefined
-            ? ` with ending character${
-                  options.endingCharacters.length > 1 ? "s" : ""
-              } ${_.map(
-                  options.endingCharacters,
-                  (character) => characterFormat[stringFormat(character)]
-              ).join(", ")};`
-            : ""
-    }${
-        options.initialCharacters !== undefined
-            ? ` with player/initial character pair${
-                  options.initialCharacters.length > 1 ? "s" : ""
-              } ${_.map(
-                  options.initialCharacters,
-                  (playerCharacter) =>
-                      `${nameFormat[stringFormat(playerCharacter[0])]}/${
-                          characterFormat[stringFormat(playerCharacter[1])]
-                      }`
-              ).join(", ")};`
-            : ""
-    }${
-        options.finalCharacters !== undefined
-            ? ` with player/final character pair${
-                  options.finalCharacters.length > 1 ? "s" : ""
-              } ${_.map(
-                  options.finalCharacters,
-                  (playerCharacter) =>
-                      `${nameFormat[stringFormat(playerCharacter[0])]}/${
-                          characterFormat[stringFormat(playerCharacter[1])]
-                      }`
-              ).join(", ")};`
-            : ""
-    }${
-        options.initialTypes !== undefined
-            ? ` with player/initial character type pair${
-                  options.initialTypes.length > 1 ? "s" : ""
-              } ${_.map(
-                  options.initialTypes,
-                  (playerCharacterType) =>
-                      `${nameFormat[stringFormat(playerCharacterType[0])]}/${
-                          characterTypeFormat[
-                              stringFormat(playerCharacterType[1])
-                          ]
-                      }`
-              ).join(", ")};`
-            : ""
-    }${
-        options.finalTypes !== undefined
-            ? ` with player/final character type pair${
-                  options.finalTypes.length > 1 ? "s" : ""
-              } ${_.map(
-                  options.finalTypes,
-                  (playerCharacterType) =>
-                      `${nameFormat[stringFormat(playerCharacterType[0])]}/${
-                          characterTypeFormat[
-                              stringFormat(playerCharacterType[1])
-                          ]
-                      }`
-              ).join(", ")};`
-            : ""
-    }${
-        options.initialAlignments !== undefined
-            ? ` with player/initial alignment pair${
-                  options.initialAlignments.length > 1 ? "s" : ""
-              } ${_.map(
-                  options.initialAlignments,
-                  (playerAlignment) =>
-                      `${nameFormat[stringFormat(playerAlignment[0])]}/${
-                          alignmentFormat[stringFormat(playerAlignment[1])]
-                      }`
-              ).join(", ")};`
-            : ""
-    }${
-        options.finalAlignments !== undefined
-            ? ` with player/final alignment pair${
-                  options.finalAlignments.length > 1 ? "s" : ""
-              } ${_.map(
-                  options.finalAlignments,
-                  (playerAlignment) =>
-                      `${nameFormat[stringFormat(playerAlignment[0])]}/${
-                          alignmentFormat[stringFormat(playerAlignment[1])]
-                      }`
-              ).join(", ")};`
-            : ""
-    }${
-        options.versus !== undefined
-            ? ` in which ${nameFormat[stringFormat(options.versus[0])]} and ${
-                  nameFormat[stringFormat(options.versus[1])]
-              } [won together, lost together, won/lost, lost/won], respectively`
-            : ""
-    }`;
+function optionString(option, func) {
+    if (option !== undefined) {
+        return func(option);
+    } else {
+        return "";
+    }
+}
+
+function getCountFindString(options, count) {
+    const startString = count ? "Number of games" : "Game numbers of all games";
+
+    let restString = "";
+    restString += optionString(
+        options.startDate,
+        (opt) => ` after date ${opt};`
+    );
+    restString += optionString(
+        options.endDate,
+        (opt) => ` before date ${opt};`
+    );
+    restString += optionString(
+        options.scripts,
+        (opt) =>
+            ` with script${pluralize(opt, " one of")} ${_.map(
+                opt,
+                (script) => scriptFormat[stringFormat(script)]
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.scriptTypes,
+        (opt) =>
+            ` with script type${pluralize(opt, " one of")} ${_.map(
+                opt,
+                (scriptType) => scriptTypeFormat[stringFormat(scriptType)]
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.winningTeam,
+        (opt) => ` with winning team ${opt};`
+    );
+    restString += optionString(
+        options.storytellers,
+        (opt) =>
+            ` with storyteller${pluralize(opt, " among")} ${_.map(
+                opt,
+                (st) => nameFormat[stringFormat(st)]
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.players,
+        (opt) =>
+            ` with player${pluralize(opt)} ${_.map(
+                opt,
+                (player) => nameFormat[stringFormat(player)]
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.winners,
+        (opt) =>
+            ` with player${pluralize(opt)} ${_.map(
+                opt,
+                (player) => nameFormat[stringFormat(player)]
+            ).join(", ")} on the winning team;`
+    );
+    restString += optionString(
+        options.losers,
+        (opt) =>
+            ` with player${pluralize(opt)} ${_.map(
+                opt,
+                (player) => nameFormat[stringFormat(player)]
+            ).join(", ")} on the losing team;`
+    );
+    restString += optionString(
+        options.characters,
+        (opt) =>
+            ` with character${pluralize(opt)} ${_.map(
+                opt,
+                (character) => characterFormat[stringFormat(character)]
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.startingCharacters,
+        (opt) =>
+            ` with starting character${pluralize(opt)} ${_.map(
+                opt,
+                (character) => characterFormat[stringFormat(character)]
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.endingCharacters,
+        (opt) =>
+            ` with ending character${pluralize(opt)} ${_.map(
+                opt,
+                (character) => characterFormat[stringFormat(character)]
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.initialCharacters,
+        (opt) =>
+            ` with player/initial character pair${pluralize(opt)} ${_.map(
+                opt,
+                ([player, char]) =>
+                    `${nameFormat[stringFormat(player)]}/${
+                        characterFormat[stringFormat(char)]
+                    }`
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.finalCharacters,
+        (opt) =>
+            ` with player/final character pair${pluralize(opt)} ${_.map(
+                opt,
+                ([player, char]) =>
+                    `${nameFormat[stringFormat(player)]}/${
+                        characterFormat[stringFormat(char)]
+                    }`
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.initialTypes,
+        (opt) =>
+            ` with player/initial character type pair${pluralize(opt)} ${_.map(
+                opt,
+                ([player, type]) =>
+                    `${nameFormat[stringFormat(player)]}/${
+                        characterTypeFormat[stringFormat(type)]
+                    }`
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.finalTypes,
+        (opt) =>
+            ` with player/final character type pair${pluralize(opt)} ${_.map(
+                opt,
+                ([player, type]) =>
+                    `${nameFormat[stringFormat(player)]}/${
+                        characterTypeFormat[stringFormat(type)]
+                    }`
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.initialAlignments,
+        (opt) =>
+            ` with player/initial alignment pair${pluralize(opt)} ${_.map(
+                opt,
+                ([player, alignment]) =>
+                    `${nameFormat[stringFormat(player)]}/${
+                        alignmentFormat[stringFormat(alignment)]
+                    }`
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.finalAlignments,
+        (opt) =>
+            ` with player/final alignment pair${pluralize(opt)} ${_.map(
+                opt,
+                ([player, alignment]) =>
+                    `${nameFormat[stringFormat(player)]}/${
+                        alignmentFormat[stringFormat(alignment)]
+                    }`
+            ).join(", ")};`
+    );
+    restString += optionString(
+        options.versus,
+        (opt) =>
+            ` in which ${nameFormat[stringFormat(opt[0])]} and ${
+                nameFormat[stringFormat(opt[1])]
+            } won together, lost together, won/lost, and lost/won, respectively`
+    );
 
     if (restString.slice(-1) === ";") {
         restString = restString.slice(0, -1);

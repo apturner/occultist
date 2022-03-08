@@ -11,11 +11,7 @@ async function count(message, options, command) {
     } else {
         response =
             getCountFindString(options, true, result) +
-            `${
-                options.versus === undefined
-                    ? result
-                    : "[" + result.join(", ") + "]"
-            }`;
+            `**${options.versus === undefined ? result : result.join(", ")}**`;
     }
 
     // Send result

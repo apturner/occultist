@@ -5,14 +5,24 @@ const sendMessage = require("../functions/sendMessage");
 async function find(message, options, command) {
     result = _.map(
         actionHelper(message, options, command, false),
-        (game) => game.Number
+
+        options.versus === undefined
+            ? (game) => game.Number
+            : (gameList) => _.map(gameList, (game) => game.Number)
     );
 
     // Send result
     await sendMessage(
         message,
         `Game numbers of games satisfying given constraints: ${
-            "[" + result.join(", ") + "]"
+            options.versus === undefined
+                ? "[" + result.join(", ") + "]"
+                : "[" +
+                  _.map(
+                      result,
+                      (gameList) => "[" + gameList.join(", ") + "]"
+                  ).join(", ") +
+                  "]"
         }`
     );
 }

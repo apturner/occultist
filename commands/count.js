@@ -2,13 +2,15 @@ const { defHelper, actionHelper } = require("../functions/countFindHelper");
 const sendMessage = require("../functions/sendMessage");
 
 async function count(message, options, command) {
-    result = actionHelper(message, options, command, true);
+    const result = actionHelper(message, options, command, true);
 
     let response;
-    if (result !== NaN) {
+    if (result === NaN) {
+        response = "Invalid constraints given.";
+    } else if (options.versus === undefined) {
         response = `Number of games satisfying given constraints: ${result}`;
     } else {
-        response = "Invalid constraints given.";
+        response = `Number of games satisfying given constraints: ${result}`;
     }
 
     // Send result

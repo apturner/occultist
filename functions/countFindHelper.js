@@ -17,8 +17,9 @@ function pairsParse(value, previous) {
     if (previous === undefined) {
         previous = [];
     }
+    previous.push(pairParse(value));
 
-    return previous.push(pairParse(value));
+    return previous;
 }
 
 function actionHelper(message, options, command, count) {

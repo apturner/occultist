@@ -1,6 +1,11 @@
-const dayDeath = require("../data/causeOfDeathDay");
-const nightDeath = require("../data/causeOfDeathNight");
-const fabledDeath = require("../data/causeOfDeathFabled");
+const _ = require("lodash");
+const stringFormat = require("../functions/stringFormat");
+const alignmentFormat = require("../data/alignmentFormat");
+const characterFormat = require("../data/characterFormat");
+const characterTypeFormat = require("../data/characterTypeFormat");
+const nameFormat = require("../data/nameFormat");
+const scriptFormat = require("../data/scriptFormat");
+const scriptTypeFormat = require("../data/scriptTypeFormat");
 
 function getCountFindString(options, count) {
     let startString = "";
@@ -20,13 +25,19 @@ function getCountFindString(options, count) {
         options.scripts !== undefined
             ? ` with script${
                   options.scripts.length > 1 ? " one of" : ""
-              } ${options.scripts.join(", ")};`
+              } ${_.map(
+                  options.scripts,
+                  (script) => scriptFormat[stringFormat(script)]
+              ).join(", ")};`
             : ""
     }${
         options.scriptTypes !== undefined
             ? ` with script type${
                   options.scriptTypes.length > 1 ? " one of" : ""
-              } ${options.scriptTypes.join(", ")};`
+              } ${_.map(
+                  options.scriptTypes,
+                  (scriptType) => scriptTypeFormat[stringFormat(scriptType)]
+              ).join(", ")};`
             : ""
     }${
         options.winningTeam !== undefined
@@ -36,43 +47,58 @@ function getCountFindString(options, count) {
         options.storytellers !== undefined
             ? ` with storyteller${
                   options.storytellers.length > 1 ? " among" : ""
-              } ${options.storytellers.join(", ")};`
+              } ${_.map(
+                  options.storytellers,
+                  (st) => nameFormat[stringFormat(st)]
+              ).join(", ")};`
             : ""
     }${
         options.players !== undefined
-            ? ` with player${
-                  options.players.length > 1 ? "s" : ""
-              } ${options.players.join(", ")};`
+            ? ` with player${options.players.length > 1 ? "s" : ""} ${_.map(
+                  options.players,
+                  (player) => nameFormat[stringFormat(player)]
+              ).join(", ")};`
             : ""
     }${
         options.winners !== undefined
-            ? ` with player${
-                  options.winners.length > 1 ? "s" : ""
-              } ${options.winners.join(", ")} on the winning team;`
+            ? ` with player${options.winners.length > 1 ? "s" : ""} ${_.map(
+                  options.winners,
+                  (player) => nameFormat[stringFormat(player)]
+              ).join(", ")} on the winning team;`
             : ""
     }${
         options.losers !== undefined
-            ? ` with player${
-                  options.losers.length > 1 ? "s" : ""
-              } ${options.losers.join(", ")} on the losing team;`
+            ? ` with player${options.losers.length > 1 ? "s" : ""} ${_.map(
+                  options.losers,
+                  (player) => nameFormat[stringFormat(player)]
+              ).join(", ")} on the losing team;`
             : ""
     }${
         options.characters !== undefined
             ? ` with character${
                   options.characters.length > 1 ? "s" : ""
-              } ${options.characters.join(", ")};`
+              } ${_.map(
+                  options.characters,
+                  (character) => characterFormat[stringFormat(character)]
+              ).join(", ")};`
             : ""
     }${
         options.startingCharacters !== undefined
             ? ` with starting character${
                   options.startingCharacters.length > 1 ? "s" : ""
-              } ${options.startingCharacters.join(", ")};`
+              } ${_.map(
+                  options.startingCharacters,
+                  (character) => characterFormat[stringFormat(character)]
+              ).join(", ")};`
             : ""
     }${
         options.endingCharacters !== undefined
             ? ` with ending character${
                   options.endingCharacters.length > 1 ? "s" : ""
-              } ${options.endingCharacters.join(", ")};`
+              } ${_.map(
+                  options.endingCharacters,
+                  (character) => characterFormat[stringFormat(character)]
+              ).join(", ")};`
             : ""
     }${
         options.initialCharacters !== undefined
@@ -81,7 +107,9 @@ function getCountFindString(options, count) {
               } ${_.map(
                   options.initialCharacters,
                   (playerCharacter) =>
-                      `${playerCharacter[0]}/${playerCharacter[1]}`
+                      `${nameFormat[stringFormat(playerCharacter[0])]}/${
+                          characterFormat[stringFormat(playerCharacter[1])]
+                      }`
               ).join(", ")};`
             : ""
     }${
@@ -91,7 +119,9 @@ function getCountFindString(options, count) {
               } ${_.map(
                   options.finalCharacters,
                   (playerCharacter) =>
-                      `${playerCharacter[0]}/${playerCharacter[1]}`
+                      `${nameFormat[stringFormat(playerCharacter[0])]}/${
+                          characterFormat[stringFormat(playerCharacter[1])]
+                      }`
               ).join(", ")};`
             : ""
     }${
@@ -101,7 +131,11 @@ function getCountFindString(options, count) {
               } ${_.map(
                   options.initialTypes,
                   (playerCharacterType) =>
-                      `${playerCharacterType[0]}/${playerCharacterType[1]}`
+                      `${nameFormat[stringFormat(playerCharacterType[0])]}/${
+                          characterTypeFormat[
+                              stringFormat(playerCharacterType[1])
+                          ]
+                      }`
               ).join(", ")};`
             : ""
     }${
@@ -111,7 +145,11 @@ function getCountFindString(options, count) {
               } ${_.map(
                   options.finalTypes,
                   (playerCharacterType) =>
-                      `${playerCharacterType[0]}/${playerCharacterType[1]}`
+                      `${nameFormat[stringFormat(playerCharacterType[0])]}/${
+                          characterTypeFormat[
+                              stringFormat(playerCharacterType[1])
+                          ]
+                      }`
               ).join(", ")};`
             : ""
     }${
@@ -121,7 +159,9 @@ function getCountFindString(options, count) {
               } ${_.map(
                   options.initialAlignments,
                   (playerAlignment) =>
-                      `${playerAlignment[0]}/${playerAlignment[1]}`
+                      `${nameFormat[stringFormat(playerAlignment[0])]}/${
+                          alignmentFormat[stringFormat(playerAlignment[1])]
+                      }`
               ).join(", ")};`
             : ""
     }${
@@ -131,17 +171,18 @@ function getCountFindString(options, count) {
               } ${_.map(
                   options.finalAlignments,
                   (playerAlignment) =>
-                      `${playerAlignment[0]}/${playerAlignment[1]}`
+                      `${nameFormat[stringFormat(playerAlignment[0])]}/${
+                          alignmentFormat[stringFormat(playerAlignment[1])]
+                      }`
               ).join(", ")};`
             : ""
     }${
         options.versus !== undefined
-            ? ` in which ${options.versus[0]} and ${options.versus[1]} [won together, lost together, won/lost, lost/won], respectively`
+            ? ` in which ${nameFormat[stringFormat(options.versus[0])]} and ${
+                  nameFormat[stringFormat(options.versus[1])]
+              } [won together, lost together, won/lost, lost/won], respectively`
             : ""
     }`;
-
-    console.log(restString);
-    console.log(restString.slice(-1));
 
     if (restString.slice(-1) === ";") {
         restString = restString.slice(0, -1);

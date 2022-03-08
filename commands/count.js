@@ -5,8 +5,6 @@ const sendMessage = require("../functions/sendMessage");
 async function count(message, options, command) {
     const result = actionHelper(message, options, command, true);
 
-    console.log(options);
-
     let response;
     if (result === NaN) {
         response = "Invalid constraints given.";

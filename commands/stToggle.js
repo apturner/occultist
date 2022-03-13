@@ -1,7 +1,7 @@
 const { InvalidArgumentError } = require("commander");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendMessage = require("../functions/sendMessage");
-const stringFormat = require("../functions/stringFormat");
+const { stringFormat } = require("../functions/stringFormat");
 
 async function stToggle(message, member, options, command) {
     // If no guild member given, set member to caller

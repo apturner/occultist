@@ -5,12 +5,13 @@ const { stringFormat } = require("../functions/stringFormat");
 
 async function stToggle(message, member, options, command) {
     // If no guild member given, set member to caller
-    // Otherwise, find the first guild member who name roughly matches the given name
-    const memberInit = member;
+    // Otherwise, find the first guild member whose name roughly matches the given name
     if (member === undefined) {
-        member = message.guild.members.cache.find(
-            (m) => m.id === message.author.id
-        );
+        member = message.member;
+        // This is the old way to do this
+        // member = message.guild.members.cache.find(
+        //     (m) => m.id === message.author.id
+        // );
     } else {
         await message.guild.members.fetch();
         member = message.guild.members.cache.find((m) =>

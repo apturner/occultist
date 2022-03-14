@@ -15,6 +15,7 @@ const { defGrim } = require("../commands/grim");
 const { defPlayer } = require("../commands/player");
 const { defStoryteller } = require("../commands/storyteller");
 const { defStToggle } = require("../commands/stToggle");
+const { defTimer } = require("../commands/timer");
 const { defWinRate } = require("../commands/winRate");
 
 // Define response to messages
@@ -42,6 +43,7 @@ module.exports = {
         defPlayer(occultist, message);
         defStoryteller(occultist, message);
         defStToggle(occultist, message);
+        defTimer(occultist, message);
         defWinRate(occultist, message);
 
         // Cut off the prefix, trim, and split on whitespace not in quotes

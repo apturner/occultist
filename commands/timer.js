@@ -28,12 +28,33 @@ async function timer(message, duration, options, command) {
         },
     });
 
+    let cancelled = false;
+
+    await timerMessage.react("765116505246662657");
+
+    const filter = (reaction, user) => {
+        return (
+            reaction.emoji.name === "disagree" && user.id === message.author.id
+        );
+    };
+
+    const collector = timerMessage.createReactionCollector({
+        filter,
+        time: 1.5 * (duration * 60000),
+    });
+
+    collector.on("collect", (reaction, user) => {
+        console.log("Collected cancel");
+        console.log(reaction.emoji.name);
+        cancelled = true;
+    });
+
     // Edit timer message loop
-    while (minutesLeft > 0 || secondsLeft > 0) {
-        // Sleep 5 seconds
+    while (cancelled === false && (minutesLeft > 0 || secondsLeft > 0)) {
+        // Sleep updatePeriod seconds
         await sleep(updatePeriod * 1000);
 
-        // Reduce the remaining time by 5 seconds
+        // Reduce the remaining time by updatePeriod seconds
         if (secondsLeft > updatePeriod) {
             secondsLeft -= updatePeriod;
         } else if (minutesLeft > 0) {
@@ -53,7 +74,13 @@ async function timer(message, duration, options, command) {
         );
     }
 
-    await timerMessage.edit(headerStr + "**TIME IS UP**");
+    collector.stop();
+
+    if (cancelled === true) {
+        await timerMessage.edit(headerStr + "**TIMER CANCELLED**");
+    } else {
+        await timerMessage.edit(headerStr + "**TIME IS UP**");
+    }
 }
 
 function defTimer(comm, message) {

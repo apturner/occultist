@@ -1,4 +1,5 @@
 const { InvalidArgumentError } = require("commander");
+const findMember = require("../functions/findMember");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendMessage = require("../functions/sendMessage");
 const { stringFormat } = require("../functions/stringFormat");
@@ -13,14 +14,7 @@ async function stToggle(message, member, options, command) {
         //     (m) => m.id === message.author.id
         // );
     } else {
-        await message.guild.members.fetch();
-        member = message.guild.members.cache.find((m) =>
-            stringFormat(m.displayName).includes(stringFormat(member))
-        );
-    }
-    if (member === undefined) {
-        await sendCodeBlock(message, "Guild member not found.");
-        throw new InvalidArgumentError("Guild member not found.");
+        member = await findMember(message, member);
     }
 
     // Get ST role

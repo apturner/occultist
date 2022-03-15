@@ -5,8 +5,8 @@ function sleep(ms) {
 }
 
 async function timer(message, duration, options, command) {
-    // Timer update frequency, in seconds (must be less than 60)
-    const updateFrequency = 5;
+    // Timer update frequency, in seconds (must be at most 60)
+    const updatePeriod = 15;
 
     // Get ending time, in milliseconds
     const endTime = Math.round(message.createdTimestamp / 1000 + duration * 60);
@@ -31,13 +31,13 @@ async function timer(message, duration, options, command) {
     // Edit timer message loop
     while (minutesLeft > 0 || secondsLeft > 0) {
         // Sleep 5 seconds
-        await sleep(updateFrequency * 1000);
+        await sleep(updatePeriod * 1000);
 
         // Reduce the remaining time by 5 seconds
-        if (secondsLeft > updateFrequency) {
-            secondsLeft -= updateFrequency;
+        if (secondsLeft > updatePeriod) {
+            secondsLeft -= updatePeriod;
         } else if (minutesLeft > 0) {
-            secondsLeft += 60 - updateFrequency;
+            secondsLeft += 60 - updatePeriod;
             minutesLeft -= 1;
         } else {
             secondsLeft = 0;

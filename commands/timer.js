@@ -4,7 +4,7 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function timer(message, duration, options, command) {
+async function timer(message, duration, command) {
     // Timer update frequency, in seconds (must be at most 60)
     const updatePeriod = 15;
 
@@ -44,8 +44,6 @@ async function timer(message, duration, options, command) {
     });
 
     collector.on("collect", (reaction, user) => {
-        console.log("Collected cancel");
-        console.log(reaction.emoji.name);
         cancelled = true;
     });
 
@@ -93,7 +91,7 @@ function defTimer(comm, message) {
             "Duration of timer, from time of call, in minutes"
         )
         .action(
-            async (duration, options, command) =>
+            async (duration, command) =>
                 await timer(message, duration, options, command)
         )
         .configureOutput({

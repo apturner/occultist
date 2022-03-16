@@ -57,7 +57,9 @@ async function cancel(message, command) {
         }
     } else {
         await poll.reply({
-            content: "Vote unsuccessful",
+            content: `Vote unsuccessful, Matt remains ${
+                isCancelled ? "" : "un"
+            }cancelled`,
             allowedMentions: {
                 repliedUser: false,
             },

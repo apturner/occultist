@@ -6,7 +6,7 @@ const getAllRoles = require("../functions/getAllRoles");
 const getCauseOfDeathString = require("../functions/getCauseOfDeathString");
 const getPlayerChangeString = require("../functions/getPlayerChangeString");
 const sendEmbed = require("../functions/sendEmbed");
-const stringFormat = require("../functions/stringFormat");
+const { stringFormat } = require("../functions/stringFormat");
 const characterTypeMap = require("../data/characterType");
 const usernameName = require("../data/usernameName");
 

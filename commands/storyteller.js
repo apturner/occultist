@@ -110,7 +110,10 @@ async function storytellerSummary(message, st, command) {
     // Make embed
     const embed = new MessageEmbed()
         .setColor("#9d221a")
-        .setAuthor("Storyteller Summary", message.client.user.avatarURL())
+        .setAuthor({
+            name: "Storyteller Summary",
+            iconURL: message.client.user.avatarURL(),
+        })
         .setTitle(`${st}`)
         .setDescription(
             `${goodWins} Good Win${

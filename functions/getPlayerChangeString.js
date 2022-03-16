@@ -6,6 +6,10 @@ function getPlayerChangeString(playerRole) {
         (str, role) =>
             `${str}${str !== "" ? " turned " : ""}${role.Alignment} ${
                 role.Character
+            }${
+                role.BelievedTheyWere !== undefined
+                    ? " " + role.BelievedTheyWere
+                    : ""
             }`,
         ""
     );

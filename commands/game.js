@@ -53,10 +53,10 @@ async function gameSummary(message, number, command) {
     // Make embed
     const embed = new MessageEmbed()
         .setColor("#9d221a")
-        .setAuthor(
-            `Game #${number}, Storytold by ${storytellers.join(", ")}`,
-            message.client.user.avatarURL()
-        )
+        .setAuthor({
+            name: `Game #${number}, Storytold by ${storytellers.join(", ")}`,
+            iconURL: message.client.user.avatarURL(),
+        })
         .setTitle(`${script}`)
         .setDescription(
             `**${win.toUpperCase()} WIN: ${winCondition}**${

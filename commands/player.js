@@ -106,7 +106,10 @@ async function playerSummary(message, player, command) {
     // Make embed(s)
     const topEmbed = new MessageEmbed()
         .setColor("#9d221a")
-        .setAuthor("Player Summary", message.client.user.avatarURL())
+        .setAuthor({
+            name: "Player Summary",
+            iconURL: message.client.user.avatarURL(),
+        })
         .setTitle(`${player}`)
         .setDescription(
             `**OVERALL WIN RATE:** ${winRate} (${winCount}/${playCount})`
@@ -156,7 +159,10 @@ async function playerSummary(message, player, command) {
 
     const embed2 = new MessageEmbed()
         .setColor("#9d221a")
-        .setAuthor("Player Summary (cont.)", message.client.user.avatarURL())
+        .setAuthor({
+            name: "Player Summary (cont.)",
+            iconURL: message.client.user.avatarURL(),
+        })
         .setTitle(`${player}`)
         .setDescription(
             `**OVERALL WIN RATE:** ${winRate} (${winCount}/${playCount})`
@@ -219,10 +225,10 @@ async function playerSummary(message, player, command) {
     for (let i = 0; i < gameSummaries.length; i++) {
         let nextEmbed = new MessageEmbed()
             .setColor("#9d221a")
-            .setAuthor(
-                "Player Summary (cont.)",
-                message.client.user.avatarURL()
-            )
+            .setAuthor({
+                name: "Player Summary (cont.)",
+                iconURL: message.client.user.avatarURL(),
+            })
             .setTitle(`${player}`)
             // .setDescription("**Game Summaries**" + (i == 0 ? "" : " (cont.)"))
             .addFields(gameSummaries[i])

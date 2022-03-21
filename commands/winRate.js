@@ -20,8 +20,6 @@ async function winRate(message, player, options, command) {
         player = usernameName[message.author.username];
     }
 
-    console.log(player);
-
     const {
         result,
         wins,

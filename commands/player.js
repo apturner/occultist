@@ -23,7 +23,7 @@ function playerGameString(playerObj, win, number, script) {
     )}`;
 }
 
-async function playerSummary(message, player, command) {
+async function playerSummary(message, player, options, command) {
     // If no player given, set player to caller
     if (player === undefined) {
         player = usernameName[message.author.username];
@@ -157,86 +157,77 @@ async function playerSummary(message, player, command) {
         )
         .setTimestamp();
 
-    const embed2 = new MessageEmbed()
-        .setColor("#9d221a")
-        .setAuthor({
-            name: "Player Summary (cont.)",
-            iconURL: message.client.user.avatarURL(),
-        })
-        .setTitle(`${player}`)
-        .setDescription(
-            `**OVERALL WIN RATE:** ${winRate} (${winCount}/${playCount})`
-        )
-        .setTimestamp();
-
     // Add player avatar if found
     if (playerAvatar !== undefined) topEmbed.setThumbnail(playerAvatar);
 
-    // Get and add game summary strings
-    // These are chunked into tens, and then the lists of chunks is chunked into fivess
-    const gameSummaries = _.chunk(
-        _.map(
-            _.chunk(
-                _.map(playerGames, (game) =>
-                    playerGameString(
-                        game.Players[player],
-                        game.Win,
-                        game.Number,
-                        game.Script
-                    )
-                ),
-                10
-            ),
-            (arr, index) => {
-                return {
-                    name:
-                        index == 0
-                            ? "Game Summaries"
-                            : index % 5 == 0
-                            ? "Game Summaries (cont.)"
-                            : "\u200b",
-                    value: arr.join("\n"),
-                    inline: false,
-                };
-            }
-        ),
-        5
-    );
-
-    // This creates 2 columns, if above inline set to true
-    // const loopLength = gameSummaries.length / 3 - 1;
-    // for (let i = 0; i <= loopLength; i++) {
-    //     gameSummaries.splice(3 * i + 2, 0, {
-    //         name: "\u200b",
-    //         value: "\u200b",
-    //         inline: false,
-    //     });
-    // }
-    // gameSummaries.forEach((summary) =>
-    //     embed.addField(summary.name, summary.value, summary.inline)
-    // );
-
-    // This previously added the summaries to the only embed
-    // embed.addFields(gameSummaries);
-
-    // Send result
+    // Send top embed
     await sendEmbed(message, topEmbed);
 
-    for (let i = 0; i < gameSummaries.length; i++) {
-        let nextEmbed = new MessageEmbed()
-            .setColor("#9d221a")
-            .setAuthor({
-                name: "Player Summary (cont.)",
-                iconURL: message.client.user.avatarURL(),
-            })
-            .setTitle(`${player}`)
-            // .setDescription("**Game Summaries**" + (i == 0 ? "" : " (cont.)"))
-            .addFields(gameSummaries[i])
-            .setTimestamp();
+    // Add game summary embeds if flag is included
+    if (options.games == true) {
+        // Get and add game summary strings
+        // These are chunked into tens, and then the lists of chunks is chunked into fivess
+        const gameSummaries = _.chunk(
+            _.map(
+                _.chunk(
+                    _.map(playerGames, (game) =>
+                        playerGameString(
+                            game.Players[player],
+                            game.Win,
+                            game.Number,
+                            game.Script
+                        )
+                    ),
+                    10
+                ),
+                (arr, index) => {
+                    return {
+                        name:
+                            index == 0
+                                ? "Game Summaries"
+                                : index % 5 == 0
+                                ? "Game Summaries (cont.)"
+                                : "\u200b",
+                        value: arr.join("\n"),
+                        inline: false,
+                    };
+                }
+            ),
+            5
+        );
 
-        // if (playerAvatar !== undefined) nextEmbed.setThumbnail(playerAvatar);
+        // This creates 2 columns, if above inline set to true
+        // const loopLength = gameSummaries.length / 3 - 1;
+        // for (let i = 0; i <= loopLength; i++) {
+        //     gameSummaries.splice(3 * i + 2, 0, {
+        //         name: "\u200b",
+        //         value: "\u200b",
+        //         inline: false,
+        //     });
+        // }
+        // gameSummaries.forEach((summary) =>
+        //     embed.addField(summary.name, summary.value, summary.inline)
+        // );
 
-        await sendEmbed(message, nextEmbed, false);
+        // This previously added the summaries to the only embed
+        // embed.addFields(gameSummaries);
+
+        for (let i = 0; i < gameSummaries.length; i++) {
+            let nextEmbed = new MessageEmbed()
+                .setColor("#9d221a")
+                .setAuthor({
+                    name: "Player Summary (cont.)",
+                    iconURL: message.client.user.avatarURL(),
+                })
+                .setTitle(`${player}`)
+                // .setDescription("**Game Summaries**" + (i == 0 ? "" : " (cont.)"))
+                .addFields(gameSummaries[i])
+                .setTimestamp();
+
+            // if (playerAvatar !== undefined) nextEmbed.setThumbnail(playerAvatar);
+
+            await sendEmbed(message, nextEmbed, false);
+        }
     }
 }
 
@@ -244,9 +235,10 @@ function defPlayer(comm, message) {
     comm.command("player")
         .description("View a summary of the given player")
         .argument("[player]", "Player to find info of (default: caller)")
+        .option("-g, --games", "Include game summaries")
         .action(
-            async (player, command) =>
-                await playerSummary(message, player, command)
+            async (player, options, command) =>
+                await playerSummary(message, player, options, command)
         )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),

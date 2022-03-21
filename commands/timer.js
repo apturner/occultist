@@ -91,8 +91,7 @@ function defTimer(comm, message) {
             "Duration of timer, from time of call, in minutes"
         )
         .action(
-            async (duration, command) =>
-                await timer(message, duration, options, command)
+            async (duration, command) => await timer(message, duration, command)
         )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),

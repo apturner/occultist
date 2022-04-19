@@ -1597,7 +1597,7 @@
 				"Character":"Sage",
 				"Alignment":"Good",
 				"Setup Tokens":[
-					"Good Twin"
+					"Twin"
 				],
 				"Fate":"Dead",
 				"Cause of Death":"Demon Attack",
@@ -3492,7 +3492,7 @@
 				"Character":"Artist",
 				"Alignment":"Good",
 				"Setup Tokens":[
-					"Good Twin"
+					"Twin"
 				],
 				"Fate":"Alive"
 			},
@@ -4149,7 +4149,7 @@
 				"Character":"Klutz",
 				"Alignment":"Good",
 				"Setup Tokens":[
-					"Good Twin"
+					"Twin"
 				],
 				"Fate":"Alive"
 			},
@@ -5258,7 +5258,7 @@
 				"Character":"Seamstress",
 				"Alignment":"Good",
 				"Setup Tokens":[
-					"Good Twin"
+					"Twin"
 				],
 				"Fate":"Alive"
 			},
@@ -9980,7 +9980,7 @@
 			"eNamorD":{
 				"Character":"Drunk",
 				"Alignment":"Good",
-				"Believed They Were":"Alchemist",
+				"Believed They Were":"Alchemist Poisoner",
 				"Cause of Death":"Other Power (Day)",
 				"Killed By":"Butcher",
 				"Fate":"Dead"
@@ -10156,6 +10156,10 @@
 				"Character":"Alchemist",
 				"Alignment":"Good",
 				"Believed They Were":"Witch",
+				"Power Gain":{
+					"Power":"Witch",
+					"Cause":"Alchemist"
+				},
 				"Cause of Death":"Demon Attack",
 				"Killed By":"Fang Gu",
 				"Fate":"Dead"
@@ -10211,7 +10215,7 @@
 					"Noble Seen"
 				],
 				"Cause of Death":"Other Power (Night)",
-				"Killed By":"Alchemist Witch",
+				"Killed By":"Alchemist",
 				"Fate":"Dead"
 			}
 		}
@@ -10291,7 +10295,7 @@
 			"CobaltWolf":{
 				"Character":"Drunk",
 				"Alignment":"Good",
-				"Believed They Were":"Alchemist",
+				"Believed They Were":"Alchemist Godfather",
 				"Change":{
 					"Character":"Fang Gu",
 					"Alignment":"Evil",
@@ -10299,6 +10303,490 @@
 				},
 				"Cause of Death":"Execution",
 				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":148,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/148.png",
+		"Date":1647748800,
+		"Script":"Sects & Violets",
+		"Fabled":[
+			"Deus Ex Fiasco"
+		],
+		"Win":"Evil",
+		"Win Condition":"Good Twin Execution",
+		"Storytellers":[
+			"Jakes"
+		],
+		"Bluffs":[
+			"Town Crier",
+			"Mathematician",
+			"Philosopher"
+		],
+		"Players":{
+			"sabrina":{
+				"Character":"Oracle",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Twin"
+				],
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Matt":{
+				"Character":"Flowergirl",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"eNamorD":{
+				"Character":"Evil Twin",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Leilinea":{
+				"Character":"Seamstress",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"No Dashii Poisoned"
+				],
+				"Fate":"Alive"
+			},
+			"Essaria":{
+				"Character":"No Dashii",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Alek2ander":{
+				"Character":"Cerenovus",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Megan":{
+				"Character":"Juggler",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"No Dashii Poisoned"
+				],
+				"Fate":"Alive"
+			},
+			"Onyxien":{
+				"Character":"Mutant",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Eric":{
+				"Character":"Snake Charmer",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"No Dashii",
+				"Fate":"Dead"
+			},
+			"Mullibok":{
+				"Character":"Artist",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"OngakuSensei":{
+				"Character":"Dreamer",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			}
+		}
+	},
+	{
+		"Number":149,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/149.png",
+		"Date":1647748800,
+		"Script":"Bad Moon Rising",
+		"Win":"Evil",
+		"Win Condition":"Two Living Players",
+		"Storytellers":[
+			"Alek2ander",
+			"eNamorD"
+		],
+		"Bluffs":[
+			"Professor",
+			"Tea Lady",
+			"Exorcist"
+		],
+		"Notes":"Eric died to Gossip, Ongaku to bad gamble (then eaten by Shabaloth), Jakes executed, Leilinea to demon, Mulli to demon, Megan to demon, Sabrina to demon, Matt to moonchild, Onyxien executed, Dano to demon + godfather. Matt thought his minions were Megan and Dano, and was given bluffs Sailor\/Professor\/Grandmother",
+		"Players":{
+			"Eric":{
+				"Character":"Godfather",
+				"Alignment":"Evil",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Gossip",
+				"Fate":"Dead"
+			},
+			"OngakuSensei":{
+				"Character":"Gambler",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Gambler",
+				"Fate":"Dead"
+			},
+			"Leilinea":{
+				"Character":"Minstrel",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Jakes":{
+				"Character":"Tinker",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Essaria":{
+				"Character":"Devil's Advocate",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Mullibok":{
+				"Character":"Gossip",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Shabaloth",
+				"Fate":"Dead"
+			},
+			"Megan":{
+				"Character":"Sailor",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Shabaloth",
+				"Fate":"Dead"
+			},
+			"sabrina":{
+				"Character":"Moonchild",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Shabaloth",
+				"Fate":"Dead"
+			},
+			"Matt":{
+				"Character":"Lunatic",
+				"Alignment":"Good",
+				"Believed They Were":"Shabaloth",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Moonchild",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Pacifist",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Dano":{
+				"Character":"Fool",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"nothership":{
+				"Character":"Shabaloth",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			}
+		}
+	},
+	{
+		"Number":150,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/150.png",
+		"Date":1647748800,
+		"Script":"Lycanthrope and Friends Commit Tax Fraud",
+		"Win":"Evil",
+		"Win Condition":"Two Living Players",
+		"Storytellers":[
+			"OngakuSensei"
+		],
+		"Bluffs":[
+			"Savant",
+			"Amnesiac",
+			"Engineer"
+		],
+		"Notes":"Night 1\nOracle (Dano) is drunk from Puzzlemaster\nAlchemist (nothership) -> Learns Witch\nDA (sabrina) -> Essaria\nA-Witch (nothership) -> Mulli\nPukka (Mulli) -> Matt\nBalloonist (Jakes) -> Essaria (outsider)\n\nDay 1 - 10 alive\nPsychopath (Alex2ander) kills Puzzlemaster (Essaria)\nFlowergirl (Matt) is executed and dies.\n\nNight 2\nDA (Sabrina) -> Mulli\nA-Witch (nothership) -> Alek2ander\nPukka (Mulli) -> sabrina\nUndertaker (Onyxien) -> Learns Flowergirl\nOracle (Dano) -> Learns 1 (Essaria, Matt) [drunk]\nBalloonist (Jakes) -> Sabrina (minion)\n\nDay 2 - 8 alive\nNo one has died.\nPsychopath kills Poppy Grower (Leilinea) \nPsychopath (Alek2ander) nominates self and dies to witch curse\nBalloonist (Jakes) is executed and dies\n\nNight 3\nMinions and Demon learn each other.\nDA (Sabrina) -> self\nA-Witch (nothership) -> Dano [poisoned]\nPukka (Mulli) -> Nothership\nSabrina dies\nUndertaker (Onyxien) -> Learns Balloonist\nOracle (Dano) -> Learns 1 (Sabrina, Matt, Alek2ander, Leilinea, Jakes, Essaria) [Drunk]\n\nDay 4 - 4 alive\nDA (sabrina) has died\n\nNight 5\nA-Witch (nothership) -> Dano\nPukka (Mulli) -> Onyx\nnothership has died\nUndertaker (Onyxien) -> does not wake\nOracle (Dano) -> Learns 1 (Sabrina, Matt, Alek2ander, Leilinea, Jakes, Essaria) [Drunk]\n\nDay 5 - 3 alive\nA-Witch (nothership) has died\nOracle (Dano) is executed and dies.\nEvil team wins",
+		"Players":{
+			"sabrina":{
+				"Character":"Devil's Advocate",
+				"Alignment":"Evil",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Pukka",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Undertaker",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Matt":{
+				"Character":"Flowergirl",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Alek2ander":{
+				"Character":"Psychopath",
+				"Alignment":"Evil",
+				"Cause of Death":"Other Power (Day)",
+				"Killed By":"Witch",
+				"Fate":"Dead"
+			},
+			"Leilinea":{
+				"Character":"Poppy Grower",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Day)",
+				"Killed By":"Psychopath",
+				"Fate":"Dead"
+			},
+			"Jakes":{
+				"Character":"Balloonist",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Essaria":{
+				"Character":"Puzzlemaster",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Day)",
+				"Killed By":"Psychopath",
+				"Fate":"Dead"
+			},
+			"Mullibok":{
+				"Character":"Pukka",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Dano":{
+				"Character":"Oracle",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Puzzlemaster Drunk"
+				],
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"nothership":{
+				"Character":"Alchemist",
+				"Alignment":"Good",
+				"Believed They Were":"Witch",
+				"Power Gain":{
+					"Power":"Witch",
+					"Cause":"Alchemist"
+				},
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Pukka",
+				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":151,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/151.png",
+		"Date":1648353600,
+		"Script":"Sects & Drugs v1.2",
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"nothership"
+		],
+		"Bluffs":[
+			"General",
+			"Klutz",
+			"Fortune Teller"
+		],
+		"Notes":"Evil Fisherman advice: Tell Cyberholmes to trust their neighbors\nLeilinea Seamstress checked Grafin and sabrina on N2 and got yes, then Luelle Cannibal Seamstress checked Qaysed\/Alek2ander on N3 and got yes. Alek2ander became Bounty Hunter Known after Jakes was executed.",
+		"Players":{
+			"Leilinea":{
+				"Character":"Seamstress",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Noble Seen"
+				],
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Luelle":{
+				"Character":"Cannibal",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Vigormortis",
+				"Fate":"Dead"
+			},
+			"Dano":{
+				"Character":"Town Crier",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Day)",
+				"Killed By":"Witch",
+				"Fate":"Dead"
+			},
+			"Qaysed":{
+				"Character":"Witch",
+				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Noble Seen"
+				],
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Vigormortis",
+				"Fate":"Dead"
+			},
+			"Cyberholmes":{
+				"Character":"Vigormortis",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Jakes":{
+				"Character":"Fearmonger",
+				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Bounty Hunter Known"
+				],
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Mullibok":{
+				"Character":"Fisherman",
+				"Alignment":"Evil",
+				"Cause of Death":"Other Power (Day)",
+				"Killed By":"Witch",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Alchemist",
+				"Alignment":"Good",
+				"Believed They Were":"Assassin",
+				"Power Gain":{
+					"Power":"Assassin",
+					"Cause":"Alchemist"
+				},
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Vigormortis",
+				"Fate":"Dead"
+			},
+			"sabrina":{
+				"Character":"Bounty Hunter",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Noble Seen"
+				],
+				"Fate":"Alive"
+			},
+			"eNamorD":{
+				"Character":"Scapegoat",
+				"Alignment":"Good",
+				"Cause of Death":"Travelled Away",
+				"Fate":"Dead"
+			},
+			"Alek2ander":{
+				"Character":"Goblin",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Essaria":{
+				"Character":"Nightwatchman",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"OngakuSensei":{
+				"Character":"Noble",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Grafin":{
+				"Character":"Poppy Grower",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			}
+		}
+	},
+	{
+		"Number":152,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/152.png",
+		"Date":1648353600,
+		"Script":"Oops! All Amnesiacs",
+		"Fabled":[
+			"Sentinel"
+		],
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"Megan"
+		],
+		"Bluffs":[
+			"Amnesiac",
+			"Amnesiac",
+			"Amnesiac"
+		],
+		"Notes":"Concordia (Townsfolk): Five players start with resources. Each night, they may pass a resource to another player. If you have all resources, learn the Demon.\nResources: brick, food, tool, wine, cloth\nCoup (Townsfolk): Two players start with Contessas. Each night, each player with a Contessa chooses a player to pass the Contessa to.\nOne Night Ultimate Werewolf (Townsfolk): Once per game, at night, choose a player: you swap roles and alignments.\nPotion Explosion (Townsfolk): Each night, choose a player: learn if their neighbors are the same character class.\nResistance (Townsfolk): Each night, choose 4 players: you learn if all are Townsfolk.\nMunchkin (Outsider): You think you are a Townsfolk character, but you are not. You receive arbitrary Amnesiac question answers unless you Bingo.\nWavelength (Outsider): Each night, choose 2 players (not yourself): they are asked a question. If they answer differently, they are drunk until dusk.\nLords of Waterdeep (Minion): Each night, choose a player and a statement: they are “mad” about this statement tomorrow, or might be executed.\nCoup (Demon): Each night*, choose a player: they die. Or, choose 2 players: they die if they do not have a Contessa.\n\nBluffs:\nExit (Townsfolk): Each night, choose a player: you receive a hint about their ability.\nQuacks of Quedlinburg (Townsfolk): Each night*, you may choose a player: if they are not a Townsfolk, you die. You may repeat this ability.\nArkham Horror (Outsider): Each night, choose a player: something bad might happen to them.\n\nN1: Dano and Jakes are given Contessas via Coup (Townsfolk) ability; Essaria, Mullibok, Leilinea, sabrina, Onyxien are given resources via Concordia (Townsfolk) ability\nD1: Mullibok executed\nN2: Dano killed\nD2: OngakuSensei executed",
+		"Players":{
+			"OngakuSensei":{
+				"Character":"Amnesiac",
+				"Alignment":"Evil",
+				"Believed They Were":"Coup (Demon)",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Mullibok":{
+				"Character":"Amnesiac",
+				"Alignment":"Good",
+				"Believed They Were":"Coup (Townsfolk)",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Amnesiac",
+				"Alignment":"Good",
+				"Believed They Were":"Potion Explosion",
+				"Fate":"Alive"
+			},
+			"Jakes":{
+				"Character":"Amnesiac",
+				"Alignment":"Good",
+				"Believed They Were":"Resistance",
+				"Fate":"Alive"
+			},
+			"sabrina":{
+				"Character":"Amnesiac",
+				"Alignment":"Evil",
+				"Believed They Were":"Lords of Waterdeep",
+				"Fate":"Alive"
+			},
+			"Essaria":{
+				"Character":"Amnesiac",
+				"Alignment":"Good",
+				"Believed They Were":"One Night Ultimate Werewolf",
+				"Power Gain":{
+					"Power":"Munchkin",
+					"Cause":"One Night Ultimate Werewolf"
+				},
+				"Fate":"Alive"
+			},
+			"Leilinea":{
+				"Character":"Amnesiac",
+				"Alignment":"Good",
+				"Believed They Were":"Munchkin",
+				"Power Gain":{
+					"Power":"One Night Ultimate Werewolf",
+					"Cause":"One Night Ultimate Werewolf"
+				},
+				"Fate":"Alive"
+			},
+			"Dano":{
+				"Character":"Amnesiac",
+				"Alignment":"Good",
+				"Believed They Were":"Concordia",
+				"Cause of Death":"Demon Attack",
+				"Fate":"Dead"
+			},
+			"Alek2ander":{
+				"Character":"Amnesiac",
+				"Alignment":"Good",
+				"Believed They Were":"Wavelength",
+				"Fate":"Alive"
 			}
 		}
 	}

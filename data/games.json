@@ -9070,6 +9070,7 @@
 			"Fortune Teller",
 			"Saint"
 		],
+		"Notes":"Qaysed nominated Virgin",
 		"Players":{
 			"Qaysed":{
 				"Character":"Imp",
@@ -9298,7 +9299,7 @@
 				"Character":"Drunk",
 				"Alignment":"Good",
 				"Believed They Were":"Philosopher",
-				"Cause of Death":"Execution",
+				"Cause of Death":"Other Power (Day)",
 				"Killed By":"Cerenovus",
 				"Fate":"Dead"
 			},
@@ -9313,6 +9314,14 @@
 				"Cause of Death":"Demon Attack",
 				"Killed By":"Fang Gu",
 				"Fate":"Dead"
+			},
+			"Matt":{
+				"Character":"Cerenovus",
+				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Investigator Minion"
+				],
+				"Fate":"Alive"
 			},
 			"Mullibok":{
 				"Character":"Cannibal",
@@ -9416,7 +9425,7 @@
 		"Date":1642910400,
 		"Script":"Bad Moon Rising",
 		"Fabled":[
-			"Deus Ex Fiasco"
+			"Deus ex Fiasco"
 		],
 		"Win":"Good",
 		"Win Condition":"No Living Demon",
@@ -9473,7 +9482,7 @@
 		"Date":1642910400,
 		"Script":"Bad Moon Rising",
 		"Fabled":[
-			"Deus Ex Fiasco"
+			"Deus ex Fiasco"
 		],
 		"Win":"Good",
 		"Win Condition":"No Living Demon",
@@ -9685,11 +9694,7 @@
 				"Setup Tokens":[
 					"Librarian Outsider"
 				],
-				"Believed They Were":"Immigrant",
-				"Power Gain":{
-					"Power":"Atheist",
-					"Cause":"Immigrant"
-				},
+				"Believed They Were":"Immigrant Atheist",
 				"Fate":"Alive"
 			},
 			"eNamorD":{
@@ -9948,7 +9953,7 @@
 		"Date":1646539200,
 		"Script":"Sects & Drugs v1.0",
 		"Fabled":[
-			"Deus Ex Fiasco"
+			"Deus ex Fiasco"
 		],
 		"Win":"Good",
 		"Win Condition":"No Living Demon",
@@ -10312,7 +10317,7 @@
 		"Date":1647748800,
 		"Script":"Sects & Violets",
 		"Fabled":[
-			"Deus Ex Fiasco"
+			"Deus ex Fiasco"
 		],
 		"Win":"Evil",
 		"Win Condition":"Good Twin Execution",
@@ -10709,7 +10714,8 @@
 		"Date":1648353600,
 		"Script":"Oops! All Amnesiacs",
 		"Fabled":[
-			"Sentinel"
+			"Sentinel",
+			"Medium"
 		],
 		"Win":"Good",
 		"Win Condition":"No Living Demon",
@@ -10780,6 +10786,7 @@
 				"Alignment":"Good",
 				"Believed They Were":"Concordia",
 				"Cause of Death":"Demon Attack",
+				"Killed By":"Coup",
 				"Fate":"Dead"
 			},
 			"Alek2ander":{
@@ -10787,6 +10794,659 @@
 				"Alignment":"Good",
 				"Believed They Were":"Wavelength",
 				"Fate":"Alive"
+			}
+		}
+	},
+	{
+		"Number":153,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/153.png",
+		"Date":1648958400,
+		"Script":"Trouble Brewing",
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"Jakes"
+		],
+		"Bluffs":[
+			"Librarian",
+			"Monk",
+			"Soldier"
+		],
+		"Players":{
+			"Qaysed":{
+				"Character":"Ravenkeeper",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Imp",
+				"Fate":"Dead"
+			},
+			"Matt":{
+				"Character":"Poisoner",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Chef",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"sabrina":{
+				"Character":"Empath",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Imp",
+				"Fate":"Dead"
+			},
+			"Dano":{
+				"Character":"Virgin",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"eNamorD":{
+				"Character":"Fortune Teller",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Essaria":{
+				"Character":"Imp",
+				"Alignment":"Evil",
+				"Cause of Death":"Other Power (Day)",
+				"Killed By":"Slayer",
+				"Fate":"Dead"
+			},
+			"Megan":{
+				"Character":"Slayer",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Mullibok":{
+				"Character":"Scarlet Woman",
+				"Alignment":"Evil",
+				"Change":{
+					"Character":"Imp",
+					"Alignment":"Evil",
+					"Cause":"Scarlet Woman"
+				},
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Eric":{
+				"Character":"Mayor",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Red Herring"
+				],
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":154,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/154.png",
+		"Date":1648958400,
+		"Script":"Bad Moon Rising",
+		"Win":"Evil",
+		"Win Condition":"Two Living Players",
+		"Storytellers":[
+			"eNamorD"
+		],
+		"Bluffs":[
+			"Chambermaid",
+			"Goon",
+			"Minstrel"
+		],
+		"Notes":"Day 1, Essaria executed and dies\nNight 2, Jakes died to Gambler ability Grafin as Sailor\nDay 2, Leilinea executed and survives\nNight 3, Onyxien dies to demon\nDay 3, sabrina executed\nNight 4, Leilinea assassinated\nDay 4, Grafin executed and dies\nDay 5, matt executed and 'dies'\nDay 6, Grafin executed, evil wins",
+		"Players":{
+			"Jakes":{
+				"Character":"Gambler",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Gambler",
+				"Fate":"Dead"
+			},
+			"Leilinea":{
+				"Character":"Moonchild",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Assassin",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Gossip",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Zombuul",
+				"Fate":"Dead"
+			},
+			"Essaria":{
+				"Character":"Sailor",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Dano":{
+				"Character":"Grandmother",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"sabrina":{
+				"Character":"Lunatic",
+				"Alignment":"Good",
+				"Believed They Were":"Zombuul",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Mullibok":{
+				"Character":"Pacifist",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Grandchild"
+				],
+				"Fate":"Alive"
+			},
+			"Matt":{
+				"Character":"Zombuul",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Grafin":{
+				"Character":"Assassin",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":155,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/155.png",
+		"Date":1649563200,
+		"Script":"Upping the Ante",
+		"Win":"Evil",
+		"Win Condition":"Two Living Players",
+		"Storytellers":[
+			"Essaria"
+		],
+		"Bluffs":[
+			"Fortune Teller",
+			"Nightwatchman",
+			"Oracle"
+		],
+		"Players":{
+			"Flying":{
+				"Character":"Undertaker",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Legion",
+				"Fate":"Dead"
+			},
+			"Grafin":{
+				"Character":"Legion",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Qaysed":{
+				"Character":"Beggar",
+				"Alignment":"Evil",
+				"Cause of Death":"Exile",
+				"Fate":"Dead"
+			},
+			"Jakes":{
+				"Character":"Mayor",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Matt":{
+				"Character":"Legion",
+				"Alignment":"Evil",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Legion",
+				"Fate":"Dead"
+			},
+			"OngakuSensei":{
+				"Character":"Legion",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Legion",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"sabrina":{
+				"Character":"Magician",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"eNamorD":{
+				"Character":"Thief",
+				"Alignment":"Good",
+				"Cause of Death":"Exile",
+				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":156,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/156.png",
+		"Date":1650168000,
+		"Script":"Bad Moon Rising",
+		"Fabled":[
+			"Deus Ex Fiasco"
+		],
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"Alek2ander"
+		],
+		"Bluffs":[
+			"Courtier",
+			"Pacifist",
+			"Moonchild"
+		],
+		"Notes":"D1: Megan executed\nN2: Matt died, Megan resurrected by Grafin, eNamorD turned evil (Deus Ex Fiasco)\nD2: Eric executed\nN3: No deaths, but eNamorD should have died (Deus Ex Fiasco)\nD3: Eric executed\nN4: sabrina died, Matt resurrected by Deus Ex Fiasco but was supposed to die in the first place\nD4: Jakes executed",
+		"Players":{
+			"eNamorD":{
+				"Character":"Goon",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Megan":{
+				"Character":"Gambler",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Grafin":{
+				"Character":"Professor",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Essaria":{
+				"Character":"Gossip",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Jakes":{
+				"Character":"Pukka",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Matt":{
+				"Character":"Sailor",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"sabrina":{
+				"Character":"Exorcist",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Pukka",
+				"Fate":"Dead"
+			},
+			"Eric":{
+				"Character":"Devil's Advocate",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Qaysed":{
+				"Character":"Apprentice",
+				"Alignment":"Good",
+				"Believed They Were":"Innkeeper",
+				"Fate":"Alive"
+			}
+		}
+	},
+	{
+		"Number":157,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/157.png",
+		"Date":1650168000,
+		"Script":"Sects & Drugs v1.2",
+		"Win":"Evil",
+		"Win Condition":"Two Living Players",
+		"Storytellers":[
+			"Eric"
+		],
+		"Notes":"N1: enamorD holds :lil_monsta:, Essaria used :seamstress~1:, Alex used :nightwatchman:, Sabrina :bounty_hunter: Matt\nD1: Qaysed executed\nN2: Megan holds :lil_monsta:, Essaria killed by :lil_monsta: \nD2: Jakes executed\nN3: Megan holds :lil_monsta:, Matt killed by :lil_monsta:, Sabrina :bounty_hunter: Megan\nD3: No exec\nN4: enamorD holds :lil_monsta:, enamord :assassin~1: Sabrina, Alex2ander killed by :lil_monsta: \nEvil wins",
+		"Players":{
+			"Alek2ander":{
+				"Character":"Nightwatchman",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Lil' Monsta",
+				"Fate":"Dead"
+			},
+			"sabrina":{
+				"Character":"Bounty Hunter",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Assassin",
+				"Fate":"Dead"
+			},
+			"Essaria":{
+				"Character":"Seamstress",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Lil' Monsta",
+				"Fate":"Dead"
+			},
+			"Jakes":{
+				"Character":"Drunk",
+				"Alignment":"Good",
+				"Believed They Were":"Atheist",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Megan":{
+				"Character":"Goblin",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"eNamorD":{
+				"Character":"Assassin",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Qaysed":{
+				"Character":"Town Crier",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Matt":{
+				"Character":"Cannibal",
+				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Bounty Hunter Known"
+				],
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Lil' Monsta",
+				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":158,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/158.png",
+		"Date":1650168000,
+		"Script":"Sects & Drugs v1.2",
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"Megan"
+		],
+		"Bluffs":[
+			"General",
+			"Fortune Teller",
+			"Alchemist"
+		],
+		"Players":{
+			"Eric":{
+				"Character":"Poisoner",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Qaysed":{
+				"Character":"Witch",
+				"Alignment":"Evil",
+				"Fate":"Alive"
+			},
+			"Jakes":{
+				"Character":"Drunk",
+				"Alignment":"Good",
+				"Believed They Were":"Bounty Hunter",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Lil' Monsta",
+				"Fate":"Dead"
+			},
+			"Essaria":{
+				"Character":"Poppy Grower",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Matt":{
+				"Character":"Balloonist",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Alek2ander":{
+				"Character":"Nightwatchman",
+				"Alignment":"Good",
+				"Cause of Death":"Other Power (Night)",
+				"Killed By":"Witch",
+				"Fate":"Dead"
+			},
+			"sabrina":{
+				"Character":"Snitch",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Bounty Hunter Known"
+				],
+				"Fate":"Alive"
+			},
+			"eNamorD":{
+				"Character":"Damsel",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Flying":{
+				"Character":"Cannibal",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			}
+		}
+	},
+	{
+		"Number":159,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/159.png",
+		"Date":1650168000,
+		"Script":"Trouble Brewing",
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"eNamorD"
+		],
+		"Bluffs":[
+			"Empath",
+			"Ravenkeeper",
+			"Virgin"
+		],
+		"Players":{
+			"Eric":{
+				"Character":"Monk",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Imp",
+				"Fate":"Dead"
+			},
+			"Teaspoon":{
+				"Character":"Spy",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Flying":{
+				"Character":"Washerwoman",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Megan":{
+				"Character":"Slayer",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Essaria":{
+				"Character":"Soldier",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"sabrina":{
+				"Character":"Imp",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Jakes":{
+				"Character":"Recluse",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Imp",
+				"Fate":"Dead"
+			},
+			"Matt":{
+				"Character":"Mayor",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Imp",
+				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":160,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/160.png",
+		"Date":1650772800,
+		"Script":"Sects and Violets",
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"Alek2ander"
+		],
+		"Bluffs":[
+			"Klutz",
+			"Dreamer",
+			"Seamstress"
+		],
+		"Notes":"For this game, Barber swap was run after the demon had killed, according to its listed spot in the night order.\n\nRare scenario where Poisoned Philo used their ability to gain the Dreamer power and then became healthy later that night, which means they didn't get to wake to use the Dreamer power.\n\nUnfortunately, eNamorD thought Alex made a mistake and bullied him into giving Dreamer info anyway. This was cleared up on night 3 and the info helped solve the game.",
+		"Players":{
+			"Mullibok":{
+				"Character":"Juggler",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Leilinea":{
+				"Character":"Evil Twin",
+				"Alignment":"Evil",
+				"Change":{
+					"Character":"No Dashii",
+					"Alignment":"Evil",
+					"Cause":"Barber"
+				},
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Onyxien":{
+				"Character":"Artist",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"No Dashii Poisoned"
+				],
+				"Fate":"Alive"
+			},
+			"Essaria":{
+				"Character":"No Dashii",
+				"Alignment":"Evil",
+				"Change":{
+					"Character":"Evil Twin",
+					"Alignment":"Evil",
+					"Cause":"Barber"
+				},
+				"Cause of Death":"Demon Attack",
+				"Killed By":"No Dashii",
+				"Fate":"Dead"
+			},
+			"Grafin":{
+				"Character":"Barber",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"eNamorD":{
+				"Character":"Philosopher",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"No Dashii Poisoned",
+					"Evil Twin Twin"
+				],
+				"Fate":"Alive"
+			},
+			"sabrina":{
+				"Character":"Snake Charmer",
+				"Alignment":"Good",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"Qaysed":{
+				"Character":"Flower Girl",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"No Dashii",
+				"Fate":"Dead"
+			}
+		}
+	},
+	{
+		"Number":161,
+		"Grimoire":"https:\/\/raw.githubusercontent.com\/apturner\/botc-game-grims\/master\/161.png",
+		"Date":1650772800,
+		"Script":"No Greater Joy",
+		"Win":"Good",
+		"Win Condition":"No Living Demon",
+		"Storytellers":[
+			"Onyxien"
+		],
+		"Notes":"Essaria hard-claimed Baron on day 1",
+		"Players":{
+			"Mullibok":{
+				"Character":"Sage",
+				"Alignment":"Good",
+				"Setup Tokens":[
+					"Investigator Wrong"
+				],
+				"Fate":"Alive"
+			},
+			"Leilinea":{
+				"Character":"Chambermaid",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Imp",
+				"Fate":"Dead"
+			},
+			"Alek2ander":{
+				"Character":"Klutz",
+				"Alignment":"Good",
+				"Fate":"Alive"
+			},
+			"Essaria":{
+				"Character":"Scarlet Woman",
+				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Investigator Minion"
+				],
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
+			},
+			"eNamorD":{
+				"Character":"Investigator",
+				"Alignment":"Good",
+				"Cause of Death":"Demon Attack",
+				"Killed By":"Imp",
+				"Fate":"Dead"
+			},
+			"sabrina":{
+				"Character":"Imp",
+				"Alignment":"Evil",
+				"Cause of Death":"Execution",
+				"Fate":"Dead"
 			}
 		}
 	}

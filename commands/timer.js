@@ -53,7 +53,7 @@ async function timer(message, duration, options, command) {
         await sleep(updatePeriod * 1000);
 
         // Reduce the remaining time by updatePeriod seconds
-        if (secondsLeft > updatePeriod) {
+        if (secondsLeft >= updatePeriod) {
             secondsLeft -= updatePeriod;
         } else if (minutesLeft > 0) {
             secondsLeft += 60 - updatePeriod;

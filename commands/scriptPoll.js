@@ -19,7 +19,7 @@ function getPosMaxIndices(arr) {
 
 async function scriptPoll(message, member, options, command) {
     // Vote duration in seconds
-    const voteDuration = 5;
+    const voteDuration = 30;
 
     // const tbEmoteID = "812144685170688030";
     const tbEmoteID = "968577751869173851";

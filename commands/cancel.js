@@ -5,17 +5,15 @@ const sleep = require("../functions/sleep");
 
 async function cancel(message, member, options, command) {
     // Vote duration in seconds
-    const voteDuration = 5;
+    const voteDuration = 30;
 
     // Get member
-    let memberName;
     if (member === undefined) {
-        memberName = "Matt";
         member = await message.guild.members.fetch("263754010136281088");
     } else {
-        memberName = await findPlayer(message, member, false);
         member = await findMember(message, member);
     }
+    const memberName = member.displayName;
 
     // Get Cancelled role
     const cancelled = message.guild.roles.cache.find(

@@ -6,7 +6,7 @@ function sleep(ms) {
 
 async function timer(message, duration, options, command) {
     // Timer update frequency, in seconds (must be at most 60)
-    const updatePeriod = 15;
+    const updatePeriod = 10;
 
     // Get ending time, in milliseconds
     const endTime = Math.round(message.createdTimestamp / 1000 + duration * 60);

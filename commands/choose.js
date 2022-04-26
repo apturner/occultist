@@ -1,10 +1,11 @@
+const makeChoice = require("../functions/makeChoice");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendMessage = require("../functions/sendMessage");
 
-async function choose(message, choice, command) {
+async function choose(message, choices, options, command) {
     await sendMessage(
         message,
-        choice[Math.floor(Math.random() * choice.length)]
+        makeChoice(choices)
     );
 }
 
@@ -13,7 +14,7 @@ function defChoose(comm, message) {
         .description("Randomly choose from among given options")
         .argument("<choice...>", "Items to choose from")
         .action(
-            async (choices, command) => await choose(message, choices, command)
+            async (choices, options, command) => await choose(message, choices, options, command)
         )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),

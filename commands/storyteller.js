@@ -10,7 +10,7 @@ const sendEmbed = require("../functions/sendEmbed");
 const { nameFormat } = require("../functions/stringFormat");
 const usernameName = require("../data/usernameName");
 
-async function storytellerSummary(message, st, command) {
+async function storytellerSummary(message, st, options, command) {
     // If no player given, set player to caller
     if (st === undefined) {
         st = usernameName[message.author.username];
@@ -214,8 +214,8 @@ function defStoryteller(comm, message) {
             "Storyteller to find info of (default: caller)"
         )
         .action(
-            async (number, command) =>
-                await storytellerSummary(message, number, command)
+            async (number, options, command) =>
+                await storytellerSummary(message, number, options, command)
         )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),

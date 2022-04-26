@@ -14,9 +14,11 @@ const { defFind } = require("../commands/find");
 const { defGame } = require("../commands/game");
 const { defGrim } = require("../commands/grim");
 const { defPlayer } = require("../commands/player");
+const { defScriptPoll } = require("../commands/scriptPoll");
 const { defStoryteller } = require("../commands/storyteller");
 const { defStToggle } = require("../commands/stToggle");
 const { defTimer } = require("../commands/timer");
+const { defToggleRole } = require("../commands/toggleRole");
 const { defWinRate } = require("../commands/winRate");
 
 // Define response to messages
@@ -43,9 +45,11 @@ module.exports = {
         defGame(occultist, message);
         defGrim(occultist, message);
         defPlayer(occultist, message);
+        defScriptPoll(occultist, message);
         defStoryteller(occultist, message);
         defStToggle(occultist, message);
         defTimer(occultist, message);
+        defToggleRole(occultist, message);
         defWinRate(occultist, message);
 
         // Cut off the prefix, trim, and split on whitespace not in quotes
@@ -59,7 +63,8 @@ module.exports = {
         } catch (err) {
             if (
                 err.code !== "commander.help" &&
-                err.code !== "commander.helpDisplayed"
+                err.code !== "commander.helpDisplayed" &&
+                err.code !== "commander.invalidArgument"
             ) {
                 console.log(err);
                 sendCodeBlock(

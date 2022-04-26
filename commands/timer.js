@@ -4,7 +4,7 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function timer(message, duration, command) {
+async function timer(message, duration, options, command) {
     // Timer update frequency, in seconds (must be at most 60)
     const updatePeriod = 15;
 
@@ -91,7 +91,7 @@ function defTimer(comm, message) {
             "Duration of timer, from time of call, in minutes"
         )
         .action(
-            async (duration, command) => await timer(message, duration, command)
+            async (duration, options, command) => await timer(message, duration, options, command)
         )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),

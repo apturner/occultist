@@ -1,14 +1,15 @@
+const nameFormatMap = require("../data/nameFormat");
 const { stringFormat, nameFormat } = require("../functions/stringFormat");
 
-async function findPlayer(message, playerString) {
+async function findPlayer(message, playerString, complain = true) {
     const player =
-        nameFormat[
-            Object.keys(nameFormat).find((p) =>
+        nameFormat(
+            Object.keys(nameFormatMap).find((p) =>
                 p.includes(stringFormat(playerString))
             )
-        ];
+        );
 
-    if (player === undefined) {
+    if (complain === true && player === undefined) {
         await sendCodeBlock(
             message,
             `No player found matching ${playerString}.`

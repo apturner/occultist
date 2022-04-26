@@ -1,20 +1,22 @@
 const { InvalidArgumentError } = require("commander");
 const findMember = require("../functions/findMember");
+const makeChoice = require("../functions/makeChoice");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendMessage = require("../functions/sendMessage");
 const { stringFormat } = require("../functions/stringFormat");
 
-async function stToggle(message, member, options, command) {
+async function stToggle(message, members, options, command) {
     // If no guild member given, set member to caller
-    // Otherwise, find the first guild member whose name roughly matches the given name
-    if (member === undefined) {
+    // Otherwise, choose one of the given options and find the first guild member whose name roughly matches the chosen name
+    let member;
+    if (members === undefined || members.length == 0) {
         member = message.member;
         // This is the old way to do this
         // member = message.guild.members.cache.find(
         //     (m) => m.id === message.author.id
         // );
     } else {
-        member = await findMember(message, member);
+        member = await findMember(message, makeChoice(members));
     }
 
     // Get ST role
@@ -41,12 +43,12 @@ function defStToggle(comm, message) {
     comm.command("st")
         .description("Toggle whether the guild member has the ST role")
         .argument(
-            "[member]",
-            "Guild member to toggle ST role of (default: caller)"
+            "[member...]",
+            "Guild member(s) to toggle ST role of; if multiple given, one will be chosen randomly (default: caller)"
         )
         .action(
-            async (member, options, command) =>
-                await stToggle(message, member, options, command)
+            async (members, options, command) =>
+                await stToggle(message, members, options, command)
         )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),

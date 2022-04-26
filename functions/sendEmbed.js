@@ -1,13 +1,13 @@
 async function sendEmbed(message, embed, reply = true) {
     if (reply === true) {
-        await message.reply({
+        return message.reply({
             embeds: [embed],
             allowedMentions: {
                 repliedUser: false,
             },
         });
     } else {
-        await message.channel.send({
+        return message.channel.send({
             embeds: [embed],
         });
     }

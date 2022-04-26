@@ -5,6 +5,7 @@ const _ = require("lodash");
 const getAllRoles = require("../functions/getAllRoles");
 const getCauseOfDeathString = require("../functions/getCauseOfDeathString");
 const getPlayerChangeString = require("../functions/getPlayerChangeString");
+const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendEmbed = require("../functions/sendEmbed");
 const { stringFormat } = require("../functions/stringFormat");
 const characterTypeMap = require("../data/characterType");
@@ -20,9 +21,14 @@ function playerRolesString(playerName, playerObj) {
     )}`;
 }
 
-async function gameSummary(message, number, command) {
+async function gameSummary(message, number, options, command) {
     // Get game
-    const game = message.client.games[parseInt(number, 10) - 1];
+    const num = parseInt(number, 10);
+    const game = message.client.games[num - 1];
+    if (game === undefined) {
+        sendCodeBlock(message, `Game ${num} not found.`);
+        return;
+    }
 
     // Get grim and check it exists
     const grim = message.client.games[parseInt(number, 10) - 1]?.Grimoire;
@@ -103,8 +109,8 @@ function defGame(comm, message) {
         .description("View a summary of the given game")
         .argument("<number>", "Game number")
         .action(
-            async (number, command) =>
-                await gameSummary(message, number, command)
+            async (number, options, command) =>
+                await gameSummary(message, number, options, command)
         )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),

@@ -1,34 +1,34 @@
 const findMember = require("../functions/findMember");
+const findPlayer = require("../functions/findPlayer");
 const sendMessage = require("../functions/sendMessage");
+const sleep = require("../functions/sleep");
 
-function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-async function cancel(message, command) {
+async function cancel(message, member, options, command) {
     // Vote duration in seconds
-    const voteDuration = 30;
+    const voteDuration = 5;
 
-    // Get Matt
-    matt = await message.guild.members.fetch("263754010136281088");
+    // Get member
+    let memberName;
+    if (member === undefined) {
+        memberName = "Matt";
+        member = await message.guild.members.fetch("263754010136281088");
+    } else {
+        memberName = await findPlayer(message, member, false);
+        member = await findMember(message, member);
+    }
 
     // Get Cancelled role
     const cancelled = message.guild.roles.cache.find(
         (role) => role.name === "Cancelled"
     );
 
-    const isCancelled = matt.roles.cache.some((role) => role === cancelled);
+    const isCancelled = member.roles.cache.some((role) => role === cancelled);
 
     const questionString = isCancelled
-        ? `Should we uncancel Matt? You have ${voteDuration} seconds to vote`
-        : `Should we cancel Matt? You have ${voteDuration} seconds to vote`;
+        ? `Should we uncancel ${memberName}? You have ${voteDuration} seconds to vote`
+        : `Should we cancel ${memberName}? You have ${voteDuration} seconds to vote`;
 
-    const poll = await message.reply({
-        content: questionString,
-        allowedMentions: {
-            repliedUser: false,
-        },
-    });
+    const poll = await sendMessage(message, questionString);
     await poll.react("765116502390603776");
     await poll.react("765116505246662657");
 
@@ -39,38 +39,36 @@ async function cancel(message, command) {
 
     if (yes > no) {
         if (isCancelled === true) {
-            await poll.reply({
-                content: "Matt has been uncancelled! Until next time...",
-                allowedMentions: {
-                    repliedUser: false,
-                },
-            });
-            matt.roles.remove(cancelled);
+            await sendMessage(
+                poll,
+                `${memberName} has been uncancelled! Until next time...`
+            );
+            member.roles.remove(cancelled);
         } else {
-            await poll.reply({
-                content: "Matt has been cancelled! Good job everyone!",
-                allowedMentions: {
-                    repliedUser: false,
-                },
-            });
-            matt.roles.add(cancelled);
+            await sendMessage(
+                poll,
+                `${memberName} has been cancelled! Good job everyone!`
+            );
+            member.roles.add(cancelled);
         }
     } else {
-        await poll.reply({
-            content: `Vote unsuccessful, Matt remains ${
+        await sendMessage(
+            poll,
+            `Vote unsuccessful, ${memberName} remains ${
                 isCancelled ? "" : "un"
-            }cancelled`,
-            allowedMentions: {
-                repliedUser: false,
-            },
-        });
+            }cancelled`
+        );
     }
 }
 
 function defCancel(comm, message) {
     comm.command("cancel")
-        .description("Create reaction poll to (un)cancel Matt")
-        .action(async (command) => await cancel(message, command))
+        .description("Create reaction poll to (un)cancel a guild member")
+        .argument("[member]", "Guild member to cancel (default: Matt)")
+        .action(
+            async (members, options, command) =>
+                await cancel(message, members, options, command)
+        )
         .configureOutput({
             writeOut: (str) => sendCodeBlock(message, str),
             writeErr: (str) => sendCodeBlock(message, str),

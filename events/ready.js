@@ -29,17 +29,18 @@ module.exports = {
             );
 
             // Special treatment for functions that are private by default
-            if (commandInfo.giveMePermission) {
-                await command.permissions.add({
-                    permissions: [
-                        {
-                            id: myId,
-                            type: "USER",
-                            permission: true,
-                        },
-                    ],
-                });
-            }
+            // Made invalid as of April 27, 2022, Permission V2 update
+            // if (commandInfo.giveMePermission) {
+            //     await command.permissions.add({
+            //         permissions: [
+            //             {
+            //                 id: myId,
+            //                 type: "USER",
+            //                 permission: true,
+            //             },
+            //         ],
+            //     });
+            // }
 
             // Set a new item in the Collection with the key as the command name and
             // the value as the exported module

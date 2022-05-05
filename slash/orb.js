@@ -15,7 +15,7 @@ module.exports = {
                 .setRequired(true)
         )
         .setDefaultPermission(false),
-    giveMePermission: true,
+    // giveMePermission: true, // Permissions V2 update broke this
     async execute(interaction) {
         await interaction.reply({ content: "Will do!", ephemeral: true });
         await interaction.channel.sendTyping();

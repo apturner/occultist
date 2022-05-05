@@ -52,7 +52,7 @@ function getCountFindString(options, count) {
     );
     countFindString += optionString(
         options.winningTeam,
-        (opt) => ` with winning team ${opt};`
+        (opt) => ` with winning team ${opt[0].toUpperCase() + opt.slice(1)};`
     );
     countFindString += optionString(
         options.storytellers,

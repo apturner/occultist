@@ -20,7 +20,7 @@ module.exports = {
         // Only run for Cyberholmes
         if (interaction.user.id !== interaction.guild.ownerId) {
             await interaction.reply({
-                content: "You are not powerful enough to ponder the orb",
+                content: "You are not powerful enough to ponder the orb.",
                 ephemeral: true,
             });
             return;

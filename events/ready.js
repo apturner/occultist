@@ -29,7 +29,8 @@ module.exports = {
             );
 
             // Special treatment for functions that are private by default
-            // Made invalid as of April 27, 2022, Permission V2 update
+            // Broken as of April 27, 2022, Permission V2 update
+            // See https://stackoverflow.com/questions/72048570/403-error-when-setting-application-command-permissions-on-discord
             // if (commandInfo.giveMePermission) {
             //     await command.permissions.add({
             //         permissions: [

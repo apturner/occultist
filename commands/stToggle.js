@@ -5,6 +5,18 @@ const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendMessage = require("../functions/sendMessage");
 const { stringFormat } = require("../functions/stringFormat");
 
+async function tryChangeNickname(message, member, nickname) {
+    // Don't try to change the guild owner's nickname
+    if (member.id === member.guild.ownerId) {
+        await sendMessage(
+            message,
+            "Can't change the nickname of the guild owner 😭"
+        );
+        return;
+    }
+    await member.setNickname(nickname);
+}
+
 async function stToggle(message, members, options, command) {
     // If no guild member given, set member to caller
     // Otherwise, choose one of the given options and find the first guild member whose name roughly matches the chosen name
@@ -24,17 +36,43 @@ async function stToggle(message, members, options, command) {
         (role) => role.name === "Storyteller"
     );
 
+    // Get member display name
+    const originalMemberName = member.displayName;
+    const hasPrefix = originalMemberName.slice(0, 5) === "(ST) ";
+
     // If they already have the ST role...
     if (member.roles.cache.some((role) => role === st)) {
-        // Take it away and tell them about it
-        member.roles.remove(st);
+        // Take it away
+        await member.roles.remove(st);
+
+        // If they have the prefix, remove it
+        if (hasPrefix) {
+            await tryChangeNickname(
+                message,
+                member,
+                originalMemberName.slice(5)
+            );
+        }
+
+        // Tell them about it
         await sendMessage(
             message,
             `${member.displayName} is no longer storytelling.`
         );
     } else {
-        // Give it to them and tell them about it
-        member.roles.add(st);
+        // Give it to them
+        await member.roles.add(st);
+
+        // If they don't have the prefix, add it
+        if (!hasPrefix) {
+            await tryChangeNickname(
+                message,
+                member,
+                "(ST) " + originalMemberName
+            );
+        }
+
+        // Tell them about it
         await sendMessage(message, `${member.displayName} is storytelling!`);
     }
 }

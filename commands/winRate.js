@@ -12,12 +12,12 @@ const {
     scriptTypeFormat,
 } = require("../functions/stringFormat");
 const scriptTypeMap = require("../data/scriptType");
-const usernameName = require("../data/usernameName");
+const snowflakeName = require("../data/snowflakeName");
 
 async function winRate(message, player, options, command) {
     // If no player given, set player to caller
     if (player === undefined) {
-        player = usernameName[message.author.username];
+        player = snowflakeName[message.author.id];
     }
 
     const {

@@ -8,21 +8,21 @@ const getWinRate = require("../functions/getWinRate");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendEmbed = require("../functions/sendEmbed");
 const { nameFormat } = require("../functions/stringFormat");
-const usernameName = require("../data/usernameName");
+const snowflakeName = require("../data/snowflakeName");
 
 async function storytellerSummary(message, st, options, command) {
     // If no player given, set player to caller
     if (st === undefined) {
-        st = usernameName[message.author.username];
+        st = snowflakeName[message.author.id];
     } else {
         st = nameFormat(st) ?? st;
     }
 
     // Get player avatar
     await message.guild.members.fetch();
-    const nameUsername = _.invert(usernameName);
+    const nameSnowflake = _.invert(snowflakeName);
     const stAvatar = message.guild.members.cache
-        .find((member) => member.user.username === nameUsername[st])
+        .find((member) => member.user.id === nameSnowflake[st])
         ?.displayAvatarURL();
 
     // Get storyteller's info

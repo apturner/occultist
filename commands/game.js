@@ -9,7 +9,7 @@ const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendEmbed = require("../functions/sendEmbed");
 const { stringFormat } = require("../functions/stringFormat");
 const characterTypeMap = require("../data/characterType");
-const usernameName = require("../data/usernameName");
+const snowflakeName = require("../data/snowflakeName");
 
 function playerRolesString(playerName, playerObj) {
     return `• ${playerName} as ${getPlayerChangeString(
@@ -77,25 +77,25 @@ async function gameSummary(message, number, options, command) {
 
     // Add demon avatar if found
     await message.guild.members.fetch();
-    const nameUsername = _.invert(usernameName);
-    const firstDemonUsername = _.map(
+    const nameSnowflake = _.invert(snowflakeName);
+    const firstDemonSnowflake = _.map(
         _.keys(
             _.pickBy(
                 players,
                 (player) => characterTypeMap[player.Character] === "Demon"
             )
         ),
-        (name) => nameUsername[name]
+        (name) => nameSnowflake[name]
     )[0];
     const firstDemonAvatar = message.guild.members.cache
-        .find((member) => member.user.username === firstDemonUsername)
+        .find((member) => member.user.id === firstDemonSnowflake)
         ?.displayAvatarURL();
     if (firstDemonAvatar !== undefined) {
         embed.setThumbnail(firstDemonAvatar);
     } else {
         embed.setThumbnail(
             `https://raw.githubusercontent.com/bra1n/townsquare/develop/src/assets/icons/${stringFormat(
-                players[usernameName[firstDemonUsername]]?.Character
+                players[snowflakeName[firstDemonSnowflake]]?.Character
             )}.png`
         );
     }

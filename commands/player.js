@@ -8,7 +8,7 @@ const getWinRate = require("../functions/getWinRate");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendEmbed = require("../functions/sendEmbed");
 const { nameFormat } = require("../functions/stringFormat");
-const usernameName = require("../data/usernameName");
+const snowflakeName = require("../data/snowflakeName");
 
 function playerGameString(playerObj, win, number, script) {
     const roles = getAllRoles(playerObj);
@@ -26,16 +26,16 @@ function playerGameString(playerObj, win, number, script) {
 async function playerSummary(message, player, options, command) {
     // If no player given, set player to caller
     if (player === undefined) {
-        player = usernameName[message.author.username];
+        player = snowflakeName[message.author.id];
     } else {
         player = nameFormat(player) ?? player;
     }
 
     // Get player avatar
     await message.guild.members.fetch();
-    const nameUsername = _.invert(usernameName);
+    const nameSnowflake = _.invert(snowflakeName);
     const playerAvatar = message.guild.members.cache
-        .find((member) => member.user.username === nameUsername[player])
+        .find((member) => member.user.id === nameSnowflake[player])
         ?.displayAvatarURL();
 
     // Get player's games

@@ -1,6 +1,7 @@
 const _ = require("lodash");
 const getAllRoles = require("../functions/getAllRoles");
 const getFinalRole = require("../functions/getFinalRole");
+const jqQuery = require("../functions/jqQuery");
 const { stringFormat, nameFormat } = require("../functions/stringFormat");
 const characterTypeMap = require("../data/characterType");
 const scriptTypeMap = require("../data/scriptType");
@@ -49,6 +50,12 @@ function filterGames(
     // console.log("playerFinalCharacterTypes: ", playerFinalCharacterTypes);
     // console.log("playerInitialAlignments: ", playerInitialAlignments);
     // console.log("playerFinalAlignments: ", playerFinalAlignments);
+
+    let queryString = `map(select(.Storytellers | contains(${JSON.stringify(
+        storytellers
+    )})) | .Number)`;
+    const queryResult = jqQuery(queryString, "./data/games.json");
+    console.log(queryResult);
 
     // Create list of conditions and push all possible conditions into it
     var conditions = [];

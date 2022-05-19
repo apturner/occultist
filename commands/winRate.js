@@ -33,16 +33,21 @@ async function winRate(message, player, options, command) {
         finalTypeFound,
         initialAlignmentFound,
         finalAlignmentFound,
-    } = getWinRate(message.client.games, player, {
-        script: options.script,
-        scriptType: options.scriptType,
-        initialCharacter: options.initialCharacter,
-        finalCharacter: options.finalCharacter,
-        initialType: options.initialType,
-        finalType: options.finalType,
-        initialAlignment: options.initialAlignment,
-        finalAlignment: options.finalAlignment,
-    });
+    } = getWinRate(
+        message.client.games,
+        player,
+        {
+            script: options.script,
+            scriptType: options.scriptType,
+            initialCharacter: options.initialCharacter,
+            finalCharacter: options.finalCharacter,
+            initialType: options.initialType,
+            finalType: options.finalType,
+            initialAlignment: options.initialAlignment,
+            finalAlignment: options.finalAlignment,
+        },
+        options.rolling
+    );
 
     let response;
     if (playerFound !== true) {
@@ -72,6 +77,8 @@ async function winRate(message, player, options, command) {
         response = `No alignment found with name "${options.finalAlignment}".`;
     } else {
         response = `${nameFormat(player)}'s win rate${
+            options.rolling ? ` over the last ${options.rolling} games` : ""
+        }${
             options.script
                 ? " in " + scriptFormat(options.script)
                 : options.scriptType
@@ -144,6 +151,10 @@ function defWinRate(comm, message) {
         .option("-a, --initial-alignment <alignment>", "Initial alignment")
         .option("-A, --final-alignment <alignment>", "Final alignment")
         .option("-f, --fraction", "Show result as unreduced fraction")
+        .option(
+            "-r, --rolling <num>",
+            "Show result taken only over last num games played satisfying constraints"
+        )
         .action(
             async (player, options, command) =>
                 await winRate(message, player, options, command)

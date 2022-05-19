@@ -20,9 +20,10 @@ function getWinRate(
         finalType,
         initialAlignment,
         finalAlignment,
-    }
+    },
+    rolling = undefined
 ) {
-    const playerGamesCount = filterGames(games, {
+    let playerGames = filterGames(games, {
         players: [player],
         scripts: script ? [script] : undefined,
         scriptTypes: scriptType ? [scriptType] : undefined,
@@ -44,33 +45,18 @@ function getWinRate(
         playerFinalAlignments: finalAlignment
             ? [[player, finalAlignment]]
             : undefined,
-        count: true,
     });
 
-    const playerWinsCount = filterGames(games, {
+    if (rolling !== undefined) {
+        playerGames = playerGames.slice(-rolling);
+    }
+
+    const playerWins = filterGames(playerGames, {
         winningPlayers: [player],
-        scripts: script ? [script] : undefined,
-        scriptTypes: scriptType ? [scriptType] : undefined,
-        playerInitialCharacters: initialCharacter
-            ? [[player, initialCharacter]]
-            : undefined,
-        playerFinalCharacters: finalCharacter
-            ? [[player, finalCharacter]]
-            : undefined,
-        playerInitialCharacterTypes: initialType
-            ? [[player, initialType]]
-            : undefined,
-        playerFinalCharacterTypes: finalType
-            ? [[player, finalType]]
-            : undefined,
-        playerInitialAlignments: initialAlignment
-            ? [[player, initialAlignment]]
-            : undefined,
-        playerFinalAlignments: finalAlignment
-            ? [[player, finalAlignment]]
-            : undefined,
-        count: true,
     });
+
+    const playerGamesCount = playerGames.length;
+    const playerWinsCount = playerWins.length;
 
     return {
         result:

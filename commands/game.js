@@ -119,7 +119,7 @@ async function gameSummary(message, number, options, command) {
             .setDescription(notes ?? "No game notes")
             .setTimestamp(date);
 
-        await sendEmbed(message, notesEmbed);
+        await sendEmbed(message, notesEmbed, false);
     }
 }
 

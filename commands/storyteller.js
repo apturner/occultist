@@ -7,7 +7,7 @@ const getPlayerChangeString = require("../functions/getPlayerChangeString");
 const getWinRate = require("../functions/getWinRate");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendEmbed = require("../functions/sendEmbed");
-const { nameFormat } = require("../functions/stringFormat");
+const { nameFormat } = require("../functions/format");
 const snowflakeName = require("../data/snowflakeName");
 
 async function storytellerSummary(message, st, options, command) {

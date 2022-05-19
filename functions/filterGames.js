@@ -1,7 +1,7 @@
 const _ = require("lodash");
 const getAllRoles = require("../functions/getAllRoles");
 const getFinalRole = require("../functions/getFinalRole");
-const { stringFormat, nameFormat } = require("../functions/stringFormat");
+const { stringFormat, nameFormat } = require("../functions/format");
 const characterTypeMap = require("../data/characterType");
 const scriptTypeMap = require("../data/scriptType");
 

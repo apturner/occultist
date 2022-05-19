@@ -10,7 +10,7 @@ const {
     nameFormat,
     scriptFormat,
     scriptTypeFormat,
-} = require("../functions/stringFormat");
+} = require("../functions/format");
 const scriptTypeMap = require("../data/scriptType");
 const snowflakeName = require("../data/snowflakeName");
 

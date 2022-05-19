@@ -7,7 +7,7 @@ const getCauseOfDeathString = require("../functions/getCauseOfDeathString");
 const getPlayerChangeString = require("../functions/getPlayerChangeString");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendEmbed = require("../functions/sendEmbed");
-const { stringFormat } = require("../functions/stringFormat");
+const { stringFormat } = require("../functions/format");
 const characterTypeMap = require("../data/characterType");
 const snowflakeName = require("../data/snowflakeName");
 
@@ -102,12 +102,32 @@ async function gameSummary(message, number, options, command) {
 
     // Send result
     await sendEmbed(message, embed);
+
+    // Send notes embed if requested
+    if (options.notes === true) {
+        const notes = game.Notes;
+
+        const notesEmbed = new MessageEmbed()
+            .setColor("#9d221a")
+            .setAuthor({
+                name: `Game #${number}, Storytold by ${storytellers.join(
+                    ", "
+                )}`,
+                iconURL: message.client.user.avatarURL(),
+            })
+            .setTitle("Game Notes")
+            .setDescription(notes ?? "No game notes")
+            .setTimestamp(date);
+
+        await sendEmbed(message, notesEmbed);
+    }
 }
 
 function defGame(comm, message) {
     comm.command("game")
         .description("View a summary of the given game")
         .argument("<number>", "Game number")
+        .option("-n, --notes", "Include game notes")
         .action(
             async (number, options, command) =>
                 await gameSummary(message, number, options, command)

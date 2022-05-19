@@ -7,7 +7,7 @@ const getPlayerChangeString = require("../functions/getPlayerChangeString");
 const getWinRate = require("../functions/getWinRate");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendEmbed = require("../functions/sendEmbed");
-const { nameFormat } = require("../functions/stringFormat");
+const { nameFormat } = require("../functions/format");
 const snowflakeName = require("../data/snowflakeName");
 
 function playerGameString(playerObj, win, number, script) {
@@ -164,7 +164,7 @@ async function playerSummary(message, player, options, command) {
     await sendEmbed(message, topEmbed);
 
     // Add game summary embeds if flag is included
-    if (options.games == true) {
+    if (options.games === true) {
         // Get and add game summary strings
         // These are chunked into tens, and then the lists of chunks is chunked into fivess
         const gameSummaries = _.chunk(

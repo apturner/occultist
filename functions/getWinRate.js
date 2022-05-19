@@ -1,6 +1,6 @@
 const _ = require("lodash");
 const filterGames = require("../functions/filterGames");
-const { stringFormat } = require("../functions/stringFormat");
+const { stringFormat } = require("../functions/format");
 const alignmentFormatMap = require("../data/alignmentFormat");
 const characterFormatMap = require("../data/characterFormat");
 const characterTypeFormatMap = require("../data/characterTypeFormat");

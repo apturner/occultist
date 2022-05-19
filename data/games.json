@@ -9971,6 +9971,9 @@
 			"Mullibok":{
 				"Character":"Poisoner",
 				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Final Lil' Monsta"
+				],
 				"Cause of Death":"Execution",
 				"Fate":"Dead"
 			},
@@ -11157,6 +11160,9 @@
 			"eNamorD":{
 				"Character":"Assassin",
 				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Final Lil' Monsta"
+				],
 				"Fate":"Alive"
 			},
 			"Qaysed":{
@@ -11196,6 +11202,9 @@
 			"Eric":{
 				"Character":"Poisoner",
 				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Final Lil' Monsta"
+				],
 				"Cause of Death":"Execution",
 				"Fate":"Dead"
 			},
@@ -11558,6 +11567,9 @@
 			"Essaria":{
 				"Character":"Poisoner",
 				"Alignment":"Evil",
+				"Setup Tokens":[
+					"Final Lil' Monsta"
+				],
 				"Cause of Death":"Execution",
 				"Fate":"Dead"
 			},

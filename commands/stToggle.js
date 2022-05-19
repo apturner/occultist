@@ -3,7 +3,7 @@ const findMember = require("../functions/findMember");
 const makeChoice = require("../functions/makeChoice");
 const sendCodeBlock = require("../functions/sendCodeBlock");
 const sendMessage = require("../functions/sendMessage");
-const { stringFormat } = require("../functions/stringFormat");
+const { stringFormat } = require("../functions/format");
 
 async function tryChangeNickname(message, member, nickname) {
     // Don't try to change the guild owner's nickname

@@ -7,7 +7,7 @@ const {
     nameFormat,
     scriptFormat,
     scriptTypeFormat,
-} = require("../functions/stringFormat");
+} = require("../functions/format");
 
 function pluralize(list, ending = "s") {
     return list.length > 1 ? ending : "";

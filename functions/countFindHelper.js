@@ -36,6 +36,7 @@ function actionHelper(message, options, command, count) {
         scriptTypes: options.scriptTypes,
         win: options.winningTeam,
         storytellers: options.storytellers,
+        bluffs: options.bluffs,
         players: options.players,
         winningPlayers: options.winners,
         losingPlayers: options.losers,
@@ -123,6 +124,7 @@ function defHelper(comm, message, name, desc, act) {
         .option("-S, --script-types <script type...>", "Script types [OR]")
         .option("-W, --winning-team <alignment>", "Winning alignment")
         .option("-g, --storytellers <storyteller...>", "Storytellers [OR]")
+        .option("-b, --bluffs <bluff...>", "Storytellers [AND]")
         .option("-p, --players <player...>", "Players [AND]")
         .option("-w, --winners <player...>", "Winning players [AND]")
         .option("-l, --losers <player...>", "Losing players [AND]")

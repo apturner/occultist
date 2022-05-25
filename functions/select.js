@@ -9,7 +9,9 @@ const scriptTypeFormatMap = require("../data/scriptTypeFormat");
 
 function select(str, map, soft = false) {
     if (soft) {
-        return Object.keys(map).find((key) => key.includes(stringFormat(str)));
+        return map[
+            Object.keys(map).find((key) => key.includes(stringFormat(str)))
+        ];
     } else {
         return map[stringFormat(str)];
     }

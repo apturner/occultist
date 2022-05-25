@@ -62,6 +62,13 @@ function getCountFindString(options, count) {
             ).join(", ")};`
     );
     countFindString += optionString(
+        options.bluffs,
+        (opt) =>
+            ` with bluff${pluralize(opt)} ${_.map(opt, (bluff) =>
+                characterFormat(bluff)
+            ).join(", ")};`
+    );
+    countFindString += optionString(
         options.players,
         (opt) =>
             ` with player${pluralize(opt)} ${_.map(opt, nameFormat).join(

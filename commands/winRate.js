@@ -46,7 +46,7 @@ async function winRate(message, player, options, command) {
             initialAlignment: options.initialAlignment,
             finalAlignment: options.finalAlignment,
         },
-        options.rolling
+        options.last
     );
 
     let response;
@@ -77,7 +77,7 @@ async function winRate(message, player, options, command) {
         response = `No alignment found with name "${options.finalAlignment}".`;
     } else {
         response = `${nameFormat(player)}'s win rate${
-            options.rolling ? ` over the last ${options.rolling} games` : ""
+            options.last ? ` over the last ${options.last} games` : ""
         }${
             options.script
                 ? " in " + scriptFormat(options.script)
@@ -150,11 +150,11 @@ function defWinRate(comm, message) {
         .option("-T, --final-type <type>", "Final character type")
         .option("-a, --initial-alignment <alignment>", "Initial alignment")
         .option("-A, --final-alignment <alignment>", "Final alignment")
-        .option("-f, --fraction", "Show result as unreduced fraction")
         .option(
-            "-r, --rolling <num>",
+            "-l, --last <num>",
             "Show result taken only over last num games played satisfying constraints"
         )
+        .option("-f, --fraction", "Show result as unreduced fraction")
         .action(
             async (player, options, command) =>
                 await winRate(message, player, options, command)

@@ -1,7 +1,15 @@
 const _ = require("lodash");
 const getAllRoles = require("../functions/getAllRoles");
 const getFinalRole = require("../functions/getFinalRole");
-const { stringFormat, nameFormat } = require("../functions/format");
+const {
+    stringFormat,
+    alignmentFormat,
+    characterFormat,
+    characterTypeFormat,
+    nameFormat,
+    scriptFormat,
+    scriptTypeFormat,
+} = require("../functions/format");
 const characterTypeMap = require("../data/characterType");
 const scriptTypeMap = require("../data/scriptType");
 
@@ -15,6 +23,7 @@ function filterGames(
         scriptTypes,
         win,
         storytellers,
+        bluffs,
         players,
         winningPlayers,
         losingPlayers,
@@ -37,6 +46,7 @@ function filterGames(
     // console.log("scriptTypes: ", scriptTypes);
     // console.log("win: ", win);
     // console.log("storytellers: ", storytellers);
+    // console.log("bluffs: ", bluffs);
     // console.log("players: ", players);
     // console.log("winningPlayers: ", winningPlayers);
     // console.log("losingPlayers: ", losingPlayers);
@@ -73,9 +83,7 @@ function filterGames(
     if (scripts !== undefined) {
         // Game script equal to given script
         conditions.push((game) =>
-            scripts.some(
-                (script) => stringFormat(game.Script) === stringFormat(script)
-            )
+            scripts.some((script) => game.Script === scriptFormat(script))
         );
     }
 
@@ -84,8 +92,7 @@ function filterGames(
         conditions.push((game) =>
             scriptTypes.some(
                 (scriptType) =>
-                    stringFormat(scriptTypeMap[game.Script]) ===
-                    stringFormat(scriptType)
+                    scriptTypeMap[game.Script] === scriptTypeFormat(scriptType)
             )
         );
     }
@@ -95,6 +102,7 @@ function filterGames(
         conditions.push((game) => stringFormat(game.Win) === stringFormat(win));
     }
 
+    // Need soft name search here
     if (storytellers !== undefined) {
         // Game contains any of the given storytellers
         conditions.push((game) =>
@@ -106,6 +114,16 @@ function filterGames(
         );
     }
 
+    if (bluffs !== undefined) {
+        // Game contains all of the given bluffs
+        conditions.push((game) =>
+            bluffs.every((bluff) =>
+                game.Bluffs?.includes(characterFormat(bluff))
+            )
+        );
+    }
+
+    // Need soft name search here
     if (players !== undefined) {
         // Game contains all of the given players
         conditions.push((game) =>
@@ -115,6 +133,7 @@ function filterGames(
         );
     }
 
+    // Need soft name search here
     if (winningPlayers !== undefined) {
         // Game contains all of the given players on the winning team
         conditions.push((game) =>
@@ -128,6 +147,7 @@ function filterGames(
         );
     }
 
+    // Need soft name search here
     if (losingPlayers !== undefined) {
         // Game contains all of the given players on the losing team
         conditions.push((game) =>
@@ -136,7 +156,7 @@ function filterGames(
                     stringFormat(
                         getFinalRole(game.Players[nameFormat(losingPlayer)])
                             ?.Alignment
-                    ) === (stringFormat(game.Win) === "good" ? "evil" : "good")
+                    ) === (game.Win === "Good" ? "evil" : "good")
             )
         );
     }
@@ -146,9 +166,10 @@ function filterGames(
         conditions.push((game) =>
             characters.every((character) =>
                 _.values(game.Players).some((player) =>
-                    _.map(getAllRoles(player), (role) =>
-                        stringFormat(role.Character)
-                    ).includes(stringFormat(character))
+                    _.map(
+                        getAllRoles(player),
+                        (role) => role.Character
+                    ).includes(characterFormat(character))
                 )
             )
         );
@@ -159,9 +180,7 @@ function filterGames(
         conditions.push((game) =>
             initialCharacters.every((character) =>
                 _.values(game.Players).some(
-                    (player) =>
-                        stringFormat(player.Character) ===
-                        stringFormat(character)
+                    (player) => player.Character === characterFormat(character)
                 )
             )
         );
@@ -173,88 +192,84 @@ function filterGames(
             finalCharacters.every((character) =>
                 _.values(game.Players).some(
                     (player) =>
-                        stringFormat(getFinalRole(player).Character) ===
-                        stringFormat(character)
+                        getFinalRole(player).Character ===
+                        characterFormat(character)
                 )
             )
         );
     }
 
+    // Need soft name search here
     if (playerInitialCharacters !== undefined) {
         // Game contains all of the given players starting as their given characters
         conditions.push((game) =>
             playerInitialCharacters.every(
                 ([player, char]) =>
-                    stringFormat(
-                        game.Players[nameFormat(player)]?.Character
-                    ) === stringFormat(char)
+                    game.Players[nameFormat(player)]?.Character ===
+                    characterFormat(char)
             )
         );
     }
 
+    // Need soft name search here
     if (playerFinalCharacters !== undefined) {
         // Game contains all of the given players ending as their given characters
         conditions.push((game) =>
             playerFinalCharacters.every(
                 ([player, char]) =>
-                    stringFormat(
-                        getFinalRole(game.Players[nameFormat(player)])
-                            ?.Character
-                    ) === stringFormat(char)
+                    getFinalRole(game.Players[nameFormat(player)])
+                        ?.Character === characterFormat(char)
             )
         );
     }
 
+    // Need soft name search here
     if (playerInitialCharacterTypes !== undefined) {
         // Game contains all of the given players starting as their given character types
         conditions.push((game) =>
             playerInitialCharacterTypes.every(
                 ([player, charType]) =>
-                    stringFormat(
-                        characterTypeMap[
-                            game.Players[nameFormat(player)]?.Character
-                        ]
-                    ) === stringFormat(charType)
+                    characterTypeMap[
+                        game.Players[nameFormat(player)]?.Character
+                    ] === characterTypeFormat(charType)
             )
         );
     }
 
+    // Need soft name search here
     if (playerFinalCharacterTypes !== undefined) {
         // Game contains all of the given players ending as their given character types
         conditions.push((game) =>
             playerFinalCharacterTypes.every(
                 ([player, charType]) =>
-                    stringFormat(
-                        characterTypeMap[
-                            getFinalRole(game.Players[nameFormat(player)])
-                                ?.Character
-                        ]
-                    ) === stringFormat(charType)
+                    characterTypeMap[
+                        getFinalRole(game.Players[nameFormat(player)])
+                            ?.Character
+                    ] === characterTypeFormat(charType)
             )
         );
     }
 
+    // Need soft name search here
     if (playerInitialAlignments !== undefined) {
         // Game contains all of the given players starting as their given alignments
         conditions.push((game) =>
             playerInitialAlignments.every(
                 ([player, alignment]) =>
-                    stringFormat(
-                        game.Players[nameFormat(player)]?.Alignment
-                    ) === stringFormat(alignment)
+                    game.Players[nameFormat(player)]?.Alignment ===
+                    alignmentFormat(alignment)
             )
         );
     }
 
+    // Need soft name search here
     if (playerFinalAlignments !== undefined) {
         // Game contains all of the given players ending as their given alignments
         conditions.push((game) =>
             playerFinalAlignments.every(
                 ([player, alignment]) =>
-                    stringFormat(
-                        getFinalRole(game.Players[nameFormat(player)])
-                            ?.Alignment
-                    ) === stringFormat(alignment)
+                    getFinalRole(game.Players[nameFormat(player)])
+                        ?.Alignment === alignmentFormat(alignment)
             )
         );
     }

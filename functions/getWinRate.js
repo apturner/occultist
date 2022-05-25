@@ -21,7 +21,7 @@ function getWinRate(
         initialAlignment,
         finalAlignment,
     },
-    rolling = undefined
+    last = undefined
 ) {
     let playerGames = filterGames(games, {
         players: [player],
@@ -47,8 +47,8 @@ function getWinRate(
             : undefined,
     });
 
-    if (rolling !== undefined) {
-        playerGames = playerGames.slice(-rolling);
+    if (last !== undefined) {
+        playerGames = playerGames.slice(-last);
     }
 
     const playerWins = filterGames(playerGames, {

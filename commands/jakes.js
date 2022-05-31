@@ -4,8 +4,8 @@ jakesId = "224631074981019658";
 
 async function jakes(message, options, command) {
     if (message.member.id === jakesId) {
-        jakes = await message.guild.members.fetch(jakesId);
-        jakes.timeout(1000 * 60 * 5);
+        const jakesMember = await message.guild.members.fetch(jakesId);
+        jakesMember.timeout(1000 * 60 * 5);
         await sendMessage(message, "Jakes has been timed out for 5 minutes.");
     } else {
         await sendMessage(message, "You're not Jakes...");

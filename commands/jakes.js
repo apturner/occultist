@@ -75,14 +75,13 @@ async function kickJakes(message) {
 
     // Kick them
     const invite = await message.guild.invites.create("673383756886704141");
-    await jakesMembers.map(
-        async (m) =>
-            await m.send(
-                `Hey, you got kicked. Bad luck! Here's an invite back: ${invite}`
-            )
-    );
+    await jakesMembers.map(async (m) => {
+        await m.send(
+            `Hey, you got kicked. Bad luck! Here's an invite back: ${invite}`
+        );
+        m.kick();
+    });
     await sendMessage(message, "Jakes has been kicked.");
-    jakesMembers.map((m) => m.kick());
     switchJakes(message);
 }
 

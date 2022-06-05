@@ -88,12 +88,18 @@ async function timeoutJakes(message) {
     // Get Jakeses
     const jakesMembers = getJakesRole(message).members;
 
-    // Time them out
-    jakesMembers.map((m) => m.timeout(timeoutMinutes * 60 * 1000));
-    await sendMessage(
-        message,
-        `Jakes has been timed out for ${timeoutMinutes} minutes.`
-    );
+    // Message to send later
+    let timeoutMessage =
+        "I would time you out, but you're in a voice channel so I guess I'll be nice...";
+
+    // Time them out if they aren't in a voice channel
+    jakesMembers.map((m) => {
+        if (!m.voice.channel) {
+            m.timeout(timeoutMinutes * 60 * 1000);
+            timeoutMessage = `Jakes has been timed out for ${timeoutMinutes} minutes.`;
+        }
+    });
+    await sendMessage(message, timeoutMessage);
 }
 
 async function cancelJakes(message) {

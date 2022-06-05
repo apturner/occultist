@@ -81,9 +81,9 @@ async function kickJakes(message) {
                 `Hey, you got kicked. Bad luck! Here's an invite back: ${invite}`
             )
     );
+    await sendMessage(message, "Jakes has been kicked.");
     jakesMembers.map((m) => m.kick());
     switchJakes(message);
-    await sendMessage(message, "Jakes has been kicked.");
 }
 
 async function timeoutJakes(message) {

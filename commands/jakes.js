@@ -43,6 +43,7 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Should make this smarter about random pick
 async function switchJakes(message, otherMember = undefined) {
     if (otherMember === undefined) {
         await message.guild.members.fetch();
@@ -81,6 +82,7 @@ async function kickJakes(message) {
             )
     );
     jakesMembers.map((m) => m.kick());
+    switchJakes(message);
     await sendMessage(message, "Jakes has been kicked.");
 }
 
